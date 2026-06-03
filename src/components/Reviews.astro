@@ -27,9 +27,13 @@ const live = (snapshot.reviews ?? []) as Array<{
   photo: string | null;
 }>;
 
-const display: Card[] =
+// Recorta textos muy largos para que las tarjetas queden parejas (2x2).
+const truncate = (t: string, max = 320) =>
+  t.length > max ? t.slice(0, max).replace(/\s+\S*$/, "") + "…" : t;
+
+const display: Card[] = (
   live.length > 0
-    ? live.map((r) => ({ ...r, isGoogle: true }))
+    ? live.map((r) => ({ ...r, text: truncate(r.text), isGoogle: true }))
     : curated.map((r) => ({
         author: r.author,
         rating: r.rating,
@@ -37,7 +41,8 @@ const display: Card[] =
         dateLabel: r.source,
         photo: null,
         isGoogle: r.source === "Google",
-      }));
+      }))
+).slice(0, 4); // 4 reseñas → grilla 2x2 prolija
 
 const hasLive = live.length > 0;
 

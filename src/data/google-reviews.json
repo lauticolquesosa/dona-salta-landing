@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-06-03T05:46:18.399Z",
+  "fetchedAt": "2026-06-03T05:58:34.176Z",
   "rating": 4.5,
   "total": 24893,
   "reviews": [
@@ -13,15 +13,6 @@
       "authorUrl": "https://www.google.com/maps/contrib/109120053705219833677/reviews"
     },
     {
-      "author": "gustavo rizzo",
-      "rating": 5,
-      "text": "Bienas empanadas",
-      "time": 1780352910,
-      "dateLabel": "junio de 2026",
-      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjUb5aBLmxc0B_IK7kUTMMzK6cXOwJOvK7kRTDTbvKyxdYCCU1_m=s128-c0x00000000-cc-rp-mo",
-      "authorUrl": "https://www.google.com/maps/contrib/112470129504262646494/reviews"
-    },
-    {
       "author": "Graciela Monton",
       "rating": 5,
       "text": "Increíblemente excelente, cordialidad, buen trato, la comuna excelente muy muy rica.\nLa atención de los mozos Iván y Damián de primera.",
@@ -29,6 +20,51 @@
       "dateLabel": "junio de 2026",
       "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXCTgmOr7KOxqLOkMvdyDNXLLT95wVrovOZ5gcKR-5seJ8YDZrkPg=s128-c0x00000000-cc-rp-mo-ba5",
       "authorUrl": "https://www.google.com/maps/contrib/109278544298062579328/reviews"
+    },
+    {
+      "author": "Mane",
+      "rating": 5,
+      "text": "Excelente servicio! Un lugar soñado! La atención, la comida, el ambiente: todo superó mis expectativas! Gracias al mozo, que no le pedí el nombre Pero me trató de maravilla! (Estaba sentada en el fondo)",
+      "time": 1772849399,
+      "dateLabel": "marzo de 2026",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXluPVal35Yf-99s3CJi1A4Tl61CI0yPvVU1pe_pXQ9KMtL7cs=s128-c0x00000000-cc-rp-mo-ba4",
+      "authorUrl": "https://www.google.com/maps/contrib/100358684659316972801/reviews"
+    },
+    {
+      "author": "El Dandy",
+      "rating": 5,
+      "text": "Doña Salta no defrauda. Ricas empanadas, ricos tamales, excelente locro y tambien las cazuelas. Ambiente logrado, atención rapida. Baños limpios y ventilados. Cierra por todos lados.\nPodria tener algo mas de parilla (creo que antes tenían) pero en si es una muy buena propuesta o un buen primer lugar al que ir al llegar a Salta.\nEs la vara con la que se miden los demás lugares de la zona.",
+      "time": 1771935026,
+      "dateLabel": "febrero de 2026",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjUnBYIwgHbLIgj8_gR8MsBYdlsFntilKoixnoJKromh6gw4WGQ=s128-c0x00000000-cc-rp-mo-ba5",
+      "authorUrl": "https://www.google.com/maps/contrib/109368109153127778495/reviews"
+    },
+    {
+      "author": "Ricardo Ayala",
+      "rating": 5,
+      "text": "Un lugar bien ambientado gauchesco, rápida y cordial atención. La comida excelente sabor calidad. Lo que pedí fue empanada de charqui, ojo de bife jugoso, tamal, humita y papas a la provenzal.",
+      "time": 1770507777,
+      "dateLabel": "febrero de 2026",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjUfaivPKwZXpNXISeO_OJ40-8EDghFmtMuZb1NRFfJUyAQI4P4=s128-c0x00000000-cc-rp-mo-ba4",
+      "authorUrl": "https://www.google.com/maps/contrib/117690380572922199386/reviews"
+    },
+    {
+      "author": "David Guetta",
+      "rating": 5,
+      "text": "La comida regional es muy rica y porciones adecuadas (capaz  es el 75 % del tamaño que un bodegón de Bs As). Pero el sabor y la frescura se notan por eso el precio de los platos que pueden estár mas elevado del promedio que encontrás en diferentes puntos de la provincia. Pensé que las reseñas eran puro marketing, pero no, realmente es lo que dicen. Las empanadas de carne son excelentes y eso que probé en diferentes puntos de la provincia y tambien en Bs As. Son un poquito mas grande que el promedio de la zona. $1500 cada una al 01/2026. Los tamales son super tiernos x fuera y sabrosos por dentro. La humita dulce tambien excelente con todos sus ingredientes. El guiso de lentejas muy sabroso, tal vez le dejaria unos milimetros mas a las rodajas de panceta y de chorizo colorado.\nEn ambiente le puse 4 estrellas porque si bien es local con temática regional (que está perfecto), las sillas están tapizadas en cuero y tal vez para adultos mayores o personas que caminaron por toda la provincia, sentarse a cenar y tener una silla acolchada, vendría de 10 (puede ser que el local tenga pero las que nos tocó adelante no eran así). También ese punto conozco que muchos locales lo hacen para la rotación de gente y es comprensible.\nPero la experiencia es excelente. Dejo algunas fotos.",
+      "time": 1769027349,
+      "dateLabel": "enero de 2026",
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocJNlWMUAX4R2IFa5sVFsKceFAVZylYM6JDV1Cum52FcldcbmA=s128-c0x00000000-cc-rp-mo-ba3",
+      "authorUrl": "https://www.google.com/maps/contrib/104790821039082317989/reviews"
+    },
+    {
+      "author": "Ana Maria Ferro Torres",
+      "rating": 5,
+      "text": "Fuimos varias veces a cenar con mi amiga, la comida muy sabrosa, la atención muy buena y dinámica. Cenamos las dos por menos de $ 30mil con postre y bebidas sin alcohol. Me encantaron las empanadas ppalmente las de charqui y los tamales. La atención de Mario espectacular, se jubilaba en los días siguientes.  Buena vida Mario!!! Comensales se los recomiendo.... lo van a disfrutar!!",
+      "time": 1764233712,
+      "dateLabel": "noviembre de 2025",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjUvyWnNYe2nT0S2beSDAQcG3FA8UGzGibE5VtRYcQhOMRrLe-fx=s128-c0x00000000-cc-rp-mo-ba2",
+      "authorUrl": "https://www.google.com/maps/contrib/105020076490731291859/reviews"
     }
   ]
 }

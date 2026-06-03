@@ -28,23 +28,35 @@ if (!key || !placeId) {
   process.exit(1);
 }
 
-const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
-url.searchParams.set("place_id", placeId);
-url.searchParams.set("reviews_sort", "newest");
-url.searchParams.set("reviews_no_translations", "true");
-url.searchParams.set("language", "es");
-url.searchParams.set("fields", "rating,user_ratings_total,reviews");
-url.searchParams.set("key", key);
+// Texto mínimo para que una reseña luzca bien en la tarjeta (evita "ok" sueltos).
+const MIN_TEXT = 25;
 
-const res = await fetch(url);
-const data = await res.json();
-if (data.status !== "OK") {
-  console.error(`Google respondió: ${data.status}`, data.error_message ?? "");
-  process.exit(1);
+async function fetchReviews(sort) {
+  const url = new URL("https://maps.googleapis.com/maps/api/place/details/json");
+  url.searchParams.set("place_id", placeId);
+  if (sort) url.searchParams.set("reviews_sort", sort);
+  url.searchParams.set("reviews_no_translations", "true");
+  url.searchParams.set("language", "es");
+  url.searchParams.set("fields", "rating,user_ratings_total,reviews");
+  url.searchParams.set("key", key);
+  const res = await fetch(url);
+  const data = await res.json();
+  if (data.status !== "OK") {
+    console.error(`Google respondió (${sort}): ${data.status}`, data.error_message ?? "");
+    process.exit(1);
+  }
+  return data.result ?? {};
 }
 
+// Combinamos "más nuevas" + "más relevantes" para maximizar reseñas con texto.
+const [newest, relevant] = await Promise.all([
+  fetchReviews("newest"),
+  fetchReviews("most_relevant"),
+]);
+
 const fmt = new Intl.DateTimeFormat("es-AR", { month: "long", year: "numeric" });
-const reviews = (data.result?.reviews ?? [])
+const seen = new Set();
+const reviews = [...(newest.reviews ?? []), ...(relevant.reviews ?? [])]
   .map((r) => ({
     author: r.author_name ?? "Cliente de Google",
     rating: Math.round(r.rating ?? 5),
@@ -54,13 +66,19 @@ const reviews = (data.result?.reviews ?? [])
     photo: r.profile_photo_url ?? null,
     authorUrl: r.author_url ?? null,
   }))
-  .filter((r) => r.text.length > 0)
-  .sort((a, b) => b.time - a.time);
+  .filter((r) => {
+    if (r.text.length < MIN_TEXT) return false;
+    const id = r.author + "|" + r.time; // dedupe entre ambos listados
+    if (seen.has(id)) return false;
+    seen.add(id);
+    return true;
+  })
+  .sort((a, b) => b.time - a.time); // más nuevas primero
 
 const snapshot = {
   fetchedAt: new Date().toISOString(),
-  rating: data.result?.rating ?? null,
-  total: data.result?.user_ratings_total ?? null,
+  rating: newest.rating ?? relevant.rating ?? null,
+  total: newest.user_ratings_total ?? relevant.user_ratings_total ?? null,
   reviews,
 };
 
