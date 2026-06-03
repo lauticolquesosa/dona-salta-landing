@@ -50,7 +50,7 @@
 /* Base                                                                */
 /* ------------------------------------------------------------------ */
 :root {
-  --header-h: 4.5rem;
+  --header-h: 5rem;
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-h);
   color-scheme: light;

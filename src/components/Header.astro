@@ -6,14 +6,14 @@ import { navLinks, wa } from "../data/site";
 
 <header
   data-header
-  class="fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ease-[var(--ease-warm)] text-crema data-[scrolled]:bg-crema/90 data-[scrolled]:text-tostado data-[scrolled]:shadow-[var(--shadow-warm-sm)] data-[scrolled]:backdrop-blur-md"
+  class="fixed inset-x-0 top-0 z-50 text-crema bg-tostado/30 backdrop-blur-sm transition-[background-color,box-shadow,backdrop-filter] duration-300 ease-[var(--ease-warm)] data-[scrolled]:bg-tostado/80 data-[scrolled]:shadow-[var(--shadow-warm-md)] data-[scrolled]:backdrop-blur-md"
 >
   <nav
     class="mx-auto flex h-[var(--header-h)] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
     aria-label="Principal"
   >
     <a href="#inicio" class="shrink-0 transition-transform duration-300 ease-[var(--ease-warm)] hover:scale-105" aria-label="Doña Salta — Inicio">
-      <Logo eager class="h-10 sm:h-12" />
+      <Logo eager class="h-12 sm:h-14" />
     </a>
 
     <!-- Links desktop -->
@@ -66,7 +66,7 @@ import { navLinks, wa } from "../data/site";
     id="mobile-menu"
     data-mobile-menu
     hidden
-    class="lg:hidden border-t border-tostado/10 bg-crema/95 text-tostado backdrop-blur-md"
+    class="lg:hidden border-t border-crema/10 bg-tostado/95 text-crema backdrop-blur-md"
   >
     <ul class="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
       {
@@ -75,7 +75,7 @@ import { navLinks, wa } from "../data/site";
             <a
               href={link.href}
               data-mobile-link
-              class="block rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-adobe"
+              class="block rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-tostado-800"
             >
               {link.label}
             </a>
