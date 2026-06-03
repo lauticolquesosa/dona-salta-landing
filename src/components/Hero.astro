@@ -1,31 +1,37 @@
 ---
+import { Image } from "astro:assets";
 import WhatsAppButton from "./ui/WhatsAppButton.astro";
 import Stars from "./ui/Stars.astro";
-import { wa, images, social, business } from "../data/site";
+import { wa, social, business } from "../data/site";
+import heroImg from "../assets/hero-dona-salta.png";
 ---
 
 <section
   id="inicio"
   class="relative flex min-h-[100svh] items-center overflow-hidden"
 >
-  <!-- Imagen de fondo (LCP): carga prioritaria, con dimensiones para evitar CLS. -->
-  <img
-    src={images.hero.src}
-    alt={images.hero.alt}
-    width={images.hero.width}
-    height={images.hero.height}
+  <!-- Imagen de fondo (LCP): foto real de la fachada de noche.
+       Responsive (srcset por anchos) + WebP + carga prioritaria.
+       object-position un poco arriba para mantener la fachada centrada al
+       recortar en mobile/tablet (vertical). -->
+  <Image
+    src={heroImg}
+    alt="Fachada del restaurante Doña Salta iluminada de noche, en el centro de Salta"
+    widths={[640, 828, 1080, 1280, 1600]}
+    sizes="100vw"
     fetchpriority="high"
-    decoding="async"
-    class="photo absolute inset-0 -z-10 h-full w-full object-cover"
+    loading="eager"
+    class="photo absolute inset-0 -z-10 h-full w-full object-cover object-[center_38%]"
   />
-  <!-- Overlay cálido oscuro para legibilidad del texto. -->
+  <!-- Overlay cálido oscuro para legibilidad del texto (más fuerte en mobile,
+       donde la fachada ocupa más). -->
   <div
-    class="absolute inset-0 -z-10 bg-gradient-to-b from-tostado/80 via-tostado/55 to-tostado/85"
+    class="absolute inset-0 -z-10 bg-gradient-to-b from-tostado/85 via-tostado/60 to-tostado/90 sm:from-tostado/80 sm:via-tostado/50 sm:to-tostado/85"
     aria-hidden="true"
   >
   </div>
   <div
-    class="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_50%_0%,transparent,rgba(43,29,22,0.35))]"
+    class="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_50%_0%,transparent,rgba(43,29,22,0.4))]"
     aria-hidden="true"
   >
   </div>
