@@ -1,0 +1,104 @@
+---
+import SectionHeading from "./ui/SectionHeading.astro";
+import Stars from "./ui/Stars.astro";
+import { reviews, social } from "../data/site";
+
+const profileLinks = [
+  { label: "Ver en Google", url: social.links.google },
+  { label: "Ver en TripAdvisor", url: social.links.tripadvisor },
+].filter((l) => l.url && !l.url.startsWith("["));
+---
+
+<section
+  id="resenas"
+  class="scroll-mt-20 bg-tostado py-20 text-crema sm:py-28"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <SectionHeading
+      kicker="Reseñas"
+      title="Miles de comensales ya lo confirman"
+      subtitle="No lo decimos nosotros: lo dicen las casi 30.000 personas que nos eligieron."
+      tone="light"
+    />
+
+    <!-- Cifras grandes reiteradas -->
+    <div
+      data-reveal
+      class="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-10 gap-y-5 text-center"
+    >
+      <div>
+        <p class="inline-flex items-center gap-1.5 font-[var(--font-display)] text-4xl font-semibold text-ocre-300" style="font-family: var(--font-display)">
+          {social.googleRating}
+          <Stars rating={1} total={1} class="text-[1.9rem]" />
+        </p>
+        <p class="text-sm text-crema/70">{social.googleReviews} reseñas en Google</p>
+      </div>
+      <div class="hidden h-12 w-px bg-crema/20 sm:block" aria-hidden="true"></div>
+      <div>
+        <p class="inline-flex items-center gap-2 font-[var(--font-display)] text-4xl font-semibold text-ocre-300" style="font-family: var(--font-display)">
+          <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 9a6 6 0 0 0 12 0V4H6zM6 4H3v2a3 3 0 0 0 3 3M18 4h3v2a3 3 0 0 1-3 3M9 21h6M12 17v4" />
+          </svg>
+          2025
+        </p>
+        <p class="text-sm text-crema/70">Travelers' Choice · {social.tripadvisorRank}</p>
+      </div>
+      <div class="hidden h-12 w-px bg-crema/20 sm:block" aria-hidden="true"></div>
+      <div>
+        <p class="font-[var(--font-display)] text-4xl font-semibold text-ocre-300" style="font-family: var(--font-display)">
+          {social.instagramFollowers}
+        </p>
+        <p class="text-sm text-crema/70">seguidores en Instagram</p>
+      </div>
+    </div>
+
+    <ul class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+      {
+        reviews.map((review) => (
+          <li
+            data-reveal
+            class="flex flex-col rounded-[var(--radius-card)] bg-tostado-800 p-6 shadow-[var(--shadow-warm-md)] ring-1 ring-crema/5"
+          >
+            <Stars rating={review.rating} class="text-ocre text-[1.05rem]" />
+            <blockquote class="mt-4 flex-1 text-base leading-relaxed text-crema/90">
+              {review.text}
+            </blockquote>
+            <footer class="mt-5 flex items-center gap-3 border-t border-crema/10 pt-4">
+              <span
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-terracota font-[var(--font-display)] text-lg font-semibold text-crema"
+                style="font-family: var(--font-display)"
+                aria-hidden="true"
+              >
+                {review.author.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "").charAt(0) || "★"}
+              </span>
+              <span class="flex flex-col">
+                <cite class="not-italic font-semibold text-crema">{review.author}</cite>
+                <span class="text-xs text-crema/60">vía {review.source}</span>
+              </span>
+            </footer>
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      profileLinks.length > 0 && (
+        <div data-reveal class="mt-10 flex flex-wrap items-center justify-center gap-4">
+          {profileLinks.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 text-sm font-medium text-ocre-300 underline-offset-4 transition-colors hover:text-crema hover:underline"
+            >
+              {link.label}
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17 17 7M7 7h10v10" />
+              </svg>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

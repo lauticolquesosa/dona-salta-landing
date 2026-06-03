@@ -1,0 +1,29 @@
+==========================================================
+  FOTOS REALES DE LA GALERÍA — Doña Salta
+==========================================================
+
+ESTADO: ACTIVADAS. La galería usa estas fotos reales.
+(Interruptor en src/data/site.ts -> const GALLERY_IMG)
+
+Fotos actuales (5):
+  galeria-01.jpg  -> Empanadas en tabla (vertical, se ve alta)
+  galeria-02.jpg  -> Salón / comensales
+  galeria-03.jpg  -> Fachada de noche (horizontal, se ve ancha)
+  galeria-04.jpg  -> Mesa servida con vino
+  galeria-05.jpg  -> Interior con arcos de adobe
+
+----------------------------------------------------------
+PARA CAMBIAR O AGREGAR FOTOS
+----------------------------------------------------------
+- Reemplazá el .jpg manteniendo el mismo nombre.
+- Para sumar una 6ta, guardá galeria-06.jpg acá y avisá
+  para agregarla a la lista en src/data/site.ts.
+- Ideal: lado largo ~1400px, < 300 KB, formato .jpg.
+- Usá fotos propias / del local (no las de clientes en
+  Google, que tienen derechos de autor de cada usuario).
+
+Para volver a las imágenes IA: en src/data/site.ts cambiá
+  const GALLERY_IMG = "/assets/img/reales";
+por
+  const GALLERY_IMG = IMG;
+==========================================================

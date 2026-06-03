@@ -1,0 +1,122 @@
+---
+import "../styles/global.css";
+import { business, social, openingHours, images } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Doña Salta — Cocina regional salteña | Empanadas, locro y vinos de altura",
+  description = "El sabor auténtico del norte argentino en Salta capital. Empanadas salteñas a cuchillo, locro, humita, tamales, asado y vinos de altura. ★ 4.5 con +25.000 reseñas · Travelers' Choice 2025. Reservá por WhatsApp.",
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://donasalta.com.ar");
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImageUrl = new URL(images.ogImage.src, site).href;
+
+// Datos estructurados Schema.org Restaurant (clave para el turista que busca en Google).
+const restaurantSchema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: business.name,
+  description,
+  url: canonical,
+  image: ogImageUrl,
+  servesCuisine: ["Cocina regional salteña", "Cocina del norte argentino", "Argentina"],
+  priceRange: "$$",
+  telephone: business.phoneDisplay,
+  acceptsReservations: "True",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: business.address.street,
+    addressLocality: business.address.city,
+    addressRegion: business.address.region,
+    postalCode: business.address.postalCode,
+    addressCountry: business.address.country,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: business.address.lat,
+    longitude: business.address.lng,
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: social.googleRating,
+    reviewCount: social.googleReviewsCount,
+    bestRating: "5",
+  },
+  openingHoursSpecification: openingHours.map((h) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: h.days,
+    opens: h.opens,
+    closes: h.closes,
+  })),
+  sameAs: [
+    social.links.instagram,
+    social.links.facebook,
+    social.links.tripadvisor,
+    social.links.google,
+  ].filter((u) => u && !u.startsWith("[")),
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Habilita el estado oculto de los reveals SOLO si hay JS y el usuario
+         no pidió reduced-motion. Inline en <head> para evitar parpadeo (FOUC). -->
+    <script is:inline>
+      if (
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        document.documentElement.classList.add("anim-on");
+      }
+    </script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#a8442a" />
+    <meta name="author" content={business.name} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/logo/logo-placeholder.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(images.ogImage.width)} />
+    <meta property="og:image:height" content={String(images.ogImage.height)} />
+    <meta property="og:image:alt" content={images.ogImage.alt} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(restaurantSchema)}
+    />
+  </head>
+  <body>
+    <a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-tostado focus:px-4 focus:py-2 focus:text-crema">
+      Saltar al contenido
+    </a>
+    <slot />
+    <!-- Grano de marca al ~3% sobre toda la página (profundidad editorial). -->
+    <div class="grain" aria-hidden="true"></div>
+  </body>
+</html>

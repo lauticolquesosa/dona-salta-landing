@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+/* Fuentes self-hosted (sin requests externos → mejor LCP y privacidad). */
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/inter";
+
+/*
+  Design tokens de la marca Doña Salta.
+  Estética: barro cocido, adobe al sol, textil andino, cerros de colores.
+  Todo el sitio toma color/tipografía/espaciado de acá. No hay valores mágicos sueltos.
+*/
+@theme {
+  /* --- Paleta --- */
+  --color-terracota: #a8442a; /* color principal de marca / CTAs */
+  --color-terracota-700: #8a3722;
+  --color-terracota-300: #c97a63;
+  --color-ocre: #c8893b; /* acentos, hover, detalles */
+  --color-ocre-300: #ddb27e;
+  --color-adobe: #e8dac4; /* fondos suaves de secciones claras */
+  --color-cerro: #4a5340; /* verde cerro, contrapunto natural */
+  --color-cerro-300: #7c856f;
+  --color-tostado: #2b1d16; /* texto principal / fondos oscuros */
+  --color-tostado-800: #3a281e;
+  --color-crema: #f6efe3; /* fondo base */
+  --color-vino: #6e2233; /* acento premium puntual (vino de altura) */
+
+  /* --- Tipografía --- */
+  --font-display: "Fraunces Variable", "Fraunces", Georgia, "Times New Roman",
+    serif;
+  --font-body: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+
+  /* --- Sombras cálidas ultra-difusas (minimalist: opacidad < 0.05) ---
+     La separación se logra con espaciado y bordes 1px, no con sombras pesadas. */
+  --shadow-warm-sm: 0 1px 2px rgba(43, 29, 22, 0.03);
+  --shadow-warm-md: 0 10px 30px rgba(43, 29, 22, 0.045);
+  --shadow-warm-lg: 0 20px 60px rgba(43, 29, 22, 0.05);
+
+  /* --- Borde hairline de marca (líneas 1px editoriales) --- */
+  --color-linea: rgba(43, 29, 22, 0.1);
+
+  /* --- Radios cálidos --- */
+  --radius-card: 1rem;
+
+  /* --- Ritmo de animación --- */
+  --ease-warm: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+:root {
+  --header-h: 4.5rem;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-crema);
+  color: var(--color-tostado);
+  font-family: var(--font-body);
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  /* Textura de papel/adobe muy tenue, generada con CSS (cero requests). */
+  background-image:
+    radial-gradient(
+      120% 80% at 80% -10%,
+      rgba(200, 137, 59, 0.06),
+      transparent 60%
+    ),
+    radial-gradient(
+      90% 60% at -10% 110%,
+      rgba(74, 83, 64, 0.05),
+      transparent 55%
+    );
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Foco visible y cálido, accesible por teclado en todo el sitio. */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-ocre);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilidades de marca                                                 */
+/* ------------------------------------------------------------------ */
+
+/* Guarda salteña: cenefa geométrica andina, usada con moderación como acento. */
+.guarda {
+  height: 10px;
+  width: 100%;
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--color-terracota) 0 10px,
+    var(--color-ocre) 10px 20px,
+    var(--color-cerro) 20px 30px,
+    transparent 30px 40px
+  );
+  background-size: 40px 10px;
+  opacity: 0.9;
+}
+
+/* Grado fotográfico editorial: desaturación cálida muy leve + contraste.
+   Sutil a propósito: la comida tiene que seguir dando hambre (conversión > estética). */
+.photo {
+  filter: saturate(0.92) contrast(1.03);
+}
+
+/* Grano/ruido de marca al ~3% para dar profundidad (minimalist §6).
+   Overlay fijo, no interactivo, por debajo de header/CTAs/lightbox. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Textura sutil de adobe para secciones, sin imágenes. */
+.bg-adobe-texture {
+  background-color: var(--color-adobe);
+  background-image: radial-gradient(
+      rgba(43, 29, 22, 0.04) 1px,
+      transparent 1px
+    ),
+    radial-gradient(rgba(43, 29, 22, 0.03) 1px, transparent 1px);
+  background-size: 18px 18px, 24px 24px;
+  background-position: 0 0, 9px 9px;
+}
+
+/* Latido muy suave y ocasional para el botón flotante de WhatsApp. */
+@keyframes wa-heartbeat {
+  0%,
+  92%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 20px rgba(43, 29, 22, 0.22);
+  }
+  94% {
+    transform: scale(1.08);
+    box-shadow: 0 10px 26px rgba(168, 68, 42, 0.35);
+  }
+  96% {
+    transform: scale(1);
+  }
+}
+.wa-pulse {
+  animation: wa-heartbeat 6s var(--ease-warm) infinite;
+}
+
+/* ------------------------------------------------------------------ */
+/* Animaciones de scroll-reveal                                        */
+/* El contenido es visible por defecto (a prueba de no-JS). Solo se     */
+/* oculta cuando un script inline confirma que hay JS y que el usuario  */
+/* NO pidió reduced-motion (clase .anim-on en <html>). GSAP lo revela.  */
+/* ------------------------------------------------------------------ */
+.anim-on [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: transform, opacity;
+}
+
+/* Elementos del hero: entrada única al cargar (controlada por GSAP). */
+.anim-on [data-hero] {
+  opacity: 0;
+  transform: translateY(18px);
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .anim-on [data-reveal],
+  .anim-on [data-hero] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

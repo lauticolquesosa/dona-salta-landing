@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import TrustStrip from "../components/TrustStrip.astro";
+import About from "../components/About.astro";
+import Menu from "../components/Menu.astro";
+import Gallery from "../components/Gallery.astro";
+import Reviews from "../components/Reviews.astro";
+import Location from "../components/Location.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+import ScrollAnimations from "../components/ScrollAnimations.astro";
+---
+
+<BaseLayout>
+  <Header />
+  <main id="contenido">
+    <Hero />
+    <TrustStrip />
+    <About />
+    <Menu />
+    <Gallery />
+    <Reviews />
+    <Location />
+    <FinalCTA />
+  </main>
+  <Footer />
+  <WhatsAppFloat />
+  <ScrollAnimations />
+</BaseLayout>

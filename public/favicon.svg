@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Doña Salta">
+  <rect width="64" height="64" rx="14" fill="#A8442A"/>
+  <g transform="translate(32 34)" fill="none" stroke="#F6EFE3" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M-16 10 L-6 -6 L1 4 L9 -12 L17 10 Z" fill="#C8893B" stroke="none"/>
+    <circle cx="11" cy="-14" r="4.5" fill="#F6EFE3" stroke="none"/>
+  </g>
+</svg>

@@ -1,0 +1,125 @@
+---
+import Logo from "./ui/Logo.astro";
+import WhatsAppButton from "./ui/WhatsAppButton.astro";
+import { navLinks, wa } from "../data/site";
+---
+
+<header
+  data-header
+  class="fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300 ease-[var(--ease-warm)] text-crema data-[scrolled]:bg-crema/90 data-[scrolled]:text-tostado data-[scrolled]:shadow-[var(--shadow-warm-sm)] data-[scrolled]:backdrop-blur-md"
+>
+  <nav
+    class="mx-auto flex h-[var(--header-h)] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
+    aria-label="Principal"
+  >
+    <a href="#inicio" class="shrink-0" aria-label="Doña Salta — Inicio">
+      <Logo />
+    </a>
+
+    <!-- Links desktop -->
+    <ul class="hidden items-center gap-7 lg:flex">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="relative text-sm font-medium tracking-tight opacity-90 transition-opacity hover:opacity-100 after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:bg-ocre after:transition-[width] after:duration-300 hover:after:w-full"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <WhatsAppButton
+        href={wa.reserva}
+        label="Reservá"
+        class="hidden sm:inline-flex"
+      />
+      <WhatsAppButton
+        href={wa.reserva}
+        label="WhatsApp"
+        class="sm:hidden !px-4 !py-2 text-sm"
+      />
+
+      <!-- Hamburguesa (solo mobile/tablet) -->
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-current/10 lg:hidden"
+      >
+        <span class="sr-only">Abrir menú</span>
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path data-icon-open d="M4 7h16M4 12h16M4 17h16"></path>
+          <path data-icon-close class="hidden" d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Panel mobile -->
+  <div
+    id="mobile-menu"
+    data-mobile-menu
+    hidden
+    class="lg:hidden border-t border-tostado/10 bg-crema/95 text-tostado backdrop-blur-md"
+  >
+    <ul class="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              data-mobile-link
+              class="block rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-adobe"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+  const iconOpen = document.querySelector<SVGElement>("[data-icon-open]");
+  const iconClose = document.querySelector<SVGElement>("[data-icon-close]");
+
+  // Header sólido/translúcido al hacer scroll.
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 24) header.setAttribute("data-scrolled", "");
+    else header.removeAttribute("data-scrolled");
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Menú mobile accesible (aria-expanded + foco por teclado).
+  const setMenu = (open: boolean) => {
+    if (!menu || !toggle) return;
+    menu.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.querySelector(".sr-only")!.textContent = open ? "Cerrar menú" : "Abrir menú";
+    iconOpen?.classList.toggle("hidden", open);
+    iconClose?.classList.toggle("hidden", !open);
+  };
+
+  toggle?.addEventListener("click", () => setMenu(menu?.hidden ?? true));
+  menu?.querySelectorAll("[data-mobile-link]").forEach((link) =>
+    link.addEventListener("click", () => setMenu(false))
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu && !menu.hidden) {
+      setMenu(false);
+      toggle?.focus();
+    }
+  });
+</script>
