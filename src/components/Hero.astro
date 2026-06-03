@@ -1,14 +1,13 @@
 ---
 import { Image } from "astro:assets";
 import WhatsAppButton from "./ui/WhatsAppButton.astro";
-import Stars from "./ui/Stars.astro";
-import { wa, social, business } from "../data/site";
+import { wa, business } from "../data/site";
 import heroImg from "../assets/hero-dona-salta.png";
 ---
 
 <section
   id="inicio"
-  class="relative flex min-h-[100svh] items-center overflow-hidden"
+  class="relative flex min-h-[68svh] items-center overflow-hidden lg:min-h-[74vh]"
 >
   <!-- Imagen de fondo (LCP): foto real de la fachada de noche.
        Responsive (srcset por anchos) + WebP + carga prioritaria.
@@ -37,7 +36,7 @@ import heroImg from "../assets/hero-dona-salta.png";
   </div>
 
   <div
-    class="mx-auto w-full max-w-5xl px-4 pt-28 pb-16 text-center text-crema sm:px-6 lg:pt-32"
+    class="mx-auto w-full max-w-5xl px-4 pt-28 pb-14 text-center text-crema sm:px-6 lg:pt-32 lg:pb-16"
   >
     <p
       data-hero
@@ -53,11 +52,11 @@ import heroImg from "../assets/hero-dona-salta.png";
       class="tw-wrap mx-auto max-w-3xl text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl"
     >
       <span data-tw-text
-        ><span data-seg>Sabor salteño de verdad, </span><span
+        ><span data-seg>Sabor </span><span
           data-seg
           data-accent
-          class="text-ocre-300">desde {business.foundedYear}</span
-        ></span
+          class="text-ocre-300">salteño</span
+        ><span data-seg> de verdad</span></span
       >
       <span data-tw-render aria-hidden="true" class="tw-render"></span>
     </h1>
@@ -86,29 +85,6 @@ import heroImg from "../assets/hero-dona-salta.png";
       </a>
     </div>
 
-    <!-- Prueba social inmediata: vende sola, va arriba de todo. -->
-    <ul
-      data-hero
-      class="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-3 text-sm font-medium text-crema/95 sm:text-base"
-    >
-      <li class="inline-flex items-center gap-1.5 rounded-full bg-tostado/40 px-4 py-2 backdrop-blur-sm">
-        <Stars rating={1} total={1} class="text-ocre-300 text-[1rem]" />
-        <strong class="font-semibold">{social.googleRating}</strong>
-        <span class="text-crema/80">· {social.googleReviews} reseñas en Google</span>
-      </li>
-      <li class="inline-flex items-center gap-1.5 rounded-full bg-tostado/40 px-4 py-2 backdrop-blur-sm">
-        <svg class="h-4 w-4 text-ocre-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6 9a6 6 0 0 0 12 0V4H6zM6 4H3v2a3 3 0 0 0 3 3M18 4h3v2a3 3 0 0 1-3 3M9 21h6M12 17v4" />
-        </svg>
-        <span>{social.tripadvisor}</span>
-      </li>
-      <li class="inline-flex items-center gap-1.5 rounded-full bg-tostado/40 px-4 py-2 backdrop-blur-sm">
-        <svg class="h-4 w-4 text-ocre-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" /><circle cx="12" cy="10" r="3" />
-        </svg>
-        <span>{social.tripadvisorRank}</span>
-      </li>
-    </ul>
   </div>
 
   <!-- Indicador de scroll, decorativo. -->
