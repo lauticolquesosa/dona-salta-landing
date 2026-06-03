@@ -24,3 +24,5 @@ Thumbs.db
 
 # claude code (config local)
 .claude/
+
+.vercel
