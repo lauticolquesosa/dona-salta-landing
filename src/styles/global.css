@@ -104,9 +104,14 @@ p {
   border-radius: 4px;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+/* En @layer base para que las utilidades de Tailwind (h-*, w-*) puedan
+   sobrescribir la altura/ancho cuando se aplican (ej. el logo del header).
+   Sin la capa, esta regla ganaría sobre las utilidades (gotcha de Tailwind v4). */
+@layer base {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* ------------------------------------------------------------------ */
