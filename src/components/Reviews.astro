@@ -52,7 +52,12 @@ const profileLinks = [
       </div>
     </div>
 
-    <ul class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+    <!-- Lista de reseñas. Render inicial = reseñas curadas (respaldo, no-JS, SEO).
+         Si la API de Google responde, el script reemplaza esto por las MÁS NUEVAS. -->
+    <ul
+      data-reviews-list
+      class="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2"
+    >
       {
         reviews.map((review) => (
           <li
@@ -69,7 +74,7 @@ const profileLinks = [
                 style="font-family: var(--font-display)"
                 aria-hidden="true"
               >
-                {review.author.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "").charAt(0) || "★"}
+                {review.author.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "").charAt(0) || "D"}
               </span>
               <span class="flex flex-col">
                 <cite class="not-italic font-semibold text-crema">{review.author}</cite>
@@ -80,6 +85,15 @@ const profileLinks = [
         ))
       }
     </ul>
+
+    <!-- Atribución a Google (se muestra solo cuando hay reseñas reales en vivo). -->
+    <p
+      data-reviews-source
+      hidden
+      class="mt-6 text-center text-xs text-crema/55"
+    >
+      Reseñas reales obtenidas de Google, actualizadas automáticamente.
+    </p>
 
     {
       profileLinks.length > 0 && (
@@ -102,3 +116,113 @@ const profileLinks = [
     }
   </div>
 </section>
+
+<script>
+  // Trae las reseñas MÁS NUEVAS de Google desde el endpoint serverless y
+  // reemplaza el respaldo curado. Si algo falla, se queda el respaldo.
+  const STAR =
+    "M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
+
+  type LiveReview = {
+    author: string;
+    rating: number;
+    text: string;
+    relativeTime: string;
+    photo: string | null;
+    authorUrl: string | null;
+  };
+
+  function starsEl(rating: number): HTMLElement {
+    const wrap = document.createElement("span");
+    wrap.className = "inline-flex items-center gap-0.5 text-ocre text-[1.05rem]";
+    wrap.setAttribute("role", "img");
+    wrap.setAttribute("aria-label", `${rating} de 5 estrellas`);
+    for (let i = 0; i < 5; i++) {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", "0 0 24 24");
+      svg.setAttribute("fill", "currentColor");
+      svg.setAttribute("aria-hidden", "true");
+      svg.setAttribute("class", "h-[1em] w-[1em]" + (i < rating ? "" : " opacity-25"));
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", STAR);
+      svg.appendChild(path);
+      wrap.appendChild(svg);
+    }
+    return wrap;
+  }
+
+  function initial(name: string): string {
+    const m = name.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "");
+    return m.charAt(0).toUpperCase() || "D";
+  }
+
+  // Construye una tarjeta usando textContent (a prueba de inyección de HTML).
+  function card(r: LiveReview): HTMLLIElement {
+    const li = document.createElement("li");
+    li.className =
+      "flex flex-col rounded-[var(--radius-card)] bg-tostado-800 p-6 shadow-[var(--shadow-warm-md)] ring-1 ring-crema/5";
+
+    li.appendChild(starsEl(r.rating));
+
+    const quote = document.createElement("blockquote");
+    quote.className = "mt-4 flex-1 text-base leading-relaxed text-crema/90";
+    quote.textContent = r.text;
+    li.appendChild(quote);
+
+    const footer = document.createElement("footer");
+    footer.className =
+      "mt-5 flex items-center gap-3 border-t border-crema/10 pt-4";
+
+    if (r.photo) {
+      const img = document.createElement("img");
+      img.src = r.photo;
+      img.alt = "";
+      img.loading = "lazy";
+      img.width = 40;
+      img.height = 40;
+      img.referrerPolicy = "no-referrer";
+      img.className = "h-10 w-10 shrink-0 rounded-full object-cover";
+      footer.appendChild(img);
+    } else {
+      const av = document.createElement("span");
+      av.className =
+        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-terracota text-lg font-semibold text-crema";
+      av.style.fontFamily = "var(--font-display)";
+      av.setAttribute("aria-hidden", "true");
+      av.textContent = initial(r.author);
+      footer.appendChild(av);
+    }
+
+    const meta = document.createElement("span");
+    meta.className = "flex flex-col";
+    const cite = document.createElement("cite");
+    cite.className = "not-italic font-semibold text-crema";
+    cite.textContent = r.author;
+    const sub = document.createElement("span");
+    sub.className = "text-xs text-crema/60";
+    sub.textContent = r.relativeTime ? `vía Google · ${r.relativeTime}` : "vía Google";
+    meta.append(cite, sub);
+    footer.appendChild(meta);
+
+    li.appendChild(footer);
+    return li;
+  }
+
+  (async () => {
+    const list = document.querySelector<HTMLUListElement>("[data-reviews-list]");
+    if (!list) return;
+    try {
+      const res = await fetch("/api/reviews.json", { headers: { accept: "application/json" } });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data?.ok || !Array.isArray(data.reviews) || data.reviews.length === 0) return;
+
+      list.replaceChildren(...data.reviews.map(card));
+
+      const note = document.querySelector<HTMLElement>("[data-reviews-source]");
+      if (note) note.hidden = false;
+    } catch {
+      /* Silencio: se mantiene el respaldo curado. */
+    }
+  })();
+</script>
