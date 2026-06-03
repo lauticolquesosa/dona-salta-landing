@@ -1,0 +1,34 @@
+{
+  "fetchedAt": "2026-06-03T05:46:18.399Z",
+  "rating": 4.5,
+  "total": 24893,
+  "reviews": [
+    {
+      "author": "FERNANDO DANIEL Guardia",
+      "rating": 5,
+      "text": "Muy buena las empanadas y excelente la carbonada.",
+      "time": 1780457282,
+      "dateLabel": "junio de 2026",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXQFV0Q37KOfp4FHx7is-yX2Kg8tOSqibe2uG5HdIETGnXSMICo=s128-c0x00000000-cc-rp-mo-ba2",
+      "authorUrl": "https://www.google.com/maps/contrib/109120053705219833677/reviews"
+    },
+    {
+      "author": "gustavo rizzo",
+      "rating": 5,
+      "text": "Bienas empanadas",
+      "time": 1780352910,
+      "dateLabel": "junio de 2026",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjUb5aBLmxc0B_IK7kUTMMzK6cXOwJOvK7kRTDTbvKyxdYCCU1_m=s128-c0x00000000-cc-rp-mo",
+      "authorUrl": "https://www.google.com/maps/contrib/112470129504262646494/reviews"
+    },
+    {
+      "author": "Graciela Monton",
+      "rating": 5,
+      "text": "Increíblemente excelente, cordialidad, buen trato, la comuna excelente muy muy rica.\nLa atención de los mozos Iván y Damián de primera.",
+      "time": 1780337282,
+      "dateLabel": "junio de 2026",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXCTgmOr7KOxqLOkMvdyDNXLLT95wVrovOZ5gcKR-5seJ8YDZrkPg=s128-c0x00000000-cc-rp-mo-ba5",
+      "authorUrl": "https://www.google.com/maps/contrib/109278544298062579328/reviews"
+    }
+  ]
+}
