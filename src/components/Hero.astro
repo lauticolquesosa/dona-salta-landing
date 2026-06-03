@@ -44,11 +44,16 @@ import { wa, images, social, business } from "../data/site";
     </p>
 
     <h1
-      data-hero
-      class="mx-auto max-w-3xl text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl"
+      class="tw-wrap mx-auto max-w-3xl text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl"
     >
-      Sabor salteño de verdad,
-      <span class="text-ocre-300">desde {business.foundedYear}</span>
+      <span data-tw-text
+        ><span data-seg>Sabor salteño de verdad, </span><span
+          data-seg
+          data-accent
+          class="text-ocre-300">desde {business.foundedYear}</span
+        ></span
+      >
+      <span data-tw-render aria-hidden="true" class="tw-render"></span>
     </h1>
 
     <p
@@ -66,10 +71,10 @@ import { wa, images, social, business } from "../data/site";
       <WhatsAppButton href={wa.reserva} label="Reservá por WhatsApp" size="lg" />
       <a
         href="#menu"
-        class="inline-flex items-center justify-center gap-2 rounded-full border border-crema/40 bg-crema/5 px-7 py-3.5 text-base font-semibold tracking-tight text-crema backdrop-blur-sm transition-[transform,background-color] duration-200 ease-[var(--ease-warm)] hover:-translate-y-0.5 hover:bg-crema/15 sm:text-lg"
+        class="cta group inline-flex items-center justify-center gap-2 rounded-full border border-crema/40 bg-crema/5 px-7 py-3.5 text-base font-semibold tracking-tight text-crema backdrop-blur-sm transition-[transform,background-color] duration-200 ease-[var(--ease-warm)] hover:-translate-y-0.5 hover:scale-[1.03] hover:bg-crema/15 active:scale-95 sm:text-lg"
       >
         Ver el menú
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="h-5 w-5 transition-transform duration-300 ease-[var(--ease-warm)] group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14M13 6l6 6-6 6"></path>
         </svg>
       </a>
@@ -110,3 +115,59 @@ import { wa, images, social, business } from "../data/site";
     </svg>
   </div>
 </section>
+
+<script>
+  // Efecto máquina de escribir del título del hero (medio rápido).
+  // Solo corre si hay JS y el usuario no pidió reduced-motion (.anim-on).
+  // El texto real queda en el DOM (data-tw-text) para SEO y lectores de pantalla.
+  if (document.documentElement.classList.contains("anim-on")) {
+    const textEl = document.querySelector<HTMLElement>("[data-tw-text]");
+    const renderEl = document.querySelector<HTMLElement>("[data-tw-render]");
+
+    if (textEl && renderEl) {
+      try {
+        // Construye la lista de caracteres conservando qué segmento es acento.
+        const chars: { ch: string; accent: boolean }[] = [];
+        textEl.querySelectorAll<HTMLElement>("[data-seg]").forEach((seg) => {
+          const accent = seg.hasAttribute("data-accent");
+          for (const ch of seg.textContent ?? "") chars.push({ ch, accent });
+        });
+
+        // Oculta la fuente visualmente (sigue ocupando espacio y la leen SR/SEO).
+        textEl.style.opacity = "0";
+
+        const caret = document.createElement("span");
+        caret.className = "tw-caret";
+        renderEl.appendChild(caret);
+
+        let i = 0;
+        let span: HTMLElement | null = null;
+        let spanAccent: boolean | null = null;
+        const SPEED = 42; // ms por caracter
+
+        const type = () => {
+          if (i >= chars.length) {
+            window.setTimeout(() => caret.remove(), 1300);
+            return;
+          }
+          const { ch, accent } = chars[i++];
+          if (span === null || accent !== spanAccent) {
+            span = document.createElement("span");
+            if (accent) span.className = "text-ocre-300";
+            renderEl.insertBefore(span, caret);
+            spanAccent = accent;
+          }
+          span.appendChild(document.createTextNode(ch));
+          window.setTimeout(type, SPEED);
+        };
+
+        // Pequeño retardo para que primero aparezca el "kicker" de arriba.
+        window.setTimeout(type, 280);
+      } catch {
+        // Ante cualquier error, mostramos el título normal.
+        textEl.style.opacity = "1";
+        renderEl.textContent = "";
+      }
+    }
+  }
+</script>

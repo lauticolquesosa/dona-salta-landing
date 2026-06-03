@@ -73,7 +73,7 @@ const initial = (name: string) =>
     >
       <div>
         <p class="inline-flex items-center gap-1.5 font-[var(--font-display)] text-4xl font-semibold text-ocre-300" style="font-family: var(--font-display)">
-          {ratingBig}
+          <span data-countup>{ratingBig}</span>
           <Stars rating={1} total={1} class="text-[1.9rem]" />
         </p>
         <p class="text-sm text-crema/70">{totalBig} reseñas en Google</p>
@@ -91,7 +91,7 @@ const initial = (name: string) =>
       <div class="hidden h-12 w-px bg-crema/20 sm:block" aria-hidden="true"></div>
       <div>
         <p class="font-[var(--font-display)] text-4xl font-semibold text-ocre-300" style="font-family: var(--font-display)">
-          {social.instagramFollowers}
+          <span data-countup>{social.instagramFollowers}</span>
         </p>
         <p class="text-sm text-crema/70">seguidores en Instagram</p>
       </div>
@@ -102,7 +102,7 @@ const initial = (name: string) =>
         display.map((review) => (
           <li
             data-reveal
-            class="flex flex-col rounded-[var(--radius-card)] bg-tostado-800 p-6 shadow-[var(--shadow-warm-md)] ring-1 ring-crema/5"
+            class="flex flex-col rounded-[var(--radius-card)] bg-tostado-800 p-6 shadow-[var(--shadow-warm-md)] ring-1 ring-crema/5 transition-[transform,box-shadow] duration-300 ease-[var(--ease-warm)] hover:-translate-y-1.5 hover:shadow-[var(--shadow-warm-lg)] hover:ring-ocre/25"
           >
             <Stars rating={review.rating} class="text-ocre text-[1.05rem]" />
             <blockquote class="mt-4 flex-1 text-base leading-relaxed text-crema/90">

@@ -47,8 +47,55 @@
       window.addEventListener("load", () => ScrollTrigger.refresh());
     };
 
+    // Conteo ascendente de las estadísticas cuando entran en pantalla.
+    const countUps = () => {
+      const els = document.querySelectorAll<HTMLElement>("[data-countup]");
+      if (!els.length) return;
+      const nf = new Intl.NumberFormat("es-AR");
+
+      const animate = (el: HTMLElement) => {
+        const raw = (el.textContent ?? "").trim();
+        const suffix = raw.endsWith("+") ? "+" : "";
+        const num = raw.replace(/\+$/, "");
+        const lastPart = num.includes(".") ? num.split(".").pop()! : "";
+        const isDecimal = num.includes(".") && lastPart.length <= 2;
+        const target = isDecimal
+          ? parseFloat(num)
+          : parseInt(num.replace(/\./g, ""), 10);
+        if (!isFinite(target)) return;
+
+        const DURATION = 1400;
+        const start = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / DURATION, 1);
+          const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+          const val = target * eased;
+          el.textContent = isDecimal
+            ? val.toFixed(lastPart.length)
+            : nf.format(Math.round(val)) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = raw; // valor exacto final
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              animate(e.target as HTMLElement);
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.6 }
+      );
+      els.forEach((el) => io.observe(el));
+    };
+
     // Los <script> de Astro son módulos (defer): corren tras parsear el DOM.
     // Arrancamos enseguida para que el hero no quede oculto.
     run();
+    countUps();
   }
 </script>

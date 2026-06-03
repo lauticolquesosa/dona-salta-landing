@@ -36,7 +36,7 @@ const items = [
         items.map((item) => (
           <li data-reveal class="flex flex-col items-center">
             <span class="inline-flex items-center gap-1 font-[var(--font-display)] text-3xl font-semibold text-terracota sm:text-4xl" style="font-family: var(--font-display)">
-              {item.value}
+              <span data-countup>{item.value}</span>
               {item.star && <Stars rating={1} total={1} class="text-ocre text-[1.6rem]" />}
             </span>
             <span class="mt-1 max-w-[14rem] text-sm leading-snug text-cerro">

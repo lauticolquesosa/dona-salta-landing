@@ -22,7 +22,7 @@ const {
 } = Astro.props;
 
 const base =
-  "group inline-flex items-center justify-center gap-2.5 rounded-full font-semibold tracking-tight transition-[transform,background-color,box-shadow,color] duration-200 ease-[var(--ease-warm)] hover:-translate-y-0.5 active:translate-y-0";
+  "cta group inline-flex items-center justify-center gap-2.5 rounded-full font-semibold tracking-tight transition-[transform,background-color,box-shadow,color] duration-200 ease-[var(--ease-warm)] hover:-translate-y-0.5 hover:scale-[1.03] active:scale-95 active:translate-y-0";
 
 const sizes = {
   md: "px-5 py-2.5 text-sm sm:text-base",
@@ -48,7 +48,7 @@ const variants = {
   class:list={[base, sizes[size], variants[variant], pulse && "wa-pulse", extra]}
 >
   <svg
-    class="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110"
+    class="h-5 w-5 shrink-0 transition-transform duration-300 ease-[var(--ease-warm)] group-hover:scale-110 group-hover:-rotate-6"
     viewBox="0 0 24 24"
     fill="currentColor"
     aria-hidden="true"
