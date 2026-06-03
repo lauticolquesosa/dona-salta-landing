@@ -1,48 +1,26 @@
 ---
 /**
- * Logo de marca como lockup tipográfico (usa currentColor para adaptarse a
- * fondos claros u oscuros, p. ej. el header translúcido sobre el hero).
- * El placeholder gráfico en /assets/logo/logo-placeholder.svg queda para
- * favicon/OG y como referencia de dimensiones para el logo real.
+ * Logo de marca (wordmark real "Doña Salta").
+ * Se optimiza con el pipeline de imágenes de Astro (genera WebP liviano y
+ * srcset @2x). El amarillo con contorno negro funciona sobre fondo oscuro
+ * (hero/footer) y claro (header con scroll) sin necesidad de variantes.
  */
+import { Image } from "astro:assets";
+import logo from "../../assets/logo-dona-salta.png";
+
 interface Props {
   class?: string;
+  /** Carga prioritaria (true en el header, que es LCP-adyacente). */
+  eager?: boolean;
 }
-const { class: extra = "" } = Astro.props;
+const { class: extra = "", eager = false } = Astro.props;
 ---
 
-<span
-  class:list={["inline-flex items-center gap-2.5 leading-none", extra]}
-  aria-label="Doña Salta"
->
-  <svg
-    class="h-9 w-9 shrink-0"
-    viewBox="0 0 40 40"
-    fill="none"
-    aria-hidden="true"
-  >
-    <!-- Sello cálido: sol/cerro estilizado del norte -->
-    <circle
-      cx="20"
-      cy="20"
-      r="18.5"
-      stroke="currentColor"
-      stroke-width="1.5"
-      opacity="0.55"></circle>
-    <path
-      d="M9 26.5 16 16l5 6.5L25.5 13 31 26.5z"
-      fill="currentColor"
-      opacity="0.9"></path>
-    <circle cx="27.5" cy="12" r="2.6" fill="currentColor"></circle>
-  </svg>
-  <span class="flex flex-col">
-    <span
-      class="font-[var(--font-display)] text-xl font-semibold tracking-tight"
-      style="font-family: var(--font-display)">Doña Salta</span
-    >
-    <span
-      class="text-[0.6rem] font-medium uppercase tracking-[0.22em] opacity-70"
-      >Cocina salteña</span
-    >
-  </span>
-</span>
+<Image
+  src={logo}
+  alt="Doña Salta — cocina regional salteña"
+  width={300}
+  densities={[1, 2]}
+  loading={eager ? "eager" : "lazy"}
+  class:list={["block w-auto", extra]}
+/>
