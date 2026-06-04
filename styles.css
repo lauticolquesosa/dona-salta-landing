@@ -23,7 +23,7 @@
 
   --maxw: 1240px;
   --pad: clamp(20px, 5vw, 80px);
-  --bar-h: 68px; /* mobile action bar */
+  --bar-h: 0px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -102,6 +102,8 @@ h1, h2, h3 {
 
 /* ---------- Layout ---------- */
 section { position: relative; }
+/* Offset para que la píldora flotante no tape los títulos al saltar por anclas */
+section[id], #top { scroll-margin-top: 92px; }
 .wrap {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -180,15 +182,46 @@ section { position: relative; }
     0 2px 8px rgba(0,0,0,0.25),
     inset 0 1px 0 rgba(255,255,255,0.35);
   max-width: calc(100vw - 24px);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  overflow: visible;
   /* estado final visible por defecto (robusto si falla la animación) */
   opacity: 1;
   transition: background .45s ease, box-shadow .45s ease, top .45s ease, padding .45s ease,
               opacity .8s cubic-bezier(.2,.85,.25,1), transform .8s cubic-bezier(.2,.85,.25,1);
 }
 .nav::-webkit-scrollbar { display: none; }
+
+/* Links: en desktop van en línea dentro de la píldora */
+.nav__links { display: flex; align-items: center; gap: 2px; }
+
+/* Botón hamburguesa: oculto en desktop */
+.nav__toggle {
+  display: none;
+  align-items: center;
+  gap: 9px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--negro-horno);
+  padding: 9px 18px;
+  border-radius: 999px;
+  transition: color .3s ease, background .25s ease;
+}
+.nav__bars { position: relative; display: inline-block; width: 18px; height: 12px; }
+.nav__bars i {
+  position: absolute; left: 0; right: 0; height: 2px; border-radius: 2px;
+  background: currentColor;
+  transition: transform .3s ease, opacity .2s ease, top .3s ease;
+}
+.nav__bars i:nth-child(1) { top: 0; }
+.nav__bars i:nth-child(2) { top: 5px; }
+.nav__bars i:nth-child(3) { top: 10px; }
+.nav.open .nav__bars i:nth-child(1) { top: 5px; transform: rotate(45deg); }
+.nav.open .nav__bars i:nth-child(2) { opacity: 0; }
+.nav.open .nav__bars i:nth-child(3) { top: 5px; transform: rotate(-45deg); }
 
 /* Entrada: arranca oculta solo si se permite movimiento, y JS la revela */
 @media (prefers-reduced-motion: no-preference) {
@@ -227,12 +260,57 @@ section { position: relative; }
 .nav.scrolled a { color: var(--crema); }
 .nav.scrolled a:hover { background: rgba(245, 197, 24, 0.18); color: var(--oro); }
 
-@media (max-width: 600px) {
-  .nav { gap: 0; padding: 5px 8px; top: 12px; }
-  .nav a { font-size: 13.5px; padding: 9px 12px; letter-spacing: 0; }
+/* ---- Hamburguesa en mobile / tablet ---- */
+@media (max-width: 900px) {
+  .nav { padding: 4px; top: 12px; gap: 0; background: var(--oro); }
+  .nav__toggle { display: inline-flex; }
+
+  /* La píldora se mantiene sólida (dorada) también al scrollear, para que el
+     menú desplegable se lea siempre bien. */
+  .nav.scrolled {
+    background: var(--oro);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    box-shadow: 0 14px 38px -8px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.35);
+  }
+  .nav.scrolled .nav__toggle,
+  .nav.scrolled .nav__links a { color: var(--negro-horno); }
+
+  /* Links como panel desplegable bajo la píldora */
+  .nav__links {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    min-width: min(74vw, 280px);
+    background: var(--oro);
+    border-radius: 18px;
+    padding: 8px;
+    box-shadow: 0 22px 54px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.35);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease, visibility .25s;
+  }
+  .nav.open .nav__links {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  .nav__links a {
+    color: var(--negro-horno);
+    text-align: center;
+    font-size: 16px;
+    padding: 14px 16px;
+    border-radius: 12px;
+  }
+  .nav__links a:hover { background: rgba(20, 17, 13, 0.12); color: var(--negro-horno); }
 }
 @media (max-width: 380px) {
-  .nav a { font-size: 12.5px; padding: 8px 10px; }
+  .nav__toggle { padding: 9px 14px; }
 }
 
 /* ============================================================
@@ -512,6 +590,19 @@ section { position: relative; }
 .tab:hover { color: var(--crema); }
 .tab.active { color: var(--oro); border-bottom-color: var(--oro); }
 
+/* En mobile, las pestañas se deslizan en una sola fila */
+@media (max-width: 760px) {
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; }
+}
+
 .panel { display: none; padding-top: clamp(26px, 4vw, 40px); }
 .panel.active { display: block; animation: fadein .4s ease; }
 @keyframes fadein { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -680,26 +771,6 @@ section { position: relative; }
 }
 @media (min-width: 760px){ .footer__bottom { padding-bottom: 28px; } }
 
-/* ============================================================
-   BARRA DE ACCIÓN MÓVIL
-   ============================================================ */
-.actionbar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1100;
-  display: grid; grid-template-columns: 1fr 1fr;
-  background: rgba(20,17,13,0.94);
-  backdrop-filter: blur(14px);
-  border-top: 1px solid var(--linea);
-  height: var(--bar-h);
-}
-.actionbar a {
-  display: flex; align-items: center; justify-content: center; gap: 9px;
-  font-weight: 700; font-size: 15px; letter-spacing: 0.01em;
-}
-.actionbar a svg { width: 19px; height: 19px; }
-.actionbar .ab-call { background: var(--oro); color: var(--negro-horno); }
-.actionbar .ab-map { color: var(--crema); }
-@media (min-width: 980px){ .actionbar { display: none; } :root { --bar-h: 0px; } }
-
 /* ---------- Reveal animations ---------- */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -708,6 +779,18 @@ section { position: relative; }
 .reveal[data-d="3"]{ transition-delay: .24s; }
 .reveal[data-d="4"]{ transition-delay: .32s; }
 .reveal[data-d="5"]{ transition-delay: .40s; }
+
+/* ---------- Ajustes finos mobile ---------- */
+@media (max-width: 560px) {
+  /* CTAs a ancho completo: tap grande y prolijo */
+  .hero .cta-row, .ubic .cta-row { flex-direction: column; align-items: stretch; }
+  .hero .cta-row .btn, .ubic .cta-row .btn { width: 100%; justify-content: center; }
+  .btn { padding: 15px 22px; }
+  /* Logo del hero un poco más contenido */
+  .hero__logo { width: clamp(180px, 56vw, 300px); }
+  /* Empanadas para llevar: precios en su propia línea, sin apretar */
+  .llevar__price { gap: 30px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }

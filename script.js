@@ -21,6 +21,32 @@
     });
   });
 
+  /* ---- Menú hamburguesa (mobile) ---- */
+  var navToggle = document.querySelector(".nav__toggle");
+  function closeMenu() {
+    nav.classList.remove("open");
+    if (navToggle) navToggle.setAttribute("aria-expanded", "false");
+  }
+  if (navToggle) {
+    navToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = nav.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    // Cerrar al elegir un link
+    nav.querySelectorAll(".nav__links a").forEach(function (a) {
+      a.addEventListener("click", closeMenu);
+    });
+    // Cerrar con Escape
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeMenu();
+    });
+    // Cerrar al tocar fuera del menú
+    document.addEventListener("click", function (e) {
+      if (nav.classList.contains("open") && !nav.contains(e.target)) closeMenu();
+    });
+  }
+
   /* ---- Scroll reveal ---- */
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && !reduce) {
