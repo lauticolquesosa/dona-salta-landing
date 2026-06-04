@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import SectionHeading from "./ui/SectionHeading.astro";
 import WhatsAppButton from "./ui/WhatsAppButton.astro";
-import { images, wa, business } from "../data/site";
+import { wa, business } from "../data/site";
+import aboutImg from "../assets/cocina.png";
 ---
 
 <section id="nosotros" class="scroll-mt-20 bg-crema py-20 sm:py-28">
@@ -12,14 +14,13 @@ import { images, wa, business } from "../data/site";
         <div
           class="overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-warm-lg)]"
         >
-          <img
-            src={images.about.src}
-            alt={images.about.alt}
-            width={images.about.width}
-            height={images.about.height}
+          <Image
+            src={aboutImg}
+            alt="Empanadas salteñas recién horneadas frente al horno de barro encendido en Doña Salta"
+            widths={[440, 640, 880]}
+            sizes="(min-width: 1024px) 40vw, 92vw"
             loading="lazy"
-            decoding="async"
-            class="photo aspect-[4/5] h-full w-full object-cover"
+            class="photo aspect-[4/5] h-full w-full object-cover object-center"
           />
         </div>
         <!-- Acento textil andino -->
