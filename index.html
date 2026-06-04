@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Doña Salta · Empanadas al horno de barro · Salta capital</title>
+<meta name="description" content="Doña Salta — el bodegón salteño frente a la Basílica de San Francisco. Empanadas al horno de barro y comida regional de verdad, desde hace generaciones. Córdoba 46, Salta capital." />
+<meta property="og:title" content="Doña Salta · Empanadas al horno de barro" />
+<meta property="og:description" content="El bodegón salteño frente a San Francisco. Comida regional de verdad, desde hace generaciones." />
+<meta property="og:type" content="restaurant" />
+<meta property="og:image" content="assets/cocina-horno.png" />
+<meta name="theme-color" content="#15110D" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Doña Salta",
+  "servesCuisine": "Comida regional salteña",
+  "image": "assets/cocina-horno.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Córdoba 46",
+    "addressLocality": "Salta",
+    "addressRegion": "Salta",
+    "postalCode": "A4400",
+    "addressCountry": "AR"
+  },
+  "telephone": "+54-387-432-1921",
+  "openingHours": ["Mo-Su 11:00-15:00", "Mo-Su 20:00-00:00"],
+  "acceptsReservations": "False",
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "9.0", "reviewCount": "19500" }
+}
+</script>
+</head>
+<body>
+
+<!-- ============ NAVBAR FLOTANTE ============ -->
+<header class="nav" id="nav" aria-label="Navegación principal">
+  <a href="#especialidad">La especialidad</a>
+  <a href="#horno">El horno</a>
+  <a href="#carta">La carta</a>
+  <a href="#salon">El salón</a>
+  <a href="#ubicacion">Ubicación</a>
+</header>
+
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Doña Salta">
+  <div class="hero__bg" role="img" aria-label="Empanadas recién salidas del horno de barro frente al fuego encendido"></div>
+  <div class="hero__veil"></div>
+  <div class="hero__glow"></div>
+  <div class="hero__inner wrap">
+    <img class="hero__logo reveal" src="assets/logo.png" alt="Doña Salta" />
+    <h1 class="reveal" data-d="1">Empanadas al horno de <em>barro</em></h1>
+    <p class="hero__sub reveal" data-d="2">El bodegón salteño frente a la Basílica de San Francisco. Comida regional de verdad, desde hace generaciones.</p>
+    <div class="cta-row reveal" data-d="3">
+      <a class="btn btn-oro" href="#carta">Ver el menú</a>
+      <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Cómo llegar
+      </a>
+      <a class="btn btn-brasa" href="tel:+543874321921">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+        Llamar
+      </a>
+    </div>
+  </div>
+  <div class="scroll-ind" aria-hidden="true">Bajá<span></span></div>
+</section>
+
+<!-- ============ PROPUESTA ============ -->
+<section class="propuesta section-pad">
+  <div class="propuesta__glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <blockquote class="reveal">Un bodegón <span class="oro">de verdad</span>: ladrillo a la vista, mozos de gaucho, folclore de fondo y el horno siempre prendido.</blockquote>
+    <div class="sellos">
+      <div class="sello reveal" data-d="1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A4.5 4.5 0 0 0 13 19c2.5 0 4.5-2 4.5-4.5 0-2-1-3.5-2.2-5.2-.3 1-.9 1.7-1.8 2 .4-1.8-.2-3.9-1.8-5.3-.5 2-1.7 2.6-2.7 4C8 11.4 8.5 12.9 8.5 14.5Z"/><path d="M6 21h12"/></svg>
+        <span>Horno de barro</span>
+        <small>Leña y brasa, todos los días</small>
+      </div>
+      <div class="sello reveal" data-d="2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8Z"/><path d="M7 11V8M12 11V7M17 11V8"/><path d="M2 21h20"/></svg>
+        <span>Cocina regional salteña</span>
+        <small>Locro, humita, tamal, cabrito</small>
+      </div>
+      <div class="sello reveal" data-d="3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/><path d="M12 3v3"/></svg>
+        <span>Frente a San Francisco</span>
+        <small>Córdoba 46, casco histórico</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- repulgue divisor -->
+<div class="wrap"><svg class="repulgue" viewBox="0 0 1200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8 Q15 0 30 8 T60 8 T90 8 T120 8 T150 8 T180 8 T210 8 T240 8 T270 8 T300 8 T330 8 T360 8 T390 8 T420 8 T450 8 T480 8 T510 8 T540 8 T570 8 T600 8 T630 8 T660 8 T690 8 T720 8 T750 8 T780 8 T810 8 T840 8 T870 8 T900 8 T930 8 T960 8 T990 8 T1020 8 T1050 8 T1080 8 T1110 8 T1140 8 T1170 8 T1200 8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></div>
+
+<!-- ============ ESPECIALIDAD ============ -->
+<section class="espec section-pad" id="especialidad">
+  <div class="wrap">
+    <div class="espec__head">
+      <span class="kicker reveal">La especialidad</span>
+      <h2 class="reveal" data-d="1">Las empanadas <em>salteñas</em></h2>
+      <p class="lead reveal" data-d="2">Chiquitas, jugosas y cocidas en horno de barro. La masa fina, el repulgue a mano y el relleno bien condimentado: como tiene que ser. Las de charqui son las más pedidas.</p>
+    </div>
+
+    <div class="espec__grid">
+      <figure class="espec__photo reveal">
+        <img src="assets/empanadas.png" alt="Tabla de empanadas salteñas doradas recién horneadas" loading="lazy" />
+        <div class="vignette"></div>
+        <figcaption>Recién salidas del horno</figcaption>
+      </figure>
+
+      <div class="variedades reveal" data-d="1">
+        <div class="variedad">
+          <span class="variedad__n">01</span>
+          <h3>Carne a cuchillo</h3>
+          <p>Carne cortada a cuchillo, jugosa, con su punto de comino y pimentón. La clásica salteña.</p>
+        </div>
+        <div class="variedad">
+          <span class="variedad__n">02</span>
+          <h3>Charqui<span class="tag-pop">La más pedida</span></h3>
+          <p>Carne secada al sol y desmenuzada. Sabor profundo, de raíz andina. La que no te podés perder.</p>
+        </div>
+        <div class="variedad">
+          <span class="variedad__n">03</span>
+          <h3>Queso</h3>
+          <p>Quesillo derretido, simple y bien hecho. Sale dorada y burbujeante del horno.</p>
+        </div>
+        <div class="variedad">
+          <span class="variedad__n">04</span>
+          <h3>Pollo</h3>
+          <p>Pollo desmenuzado y condimentado. La preferida de los más chicos de la mesa.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tecnica">
+      <div class="tecnica__card reveal">
+        <span class="kicker">El repulgue a mano</span>
+        <h3>Trece pliegues, uno por uno</h3>
+        <p>Cada empanada se cierra a mano, con su repulgue. No es adorno: sella el jugo adentro para que la carne se cocine en su propio caldo. Por eso muerden distinto.</p>
+      </div>
+      <div class="tecnica__card reveal" data-d="1">
+        <span class="kicker">El horno de barro</span>
+        <h3>Calor de leña, piso de ladrillo</h3>
+        <p>El barro guarda el calor parejo y la leña le da ese gusto ahumado que el horno eléctrico no logra. Salen apenas tostadas arriba, doradas abajo, en minutos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HORNO DE BARRO (parallax) ============ -->
+<section class="horno" id="horno">
+  <div class="horno__bg" role="img" aria-label="El horno de barro encendido con las brasas vivas"></div>
+  <div class="horno__veil"></div>
+  <div class="wrap">
+    <div class="horno__inner">
+      <span class="kicker reveal">Desde el horno de barro</span>
+      <h2 class="reveal" data-d="1">El fuego nunca <em>se apaga</em></h2>
+      <p class="reveal" data-d="2">Antes de que abra la puerta ya está prendido. Leña, brasa y paciencia: la cocción a fuego de barro es la que le da el carácter a todo lo que sale de esta cocina.</p>
+      <p class="muted reveal" data-d="3">Son generaciones haciendo lo mismo, sin atajos. No hay secreto moderno: hay oficio, repetido cada día frente a la misma boca de fuego.</p>
+      <div class="horno__rule reveal" data-d="4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA CARTA ============ -->
+<section class="carta section-pad" id="carta">
+  <div class="wrap">
+    <div class="carta__top">
+      <div class="carta__intro">
+        <span class="kicker reveal">La carta</span>
+        <h2 class="reveal" data-d="1">Para sentarse <em>con tiempo</em></h2>
+        <p class="lead reveal" data-d="2">Carta corta y honesta, 100% regional y de carne. Lo que ves es lo que hay, y todo se hace acá. Poca opción vegetariana — pero lo que sale, sale bien.</p>
+      </div>
+      <figure class="carta__photo reveal" data-d="1">
+        <img src="assets/locro.png" alt="Locro salteño humeante servido en olla de barro" loading="lazy" />
+        <div class="vignette"></div>
+        <figcaption>Locro · plato de cuchara</figcaption>
+      </figure>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs" role="tablist" aria-label="Categorías de la carta">
+      <button class="tab active" role="tab" data-tab="regionales" aria-selected="true">Regionales</button>
+      <button class="tab" role="tab" data-tab="pastas" aria-selected="false">Pastas</button>
+      <button class="tab" role="tab" data-tab="casa" aria-selected="false">Platos de la casa</button>
+      <button class="tab" role="tab" data-tab="minutas" aria-selected="false">Minutas</button>
+      <button class="tab" role="tab" data-tab="guarniciones" aria-selected="false">Guarniciones</button>
+      <button class="tab" role="tab" data-tab="postres" aria-selected="false">Postres</button>
+      <button class="tab" role="tab" data-tab="bebidas" aria-selected="false">Bebidas</button>
+    </div>
+
+    <!-- REGIONALES -->
+    <div class="panel active" role="tabpanel" data-panel="regionales">
+      <!-- Empanadas para llevar -->
+      <div class="llevar reveal">
+        <div>
+          <h3>Empanadas <em>para llevar</em></h3>
+          <p>Al horno de barro · carne a cuchillo, charqui, queso o pollo. ¿Te volvés en avión? Pedilas con anticipación y te las preparamos para el viaje.</p>
+        </div>
+        <div class="llevar__price">
+          <div><span class="p-num">$2.000</span><span class="p-lbl">la unidad</span></div>
+          <div><span class="p-num">$24.000</span><span class="p-lbl">la docena</span></div>
+        </div>
+      </div>
+
+      <div class="panel__grid cols-2">
+        <div class="menu-group reveal">
+          <h3>Empanadas · al horno de barro</h3>
+          <div class="item"><span class="item__name">Empanada<small class="item__desc">Carne a cuchillo · charqui · queso · pollo</small></span><span class="item__price">$2.000 <small>c/u</small></span></div>
+          <div class="item"><span class="item__name">Docena</span><span class="item__price">$24.000</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>Platos regionales</h3>
+          <div class="item"><span class="item__name">Lentejas · Carbonada · Mondongo</span><span class="item__price">$25.000</span></div>
+          <div class="item"><span class="item__name">Locro · Huaschalocro</span><span class="item__price">$25.000</span></div>
+          <div class="item"><span class="item__name">Humitas</span><span class="item__price">$8.000</span></div>
+          <div class="item"><span class="item__name">Tamales</span><span class="item__price">$8.000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASTAS -->
+    <div class="panel" role="tabpanel" data-panel="pastas">
+      <div class="panel__grid cols-2">
+        <div class="menu-group reveal">
+          <h3>Pastas</h3>
+          <div class="item"><span class="item__name">Pasta sola</span><span class="item__price">$20.000</span></div>
+          <div class="item"><span class="item__name">Tallarines con tuco</span><span class="item__price">$23.000</span></div>
+          <div class="item"><span class="item__name">Ñoquis con tuco</span><span class="item__price">$23.000</span></div>
+          <div class="item"><span class="item__name">Ravioles con tuco</span><span class="item__price">$23.000</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>Sorrentinos y extras</h3>
+          <div class="item"><span class="item__name">Sorrentinos con tuco</span><span class="item__price">$28.000</span></div>
+          <div class="item"><span class="item__name">Sorrentinos solo</span><span class="item__price">$25.000</span></div>
+          <div class="item"><span class="item__name">Extra peceto o pollo acompañando pastas</span><span class="item__price">$6.000</span></div>
+          <div class="item"><span class="item__name">Extra salsa blanca o bolognesa</span><span class="item__price">$6.000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLATOS DE LA CASA -->
+    <div class="panel" role="tabpanel" data-panel="casa">
+      <div class="panel__grid cols-2">
+        <div class="menu-group reveal">
+          <h3>De cazuela y parrilla</h3>
+          <div class="item"><span class="item__name">Cazuela de conejo</span><span class="item__price">$35.000</span></div>
+          <div class="item"><span class="item__name">Cazuela de cabrito</span><span class="item__price">$38.000</span></div>
+          <div class="item"><span class="item__name">Cabrito a la provenzal c/ papas españolas</span><span class="item__price">$50.000</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>De la parrilla</h3>
+          <div class="item"><span class="item__name">Bife de chorizo</span><span class="item__price">$30.000</span></div>
+          <div class="item"><span class="item__name">Matambre</span><span class="item__price">$25.000</span></div>
+          <div class="item"><span class="item__name">¼ de pollo deshuesado</span><span class="item__price">$25.000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINUTAS -->
+    <div class="panel" role="tabpanel" data-panel="minutas">
+      <div class="panel__grid cols-2">
+        <div class="menu-group reveal">
+          <h3>Minutas</h3>
+          <div class="item"><span class="item__name">Milanesa c/ fritas y huevo</span><span class="item__price">$25.000</span></div>
+          <div class="item"><span class="item__name">Suprema c/ fritas y huevo</span><span class="item__price">$25.000</span></div>
+          <div class="item"><span class="item__name">Napolitana c/ fritas</span><span class="item__price">$28.000</span></div>
+          <div class="item"><span class="item__name">Suprema napolitana c/ fritas</span><span class="item__price">$28.000</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>Pizza a la piedra</h3>
+          <div class="item"><span class="item__name">Muzzarella</span><span class="item__price">$30.000</span></div>
+          <div class="item"><span class="item__name">Napolitana</span><span class="item__price">$30.000</span></div>
+          <div class="item"><span class="item__name">Jamón</span><span class="item__price">$35.000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUARNICIONES -->
+    <div class="panel" role="tabpanel" data-panel="guarniciones">
+      <div class="panel__grid cols-2">
+        <div class="menu-group reveal">
+          <h3>Guarniciones</h3>
+          <div class="item"><span class="item__name">Puré</span><span class="item__price">$8.500</span></div>
+          <div class="item"><span class="item__name">Papas fritas</span><span class="item__price">$8.500</span></div>
+          <div class="item"><span class="item__name">Papas fritas a la provenzal</span><span class="item__price">$10.000</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>Ensaladas y verduras</h3>
+          <div class="item"><span class="item__name">Ensalada mixta común</span><span class="item__price">$8.500</span></div>
+          <div class="item"><span class="item__name">Ensalada mixta especial</span><span class="item__price">$10.000</span></div>
+          <div class="item"><span class="item__name">Panaché de verduras</span><span class="item__price">$8.500</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POSTRES -->
+    <div class="panel" role="tabpanel" data-panel="postres">
+      <div class="panel__grid cols-2">
+        <div class="menu-group reveal">
+          <h3>Postres regionales</h3>
+          <div class="item"><span class="item__name">Turrón salteño</span><span class="item__price">$6.500</span></div>
+          <div class="item"><span class="item__name">Postre Doña Salta</span><span class="item__price">$9.500</span></div>
+          <div class="item"><span class="item__name">Cayote o cuaresmillo</span><span class="item__price">$6.000</span></div>
+          <div class="item"><span class="item__name">Quesillo c/ miel</span><span class="item__price">$6.000</span></div>
+          <div class="item"><span class="item__name">Quesillo c/ cuaresmillo · c/ cayote y nueces</span><span class="item__price">$8.500</span></div>
+          <div class="item"><span class="item__name">Quesillo mixto completo</span><span class="item__price">$12.000</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>Dulces y helados</h3>
+          <div class="item"><span class="item__name">Ensalada de frutas</span><span class="item__price">$6.500</span></div>
+          <div class="item"><span class="item__name">Flan o budín de pan</span><span class="item__price">$6.500</span></div>
+          <div class="item"><span class="item__name">Helado<small class="item__desc">1 bocha $5.000 · 2 bochas $7.000 · 3 bochas $10.000</small></span><span class="item__price">$5.000</span></div>
+          <div class="item"><span class="item__name">Almendrado · Suizo · Escocés</span><span class="item__price">$8.000</span></div>
+          <div class="item"><span class="item__name">Copa Don Pedro</span><span class="item__price">$11.000</span></div>
+          <div class="item"><span class="item__name">Extra dulce o crema</span><span class="item__price">$3.500</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEBIDAS -->
+    <div class="panel" role="tabpanel" data-panel="bebidas">
+      <div class="panel__grid cols-2">
+        <div class="menu-group reveal">
+          <h3>Sin alcohol</h3>
+          <div class="item"><span class="item__name">Gaseosa x 1 litro</span><span class="item__price">$11.000</span></div>
+          <div class="item"><span class="item__name">Gaseosa chica x 330cc</span><span class="item__price">$4.500</span></div>
+          <div class="item"><span class="item__name">Schweppes lata x 500cc</span><span class="item__price">$5.500</span></div>
+          <div class="item"><span class="item__name">Agua mineral (con/sin gas)</span><span class="item__price">$5.000</span></div>
+          <div class="item"><span class="item__name">Agua c/ gas limonada<small class="item__desc">x 1 litro $10.000 · x 500cc $5.500</small></span><span class="item__price">$10.000</span></div>
+          <div class="item"><span class="item__name">Aguas saborizadas x 500cc</span><span class="item__price">$5.500</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>Tragos, sangría y cervezas</h3>
+          <div class="item"><span class="item__name">Fernet con Coca</span><span class="item__price">$12.000</span></div>
+          <div class="item"><span class="item__name">Fernet solo</span><span class="item__price">$7.500</span></div>
+          <div class="item"><span class="item__name">Sangría jarra<small class="item__desc">½ litro $9.000 · 1 litro $15.000</small></span><span class="item__price">$9.000</span></div>
+          <div class="item"><span class="item__name">Cerveza Salta · Blanca / Negra / Roja<small class="item__desc">x 1 litro $12.000 · x 500cc $8.000</small></span><span class="item__price">$12.000</span></div>
+          <div class="item"><span class="item__name">Heineken<small class="item__desc">x 1 litro $15.000 · x 500cc $10.000</small></span><span class="item__price">$15.000</span></div>
+        </div>
+      </div>
+
+      <div class="panel__grid cols-2" style="margin-top:8px">
+        <div class="menu-group reveal">
+          <h3>Vino de la casa</h3>
+          <div class="item"><span class="item__name">Copa</span><span class="item__price">$4.500</span></div>
+          <div class="item"><span class="item__name">Jarra ¼</span><span class="item__price">$6.000</span></div>
+          <div class="item"><span class="item__name">Jarra ½</span><span class="item__price">$8.000</span></div>
+          <div class="item"><span class="item__name">1 litro</span><span class="item__price">$12.000</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>Vinos salteños</h3>
+          <div class="item"><span class="item__name">Origen Regional Tinto</span><span class="item__price">$14.000</span></div>
+          <div class="item"><span class="item__name">Origen Malbec / Torrontés</span><span class="item__price">$15.000</span></div>
+          <div class="item"><span class="item__name">Domingo Hnos. Expresión de Altura<small class="item__desc">Tinto / Blanco / Dulce</small></span><span class="item__price">$20.000</span></div>
+          <div class="item"><span class="item__name">Domingo Molina Malbec / Cab. Suav.</span><span class="item__price">$43.000</span></div>
+          <div class="item"><span class="item__name">Nani · Malbec / Tannat / Cab. Suav. / Torrontés<small class="item__desc">3/8 $15.000</small></span><span class="item__price">$22.000</span></div>
+          <div class="item"><span class="item__name">Mayuco Malbec · Mayuco Torrontés</span><span class="item__price">$30.000</span></div>
+          <div class="item"><span class="item__name">Familia Gascón Malbec</span><span class="item__price">$20.000</span></div>
+          <div class="item"><span class="item__name">Finca Las Nubes Malbec<small class="item__desc">Torrontés $23.000</small></span><span class="item__price">$33.000</span></div>
+          <div class="item"><span class="item__name">Etchart Malbec · Cafayate / Privado Torrontés</span><span class="item__price">$17.000</span></div>
+          <div class="item"><span class="item__name">Don David · Malbec / Cab. Suav. / Torrontés</span><span class="item__price">$22.000</span></div>
+          <div class="item"><span class="item__name">Vasija Secreta Malbec / Cabernet</span><span class="item__price">$15.000</span></div>
+        </div>
+      </div>
+
+      <div class="panel__grid cols-2" style="margin-top:8px">
+        <div class="menu-group reveal">
+          <h3>Puna</h3>
+          <div class="item"><span class="item__name">Puna 2600 Malbec Reserva<small class="item__desc">Malbec $25.000 · Malbec 3/8 $15.000</small></span><span class="item__price">$33.000</span></div>
+          <div class="item"><span class="item__name">Puna 2600 Torrontés / Torrontés Dulce</span><span class="item__price">$18.000</span></div>
+          <div class="item"><span class="item__name">Puna Helios Malbec</span><span class="item__price">$16.000</span></div>
+          <div class="item"><span class="item__name">Occidente Malbec</span><span class="item__price">$20.000</span></div>
+        </div>
+        <div class="menu-group reveal" data-d="1">
+          <h3>Vinos mendocinos</h3>
+          <div class="item"><span class="item__name">San Felipe<small class="item__desc">3/8 $10.000</small></span><span class="item__price">$15.000</span></div>
+          <div class="item"><span class="item__name">López Malbec<small class="item__desc">3/8 $12.000</small></span><span class="item__price">$18.000</span></div>
+          <div class="item"><span class="item__name">Dilema Dulce<small class="item__desc">Dilema Espumante $16.000</small></span><span class="item__price">$13.000</span></div>
+          <div class="item"><span class="item__name">Champagne Chandon Extra Brut</span><span class="item__price">$38.000</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carta__notes reveal">
+      <span><b>Servicio de cubiertos:</b> $2.000 por persona.</span>
+      <span>Precios en pesos argentinos, sujetos a cambios.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EL SALÓN ============ -->
+<section class="salon section-pad" id="salon">
+  <div class="wrap">
+    <div class="salon__head">
+      <span class="kicker reveal">El salón</span>
+      <h2 class="reveal" data-d="1">Casona vieja, mesas <em>llenas</em></h2>
+      <p class="lead reveal" data-d="2">Techos altos, ladrillo a la vista, paredes color tierra y el murmullo de las mesas. Vení temprano: a la noche se llena volando.</p>
+    </div>
+    <div class="gallery reveal" data-d="1">
+      <figure class="gphoto g-big">
+        <img src="assets/salon-gente.png" alt="Salón principal de Doña Salta con mesas llenas, paredes color terracota y lámparas colgantes" loading="lazy" />
+        <figcaption>El salón a la noche</figcaption>
+      </figure>
+      <figure class="gphoto g-tall">
+        <img src="assets/salon-paredes.png" alt="Detalle de las paredes de adobe color tierra con lámparas de mimbre y cañas de bambú" loading="lazy" />
+        <figcaption>Adobe y mimbre</figcaption>
+      </figure>
+      <figure class="gphoto">
+        <img src="assets/salon-mesa-pan.png" alt="Mesa servida con canasta de pan casero y el salón de fondo" loading="lazy" />
+        <figcaption>La mesa puesta</figcaption>
+      </figure>
+      <figure class="gphoto g-wide">
+        <img src="assets/locro-mesa.png" alt="Locro en olla de barro con pan y copa de vino tinto sobre la mesa" loading="lazy" />
+        <figcaption>Pan, locro y un tinto</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UBICACIÓN ============ -->
+<section class="ubic section-pad" id="ubicacion">
+  <div class="wrap">
+    <div class="ubic__grid">
+      <figure class="ubic__photo reveal">
+        <img src="assets/fachada.png" alt="Fachada iluminada de la casona de Doña Salta de noche en el casco histórico de Salta" loading="lazy" />
+        <div class="vignette"></div>
+        <figcaption>Frente a la Basílica de San Francisco</figcaption>
+      </figure>
+      <div class="ubic__info">
+        <span class="kicker reveal">Ubicación</span>
+        <h2 class="reveal" data-d="1">En pleno <em>casco histórico</em></h2>
+        <p class="lead reveal" data-d="2">Estás justo frente a la Basílica y Convento de San Francisco — el corazón colonial de Salta. Imposible no encontrarnos.</p>
+        <div class="reveal" data-d="3" style="margin-top:22px">
+          <p class="ubic__addr"><b>Córdoba 46</b><small>A4400 · Salta capital, Argentina</small></p>
+          <div class="cta-row" style="margin-top:18px">
+            <a class="btn btn-oro" href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Cómo llegar
+            </a>
+            <a class="btn btn-ghost" href="tel:+543874321921">Llamar para take-out</a>
+          </div>
+        </div>
+        <div class="map reveal" data-d="4">
+          <iframe title="Mapa de Doña Salta — Córdoba 46, Salta" src="https://www.google.com/maps?q=C%C3%B3rdoba%2046%2C%20Salta%2C%20Argentina&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO VISITARNOS ============ -->
+<section class="visit section-pad">
+  <div class="wrap">
+    <span class="kicker reveal">Cómo visitarnos</span>
+    <h2 class="reveal" data-d="1">Abierto de <em class="oro" style="font-style:normal">lunes a lunes</em></h2>
+    <div class="visit__grid">
+      <div class="reveal" data-d="2">
+        <div class="horarios">
+          <div class="horario"><span>Almuerzo<small>Todos los días</small></span><time>11:00 — 15:00</time></div>
+          <div class="horario"><span>Cena<small>Todos los días</small></span><time>20:00 — 00:00</time></div>
+        </div>
+      </div>
+      <div class="reveal" data-d="3">
+        <div class="aviso">
+          <h3>No tomamos reserva</h3>
+          <p>Es por orden de llegada. Vení temprano que se llena volando — sobre todo a la noche y los fines de semana.</p>
+        </div>
+        <div class="aviso">
+          <h3>Take-out en la vereda</h3>
+          <p>Llevás tus empanadas y platos para casa. No tenemos delivery propio: llamá y te lo dejamos listo para retirar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contacto">
+  <div class="footer__glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__logo">
+        <img src="assets/logo.png" alt="Doña Salta" />
+        <p>Empanadas al horno de barro y comida regional salteña. Frente a San Francisco, desde hace generaciones.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <a class="big" href="tel:+543874321921">0387 432-1921</a>
+        <p><small>Tocá para llamar y pedir take-out</small></p>
+        <a href="https://instagram.com/donasaltarestaurante" target="_blank" rel="noopener">Instagram @donasaltarestaurante</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook · Doña Salta</a>
+      </div>
+      <div class="footer__col">
+        <h4>Dónde y cuándo</h4>
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">Córdoba 46 · Salta capital</a>
+        <p>Almuerzo 11:00 — 15:00</p>
+        <p>Cena 20:00 — 00:00</p>
+        <p><small>Lunes a lunes · sin reserva</small></p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="yr">2026</span> Doña Salta · Salta capital, Argentina</span>
+      <span>Comida regional al horno de barro</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ BARRA DE ACCIÓN MÓVIL ============ -->
+<nav class="actionbar" aria-label="Acciones rápidas">
+  <a class="ab-call" href="tel:+543874321921">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+    Llamar
+  </a>
+  <a class="ab-map" href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+    Cómo llegar
+  </a>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
