@@ -1,0 +1,11 @@
+{
+  "name": "dona-salta-landing",
+  "private": true,
+  "description": "Sitio estático de Doña Salta. sharp solo se usa localmente para optimizar imágenes.",
+  "scripts": {
+    "optimize": "node scripts/optimize-images.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}
