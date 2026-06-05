@@ -587,8 +587,8 @@ section[id], #top { scroll-margin-top: 92px; }
 
 .menu-group { margin-bottom: 30px; break-inside: avoid; }
 .menu-group h3 {
-  font-family: var(--serif); font-size: 14px; font-weight: 600;
-  letter-spacing: 0.22em; text-transform: uppercase; color: var(--brasa);
+  font-family: var(--serif); font-size: 16px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase; color: #fff;
   margin-bottom: 14px;
 }
 .item {
