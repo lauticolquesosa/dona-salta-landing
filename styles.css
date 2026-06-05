@@ -292,7 +292,7 @@ section[id], #top { scroll-margin-top: 92px; }
   .nav__inner { padding-top: 12px; padding-bottom: 12px; gap: 0; }
   .nav.scrolled .nav__inner { padding-top: 10px; padding-bottom: 10px; }
 
-  .nav__brand-name { font-size: clamp(24px, 7vw, 34px); }
+  .nav__logo { width: clamp(130px, 42vw, 200px); }
   .nav__brand-tag { font-size: 9px; letter-spacing: 0.22em; }
 
   .nav__toggle { display: inline-flex; }
