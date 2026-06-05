@@ -380,7 +380,7 @@ section[id], #top { scroll-margin-top: 92px; }
   align-items: flex-end;
   position: relative;
   overflow: hidden;
-  padding-bottom: clamp(48px, 9vh, 110px);
+  padding-bottom: clamp(96px, 17vh, 200px);
 }
 .hero__bg {
   position: absolute; inset: 0;
@@ -414,15 +414,16 @@ section[id], #top { scroll-margin-top: 92px; }
   width: clamp(220px, 42vw, 420px);
   height: auto;
   filter: drop-shadow(0 6px 30px rgba(0,0,0,0.55));
-  margin-top: 114px;
+  margin-top: 40px;
   margin-bottom: clamp(20px, 4vw, 34px);
+  margin-left: auto;
+  margin-right: 0;
 }
 .hero h1 {
   font-size: clamp(40px, 7.6vw, 98px);
   line-height: 0.92;
   font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
   color: #fff;
-  margin-top: -57px;
   margin-bottom: 22px;
   max-width: 14ch;
 }
