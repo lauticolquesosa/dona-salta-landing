@@ -172,54 +172,35 @@ section[id], #top { scroll-margin-top: 92px; }
 
 .nav__inner {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding-top: clamp(8px, 1.2vw, 14px);
-  padding-bottom: clamp(6px, 1vw, 11px);
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(16px, 4vw, 40px);
+  padding-top: clamp(6px, 0.9vw, 10px);
+  padding-bottom: clamp(6px, 0.9vw, 10px);
   transition: padding .3s ease;
 }
 
-/* ---- Fila superior: marca centrada + acciones a la derecha ---- */
-.nav__top {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 16px;
-}
-.nav__top-spacer { grid-column: 1; }
-
-/* ---- Marca / logo (centrado arriba) ---- */
+/* ---- Marca / logo (a la izquierda) ---- */
 .nav__brand {
-  grid-column: 2;
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   align-items: center;
-  text-align: center;
   line-height: 1;
   text-decoration: none;
+  flex-shrink: 0;
   transition: transform .25s ease;
 }
 .nav__brand:hover { transform: translateY(-1px); }
 .nav__logo {
-  width: clamp(120px, 13vw, 175px);
+  width: clamp(92px, 9vw, 120px);
   height: auto;
 }
 
-/* ---- Acciones (CTA + hamburguesa), a la derecha ---- */
-.nav__actions {
-  grid-column: 3;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-}
-
-/* ---- Fila inferior: secciones centradas ---- */
+/* ---- Secciones (a la derecha) ---- */
 .nav__links {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(4px, 1.4vw, 16px);
+  justify-content: flex-end;
+  gap: clamp(2px, 1vw, 12px);
 }
 .nav__links a {
   font-family: var(--sans);
@@ -278,10 +259,10 @@ section[id], #top { scroll-margin-top: 92px; }
    NAVBAR — mobile / tablet
    ============================================================ */
 @media (max-width: 900px) {
-  .nav__inner { padding-top: 12px; padding-bottom: 12px; gap: 0; }
-  .nav.scrolled .nav__inner { padding-top: 10px; padding-bottom: 10px; }
+  .nav__inner { padding-top: 9px; padding-bottom: 9px; gap: 0; }
+  .nav.scrolled .nav__inner { padding-top: 8px; padding-bottom: 8px; }
 
-  .nav__logo { width: clamp(130px, 42vw, 200px); }
+  .nav__logo { width: clamp(88px, 26vw, 130px); }
 
   .nav__toggle { display: inline-flex; }
 
