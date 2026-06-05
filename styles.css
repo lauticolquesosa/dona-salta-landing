@@ -202,18 +202,6 @@ section[id], #top { scroll-margin-top: 92px; }
 .nav__logo {
   width: clamp(150px, 19vw, 250px);
   height: auto;
-  /* el logo es amarillo: lo oscurecemos para que lea sobre el header amarillo */
-  filter: brightness(0);
-}
-.nav__brand-tag {
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: clamp(10px, 1vw, 12px);
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--negro-horno);
-  opacity: 0.62;
-  margin-top: 7px;
 }
 
 /* ---- Acciones (CTA + hamburguesa), a la derecha ---- */
@@ -293,7 +281,6 @@ section[id], #top { scroll-margin-top: 92px; }
   .nav.scrolled .nav__inner { padding-top: 10px; padding-bottom: 10px; }
 
   .nav__logo { width: clamp(130px, 42vw, 200px); }
-  .nav__brand-tag { font-size: 9px; letter-spacing: 0.22em; }
 
   .nav__toggle { display: inline-flex; }
 
