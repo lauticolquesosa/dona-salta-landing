@@ -156,16 +156,26 @@ section[id], #top { scroll-margin-top: 92px; }
 }
 .btn-ghost:hover { border-color: var(--oro); color: var(--oro); }
 
-/* Botones del hero: fondo blanco, letra negra */
+/* Botones del hero: fondo blanco, letra negra.
+   Hover "ventana cerrándose": dos paneles amarillos entran desde
+   arriba y abajo y se cierran en el centro, rápido. */
 .hero .cta-row .btn {
-  background: #fff;
   color: var(--negro-horno);
   border-color: #fff;
+  background-color: #fff;
+  background-image:
+    linear-gradient(var(--oro), var(--oro)),
+    linear-gradient(var(--oro), var(--oro));
+  background-repeat: no-repeat;
+  background-position: top, bottom;
+  background-size: 100% 0%, 100% 0%;
   box-shadow: 0 8px 28px -12px rgba(0,0,0,0.5);
+  transition: background-size .2s cubic-bezier(.6,0,.2,1),
+              border-color .2s ease, transform .15s ease, box-shadow .25s ease;
 }
 .hero .cta-row .btn:hover {
-  background: var(--crema);
-  border-color: var(--crema);
+  background-size: 100% 51%, 100% 51%;
+  border-color: var(--oro);
   color: var(--negro-horno);
 }
 
