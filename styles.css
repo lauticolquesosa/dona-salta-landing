@@ -112,14 +112,6 @@ section[id], #top { scroll-margin-top: 92px; }
 }
 .section-pad { padding-top: clamp(72px, 12vw, 150px); padding-bottom: clamp(72px, 12vw, 150px); }
 
-/* Divisor "repulgue" abstraído */
-.repulgue {
-  width: 100%;
-  height: 16px;
-  display: block;
-  color: var(--linea-oro);
-}
-
 /* ---------- Botones / CTA ---------- */
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn {
@@ -432,26 +424,6 @@ section[id], #top { scroll-margin-top: 92px; }
   color: var(--crema);
 }
 .propuesta blockquote .oro { font-style: italic; }
-.sellos {
-  margin-top: clamp(40px, 6vw, 64px);
-  display: flex; flex-wrap: wrap; gap: 14px 0;
-  justify-content: center;
-  border-top: 1px solid var(--linea);
-  padding-top: clamp(32px, 5vw, 46px);
-}
-.sello {
-  flex: 1 1 220px;
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  padding: 0 18px;
-  position: relative;
-}
-.sello + .sello::before {
-  content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 1px; background: var(--linea);
-}
-@media (max-width: 700px){ .sello + .sello::before { display: none; } }
-.sello svg { width: 34px; height: 34px; color: var(--brasa); }
-.sello span { font-size: 15px; color: var(--crema); font-weight: 600; letter-spacing: 0.02em; }
-.sello small { color: var(--crema-tenue); font-size: 13px; font-weight: 400; }
 
 /* ============================================================
    ESPECIALIDAD — Empanadas
