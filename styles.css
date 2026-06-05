@@ -414,7 +414,7 @@ section[id], #top { scroll-margin-top: 92px; }
   width: clamp(220px, 42vw, 420px);
   height: auto;
   filter: drop-shadow(0 6px 30px rgba(0,0,0,0.55));
-  margin-top: 38px;
+  margin-top: 76px;
   margin-bottom: clamp(20px, 4vw, 34px);
 }
 .hero h1 {
