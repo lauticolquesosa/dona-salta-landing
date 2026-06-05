@@ -426,7 +426,7 @@ section[id], #top { scroll-margin-top: 92px; }
   margin-bottom: 22px;
   max-width: 14ch;
 }
-.hero h1 em { font-style: normal; color: var(--oro); }
+.hero h1 em { font-style: normal; color: #fff; }
 .hero__sub {
   font-size: clamp(16px, 2.3vw, 21px);
   color: var(--crema-tenue);
