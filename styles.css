@@ -156,17 +156,17 @@ section[id], #top { scroll-margin-top: 92px; }
 }
 .btn-ghost:hover { border-color: var(--oro); color: var(--oro); }
 
-/* Botones del hero: fondo blanco, letra amarilla */
+/* Botones del hero: fondo blanco, letra negra */
 .hero .cta-row .btn {
   background: #fff;
-  color: var(--oro);
+  color: var(--negro-horno);
   border-color: #fff;
   box-shadow: 0 8px 28px -12px rgba(0,0,0,0.5);
 }
 .hero .cta-row .btn:hover {
   background: var(--crema);
   border-color: var(--crema);
-  color: var(--oro);
+  color: var(--negro-horno);
 }
 
 /* ============================================================
