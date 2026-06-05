@@ -333,7 +333,7 @@ section[id], #top { scroll-margin-top: 92px; }
 }
 .hero__bg {
   position: absolute; inset: 0;
-  background: url("assets/cocina-horno.webp") center 32% / cover no-repeat;
+  background: url("assets/hero.webp") center 32% / cover no-repeat;
   transform: scale(1.06);
   z-index: 0;
 }
