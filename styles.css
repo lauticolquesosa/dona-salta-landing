@@ -418,10 +418,11 @@ section[id], #top { scroll-margin-top: 92px; }
   margin-bottom: clamp(20px, 4vw, 34px);
 }
 .hero h1 {
-  font-size: clamp(46px, 9.5vw, 124px);
+  font-size: clamp(40px, 7.6vw, 98px);
   line-height: 0.92;
   font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
-  color: var(--crema);
+  color: #fff;
+  margin-top: -57px;
   margin-bottom: 22px;
   max-width: 14ch;
 }
