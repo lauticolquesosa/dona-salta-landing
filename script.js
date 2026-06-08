@@ -36,28 +36,66 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
   }
 
-  /* ---- Hero: secuencia sticky (frames + líneas + dots) ---- */
+  /* ---- Hero: desktop = scroll sticky · mobile = crossfade automático + swipe ---- */
   var hero = document.querySelector(".hero");
+  var sticky = document.querySelector(".hero__sticky");
   var frames = document.querySelectorAll(".hero__frame");
   var lines = document.querySelectorAll(".hero__line");
   var dots = document.querySelectorAll(".hero__dots span");
+  var nFrames = frames.length;
+  var mqMobile = window.matchMedia("(max-width: 920px)");
   var curHero = -1;
+  var autoTimer = null;
+
   function setHero(i) {
-    if (i === curHero) return;
+    if (i === curHero || !nFrames) return;
     curHero = i;
     frames.forEach(function (f, n) { f.classList.toggle("is-active", n === i); });
     lines.forEach(function (l, n) { l.classList.toggle("is-active", n === i); });
     dots.forEach(function (d, n) { d.classList.toggle("is-active", n === i); });
   }
+
   function onHero() {
-    if (!hero) return;
+    if (!hero || mqMobile.matches) return;
     var rect = hero.getBoundingClientRect();
     var total = hero.offsetHeight - window.innerHeight;
     var p = total > 0 ? (-rect.top) / total : 0;
     p = Math.max(0, Math.min(1, p));
     setHero(p < 0.34 ? 0 : p < 0.67 ? 1 : 2);
   }
+
+  function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+  function startAuto() {
+    stopAuto();
+    if (reduce || !nFrames) return;
+    autoTimer = setInterval(function () { setHero((curHero + 1) % nFrames); }, 4500);
+  }
+  function goTo(i) {
+    setHero((i + nFrames) % nFrames);
+    if (mqMobile.matches) startAuto();
+  }
+  function syncHeroMode() {
+    if (mqMobile.matches) { setHero(curHero < 0 ? 0 : curHero); startAuto(); }
+    else { stopAuto(); onHero(); }
+  }
+
+  dots.forEach(function (d, n) { d.addEventListener("click", function () { if (mqMobile.matches) goTo(n); }); });
+
+  if (sticky) {
+    var sx = 0, sy = 0;
+    sticky.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    sticky.addEventListener("touchend", function (e) {
+      if (!mqMobile.matches) return;
+      var dx = e.changedTouches[0].clientX - sx;
+      var dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) goTo(curHero + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
+  if (mqMobile.addEventListener) mqMobile.addEventListener("change", syncHeroMode);
+  else if (mqMobile.addListener) mqMobile.addListener(syncHeroMode);
   setHero(0);
+  syncHeroMode();
 
   /* ---- Parallax suave (horno + fachada) ---- */
   var parallax = [
