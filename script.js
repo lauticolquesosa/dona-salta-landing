@@ -104,32 +104,6 @@
     revealEls.forEach(function (el) { el.classList.add("in"); });
   }
 
-  /* ---- Contadores ---- */
-  var counters = document.querySelectorAll(".proof__num[data-count]");
-  function animateCount(el) {
-    var target = parseFloat(el.dataset.count);
-    var dec = parseInt(el.dataset.decimals || "0", 10);
-    var suffix = el.dataset.suffix || "";
-    var start = performance.now(), dur = 1400;
-    function frame(now) {
-      var t = Math.min(1, (now - start) / dur);
-      var eased = 1 - Math.pow(1 - t, 3);
-      var val = target * eased;
-      var out = dec > 0 ? val.toFixed(dec) : Math.round(val).toLocaleString("es-AR");
-      el.textContent = out + suffix;
-      if (t < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-  if ("IntersectionObserver" in window && !reduce && counters.length) {
-    var cio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { animateCount(e.target); cio.unobserve(e.target); }
-      });
-    }, { threshold: 0.6 });
-    counters.forEach(function (el) { cio.observe(el); });
-  }
-
   /* ---- Tabs de la carta ---- */
   var tabs = document.querySelectorAll(".tab");
   var panels = document.querySelectorAll(".panel");

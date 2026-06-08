@@ -118,6 +118,7 @@ section[id] { scroll-margin-top: 88px; }
   gap: 10px;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   transition: transform .18s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
   will-change: transform;
 }
@@ -128,7 +129,7 @@ section[id] { scroll-margin-top: 88px; }
 /* sólido: dorado, con barrido al hover */
 .btn--solid { background: var(--oro); color: var(--negro); }
 .btn--solid::before {
-  content: ""; position: absolute; inset: 0; z-index: 0;
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background: var(--oro-2);
   transform: translateY(101%);
   transition: transform .4s var(--ease-out);
@@ -136,15 +137,15 @@ section[id] { scroll-margin-top: 88px; }
 .btn--solid:hover::before { transform: translateY(0); }
 .btn--solid > * { position: relative; z-index: 1; }
 
-/* línea: borde, se rellena al hover */
+/* línea: borde, se rellena de oscuro cálido al hover (texto blanco siempre = legible) */
 .btn--line { background: transparent; color: var(--crema); border-color: var(--linea); }
 .btn--line::before {
-  content: ""; position: absolute; inset: 0; z-index: 0;
-  background: var(--crema);
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: var(--carbon-2);
   transform: translateY(101%);
   transition: transform .4s var(--ease-out);
 }
-.btn--line:hover { color: var(--negro); border-color: var(--crema); }
+.btn--line:hover { color: #fff; border-color: var(--oro); }
 .btn--line:hover::before { transform: translateY(0); }
 .btn--line > *, .btn--line svg { position: relative; z-index: 1; }
 
@@ -317,39 +318,6 @@ section[id] { scroll-margin-top: 88px; }
   46% { transform-origin: bottom; }
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
-
-/* ============================================================
-   PROOF BAR
-   ============================================================ */
-.proof { background: var(--negro-2); border-bottom: 1px solid var(--linea); }
-.proof__inner {
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 28px 20px;
-  padding: clamp(30px, 5vw, 48px) var(--pad);
-}
-@media (min-width: 760px) { .proof__inner { grid-template-columns: repeat(4, 1fr); } }
-.proof__item { display: flex; flex-direction: column; gap: 6px; text-align: left; position: relative; }
-@media (min-width: 760px) {
-  .proof__item + .proof__item::before {
-    content: ""; position: absolute; left: -10px; top: 6px; bottom: 6px; width: 1px; background: var(--linea);
-  }
-}
-.proof__num { font-family: var(--serif); font-size: clamp(30px, 4.6vw, 46px); color: var(--oro); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums; }
-.proof__num.is-static { letter-spacing: -0.01em; }
-.proof__lbl { font-size: 13px; color: var(--crema-2); letter-spacing: 0.02em; }
-
-/* ============================================================
-   MARQUEE
-   ============================================================ */
-.marquee { overflow: hidden; border-bottom: 1px solid var(--linea); background: var(--negro); padding: clamp(14px, 2vw, 20px) 0; }
-.marquee__track { display: inline-flex; align-items: center; gap: 0; white-space: nowrap; animation: marquee 34s linear infinite; }
-.marquee__track span {
-  font-family: var(--serif); font-style: italic; font-weight: 400;
-  font-size: clamp(20px, 3vw, 30px); color: var(--crema);
-  padding: 0 clamp(18px, 2.4vw, 30px);
-}
-.marquee__track b { color: var(--oro); font-size: clamp(16px, 2vw, 22px); }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ============================================================
    STATEMENT
@@ -673,7 +641,7 @@ section[id] { scroll-margin-top: 88px; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .hero__frame { transition: opacity .4s ease !important; transform: none !important; }
   .hero__frame.is-active { transform: none !important; }
-  .hero__scroll i, .marquee__track { animation: none !important; }
+  .hero__scroll i { animation: none !important; }
   .horno__rule { width: 64px; transition: none; }
   .horno__bg, .visita__bg { inset: 0; }
 }
