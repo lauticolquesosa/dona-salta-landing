@@ -8,14 +8,14 @@
 <meta property="og:title" content="Doña Salta · Empanadas al horno de barro" />
 <meta property="og:description" content="El bodegón salteño frente a San Francisco. Comida regional de verdad, desde hace generaciones." />
 <meta property="og:type" content="restaurant" />
-<meta property="og:image" content="assets/hero.webp" />
+<meta property="og:image" content="assets/hero-dia.webp" />
 <meta name="theme-color" content="#15110D" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high" />
-<link rel="stylesheet" href="styles.css?v=24" />
+<link rel="preload" as="image" href="assets/hero-dia.webp" fetchpriority="high" />
+<link rel="stylesheet" href="styles.css?v=30" />
 
 <script type="application/ld+json">
 {
@@ -23,7 +23,7 @@
   "@type": "Restaurant",
   "name": "Doña Salta",
   "servesCuisine": "Comida regional salteña",
-  "image": "assets/hero.webp",
+  "image": "assets/hero-dia.webp",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Córdoba 46",
@@ -40,119 +40,165 @@
 </script>
 </head>
 <body>
-
-<!-- ============ NAVBAR ============ -->
 <span id="top"></span>
-<header class="nav" id="nav" aria-label="Navegación principal">
-  <div class="nav__inner wrap">
-    <a class="nav__brand" href="#top" aria-label="Doña Salta — inicio">
-      <img class="nav__logo" src="assets/logo.webp" alt="Doña Salta" />
+
+<!-- ============ HEADER ============ -->
+<header class="hdr" id="hdr" aria-label="Navegación principal">
+  <div class="hdr__inner">
+    <a class="hdr__brand" href="#top" aria-label="Doña Salta — inicio">
+      <img class="hdr__logo" src="assets/logo.webp" alt="Doña Salta" />
     </a>
 
-    <nav class="nav__links" id="nav-links">
-      <a href="#especialidad">La especialidad</a>
+    <nav class="hdr__nav" id="menu" aria-label="Secciones">
+      <a href="#empanadas">Empanadas</a>
       <a href="#horno">El horno</a>
       <a href="#carta">La carta</a>
       <a href="#salon">El salón</a>
-      <a href="#ubicacion">Ubicación</a>
+      <a href="#visita">Visitanos</a>
     </nav>
 
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú">
-      <span class="nav__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    <a class="hdr__cta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">
+      <span>Cómo llegar</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+    </a>
+
+    <button class="hdr__burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+      <span aria-hidden="true"><i></i><i></i></span>
     </button>
   </div>
 </header>
 
-<!-- ============ HERO ============ -->
-<section class="hero" aria-label="Doña Salta">
-  <div class="hero__bg" role="img" aria-label="Empanadas recién salidas del horno de barro frente al fuego encendido"></div>
-  <div class="hero__veil"></div>
-  <div class="hero__glow"></div>
-  <div class="hero__inner wrap">
-    <h1 class="reveal" data-d="1">Empanadas al horno de <em>barro</em></h1>
-    <p class="hero__sub reveal" data-d="2">El bodegón salteño frente a la Basílica de San Francisco. Comida regional de verdad, desde hace generaciones.</p>
-    <div class="cta-row reveal" data-d="3">
-      <a class="btn btn-oro" href="#carta">Ver el menú</a>
-      <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        Cómo llegar
-      </a>
+<!-- ============ HERO (secuencia sticky) ============ -->
+<section class="hero" aria-label="Doña Salta — empanadas al horno de barro">
+  <div class="hero__sticky">
+    <div class="hero__frames" aria-hidden="true">
+      <div class="hero__frame is-active" data-frame="0" style="background-image:url('assets/hero-dia.webp')"></div>
+      <div class="hero__frame" data-frame="1" style="background-image:url('assets/empanadas.webp')"></div>
+      <div class="hero__frame" data-frame="2" style="background-image:url('assets/salon-gente.webp')"></div>
     </div>
+    <div class="hero__scrim" aria-hidden="true"></div>
+
+    <div class="hero__content wrap">
+      <p class="hero__kicker">Salta capital · desde hace generaciones</p>
+      <h1 class="hero__title">
+        <span class="hero__line is-active" data-line="0">Empanadas al<br>horno de barro.</span>
+        <span class="hero__line" data-line="1">Comida regional,<br>de verdad.</span>
+        <span class="hero__line" data-line="2">Frente a<br>San Francisco.</span>
+      </h1>
+      <div class="hero__actions">
+        <a class="btn btn--solid" href="#carta">Ver la carta</a>
+        <a class="btn btn--line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Cómo llegar
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__dots" aria-hidden="true">
+      <span class="is-active"></span><span></span><span></span>
+    </div>
+    <div class="hero__scroll" aria-hidden="true"><span>Bajá</span><i></i></div>
   </div>
-  <div class="scroll-ind" aria-hidden="true">Bajá<span></span></div>
 </section>
+
+<!-- ============ PROOF BAR ============ -->
+<section class="proof" aria-label="Reconocimiento">
+  <div class="proof__inner wrap">
+    <div class="proof__item"><span class="proof__num" data-count="9.0" data-decimals="1">9.0</span><span class="proof__lbl">Puntaje en Google</span></div>
+    <div class="proof__item"><span class="proof__num" data-count="19500" data-suffix="+">19.500+</span><span class="proof__lbl">Reseñas de clientes</span></div>
+    <div class="proof__item"><span class="proof__num" data-count="13">13</span><span class="proof__lbl">Pliegues por repulgue</span></div>
+    <div class="proof__item"><span class="proof__num is-static">Lun a Lun</span><span class="proof__lbl">Almuerzo y cena</span></div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Horno de barro</span><b>·</b><span>Repulgue a mano</span><b>·</b><span>Carne a cuchillo</span><b>·</b><span>Charqui</span><b>·</b><span>Locro</span><b>·</b><span>Folclore de fondo</span><b>·</b><span>Ladrillo a la vista</span><b>·</b>
+    <span>Horno de barro</span><b>·</b><span>Repulgue a mano</span><b>·</b><span>Carne a cuchillo</span><b>·</b><span>Charqui</span><b>·</b><span>Locro</span><b>·</b><span>Folclore de fondo</span><b>·</b><span>Ladrillo a la vista</span><b>·</b>
+  </div>
+</div>
 
 <!-- ============ PROPUESTA ============ -->
-<section class="propuesta section-pad">
-  <div class="propuesta__glow" aria-hidden="true"></div>
+<section class="statement section-pad">
   <div class="wrap">
-    <blockquote class="reveal">Un bodegón <span class="oro">de verdad</span>: ladrillo a la vista, mozos de gaucho, folclore de fondo y el horno siempre prendido.</blockquote>
+    <p class="statement__kicker reveal">El bodegón</p>
+    <blockquote class="statement__quote reveal" data-d="1">Un bodegón de verdad: ladrillo a la vista, mozos de gaucho, folclore de fondo y el horno siempre prendido.</blockquote>
   </div>
 </section>
 
-<!-- ============ ESPECIALIDAD ============ -->
-<section class="espec section-pad" id="especialidad">
-  <div class="wrap">
-    <div class="espec__head">
-      <span class="kicker reveal">La especialidad</span>
-      <h2 class="reveal" data-d="1">Las empanadas <em>salteñas</em></h2>
-      <p class="lead reveal" data-d="2">Chiquitas, jugosas y cocidas en horno de barro. La masa fina, el repulgue a mano y el relleno bien condimentado: como tiene que ser. Las de charqui son las más pedidas.</p>
-    </div>
-
-    <div class="espec__grid">
+<!-- ============ EMPANADAS (split sticky) ============ -->
+<section class="espec" id="empanadas">
+  <div class="espec__grid wrap">
+    <div class="espec__media">
       <figure class="espec__photo reveal">
-        <img src="assets/empanadas.webp" alt="Tabla de empanadas salteñas doradas recién horneadas" loading="lazy" />
-        <div class="vignette"></div>
+        <img src="assets/empanadas.webp" alt="Tabla de empanadas salteñas doradas recién salidas del horno de barro" loading="lazy" />
         <figcaption>Recién salidas del horno</figcaption>
       </figure>
-
-      <div class="variedades reveal" data-d="1">
-        <div class="variedad">
-          <span class="variedad__n">01</span>
-          <h3>Carne a cuchillo</h3>
-          <p>Carne cortada a cuchillo, jugosa, con su punto de comino y pimentón. La clásica salteña.</p>
-        </div>
-        <div class="variedad">
-          <span class="variedad__n">02</span>
-          <h3>Charqui<span class="tag-pop">La más pedida</span></h3>
-          <p>Carne secada al sol y desmenuzada. Sabor profundo, de raíz andina. La que no te podés perder.</p>
-        </div>
-        <div class="variedad">
-          <span class="variedad__n">03</span>
-          <h3>Queso</h3>
-          <p>Quesillo derretido, simple y bien hecho. Sale dorada y burbujeante del horno.</p>
-        </div>
-        <div class="variedad">
-          <span class="variedad__n">04</span>
-          <h3>Pollo</h3>
-          <p>Pollo desmenuzado y condimentado. La preferida de los más chicos de la mesa.</p>
-        </div>
-      </div>
     </div>
 
-    <div class="tecnica">
-      <div class="tecnica__card reveal">
-        <span class="kicker">El repulgue a mano</span>
-        <h3>Trece pliegues, uno por uno</h3>
-        <p>Cada empanada se cierra a mano, con su repulgue. No es adorno: sella el jugo adentro para que la carne se cocine en su propio caldo. Por eso muerden distinto.</p>
-      </div>
-      <div class="tecnica__card reveal" data-d="1">
-        <span class="kicker">El horno de barro</span>
-        <h3>Calor de leña, piso de ladrillo</h3>
-        <p>El barro guarda el calor parejo y la leña le da ese gusto ahumado que el horno eléctrico no logra. Salen apenas tostadas arriba, doradas abajo, en minutos.</p>
+    <div class="espec__body">
+      <header class="espec__head">
+        <span class="kicker reveal">La especialidad</span>
+        <h2 class="reveal" data-d="1">Las empanadas salteñas</h2>
+        <p class="lead reveal" data-d="2">Chiquitas, jugosas y cocidas en horno de barro. Masa fina, repulgue a mano y relleno bien condimentado: como tiene que ser. Las de charqui son las más pedidas.</p>
+      </header>
+
+      <ol class="variedades">
+        <li class="variedad reveal">
+          <span class="variedad__n">01</span>
+          <div>
+            <h3>Carne a cuchillo</h3>
+            <p>Carne cortada a cuchillo, jugosa, con su punto de comino y pimentón. La clásica salteña.</p>
+          </div>
+        </li>
+        <li class="variedad reveal">
+          <span class="variedad__n">02</span>
+          <div>
+            <h3>Charqui <span class="tag-pop">La más pedida</span></h3>
+            <p>Carne secada al sol y desmenuzada. Sabor profundo, de raíz andina. La que no te podés perder.</p>
+          </div>
+        </li>
+        <li class="variedad reveal">
+          <span class="variedad__n">03</span>
+          <div>
+            <h3>Queso</h3>
+            <p>Quesillo derretido, simple y bien hecho. Sale dorada y burbujeante del horno.</p>
+          </div>
+        </li>
+        <li class="variedad reveal">
+          <span class="variedad__n">04</span>
+          <div>
+            <h3>Pollo</h3>
+            <p>Pollo desmenuzado y condimentado. La preferida de los más chicos de la mesa.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="tecnica">
+        <div class="tecnica__card reveal">
+          <span class="kicker kicker--brasa">El repulgue a mano</span>
+          <h3>Trece pliegues, uno por uno</h3>
+          <p>Cada empanada se cierra a mano, con su repulgue. No es adorno: sella el jugo adentro para que la carne se cocine en su propio caldo. Por eso muerden distinto.</p>
+        </div>
+        <div class="tecnica__card reveal" data-d="1">
+          <span class="kicker kicker--brasa">El horno de barro</span>
+          <h3>Calor de leña, piso de ladrillo</h3>
+          <p>El barro guarda el calor parejo y la leña le da ese gusto ahumado que el horno eléctrico no logra. Salen apenas tostadas arriba, doradas abajo, en minutos.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ HORNO DE BARRO (parallax) ============ -->
+<!-- ============ EL HORNO (feature parallax) ============ -->
 <section class="horno" id="horno">
   <div class="horno__bg" role="img" aria-label="El horno de barro encendido con las brasas vivas"></div>
-  <div class="horno__veil"></div>
+  <div class="horno__veil" aria-hidden="true"></div>
   <div class="wrap">
     <div class="horno__inner">
       <span class="kicker reveal">Desde el horno de barro</span>
-      <h2 class="reveal" data-d="1">El fuego nunca <em>se apaga</em></h2>
+      <h2 class="reveal" data-d="1">El fuego nunca se apaga</h2>
       <p class="reveal" data-d="2">Antes de que abra la puerta ya está prendido. Leña, brasa y paciencia: la cocción a fuego de barro es la que le da el carácter a todo lo que sale de esta cocina.</p>
       <p class="muted reveal" data-d="3">Son generaciones haciendo lo mismo, sin atajos. No hay secreto moderno: hay oficio, repetido cada día frente a la misma boca de fuego.</p>
       <div class="horno__rule reveal" data-d="4"></div>
@@ -166,19 +212,17 @@
     <div class="carta__top">
       <div class="carta__intro">
         <span class="kicker reveal">La carta</span>
-        <h2 class="reveal" data-d="1">Para sentarse <em>con tiempo</em></h2>
+        <h2 class="reveal" data-d="1">Para sentarse con tiempo</h2>
         <p class="lead reveal" data-d="2">Carta corta y honesta, 100% regional y de carne. Lo que ves es lo que hay, y todo se hace acá. Poca opción vegetariana — pero lo que sale, sale bien.</p>
       </div>
       <figure class="carta__photo reveal" data-d="1">
         <img src="assets/locro.webp" alt="Locro salteño humeante servido en olla de barro" loading="lazy" />
-        <div class="vignette"></div>
         <figcaption>Locro · plato de cuchara</figcaption>
       </figure>
     </div>
 
-    <!-- Tabs -->
     <div class="tabs" role="tablist" aria-label="Categorías de la carta">
-      <button class="tab active" role="tab" data-tab="regionales" aria-selected="true">Regionales</button>
+      <button class="tab is-active" role="tab" data-tab="regionales" aria-selected="true">Regionales</button>
       <button class="tab" role="tab" data-tab="pastas" aria-selected="false">Pastas</button>
       <button class="tab" role="tab" data-tab="casa" aria-selected="false">Platos de la casa</button>
       <button class="tab" role="tab" data-tab="minutas" aria-selected="false">Minutas</button>
@@ -188,11 +232,10 @@
     </div>
 
     <!-- REGIONALES -->
-    <div class="panel active" role="tabpanel" data-panel="regionales">
-      <!-- Empanadas para llevar -->
+    <div class="panel is-active" role="tabpanel" data-panel="regionales">
       <div class="llevar reveal">
-        <div>
-          <h3>Empanadas <em>para llevar</em></h3>
+        <div class="llevar__txt">
+          <h3>Empanadas para llevar</h3>
           <p>Al horno de barro · carne a cuchillo, charqui, queso o pollo. ¿Te volvés en avión? Pedilas con anticipación y te las preparamos para el viaje.</p>
         </div>
         <div class="llevar__price">
@@ -241,7 +284,7 @@
     <div class="panel" role="tabpanel" data-panel="casa">
       <div class="panel__grid cols-2">
         <div class="menu-group reveal">
-          <h3>De cazuela y parrilla</h3>
+          <h3>De cazuela</h3>
           <div class="item"><span class="item__name">Cazuela de conejo</span><span class="item__price">$35.000</span></div>
           <div class="item"><span class="item__name">Cazuela de cabrito</span><span class="item__price">$38.000</span></div>
           <div class="item"><span class="item__name">Cabrito a la provenzal c/ papas españolas</span><span class="item__price">$50.000</span></div>
@@ -338,7 +381,7 @@
         </div>
       </div>
 
-      <div class="panel__grid cols-2" style="margin-top:8px">
+      <div class="panel__grid cols-2">
         <div class="menu-group reveal">
           <h3>Vino de la casa</h3>
           <div class="item"><span class="item__name">Copa</span><span class="item__price">$4.500</span></div>
@@ -362,7 +405,7 @@
         </div>
       </div>
 
-      <div class="panel__grid cols-2" style="margin-top:8px">
+      <div class="panel__grid cols-2">
         <div class="menu-group reveal">
           <h3>Puna</h3>
           <div class="item"><span class="item__name">Puna 2600 Malbec Reserva<small class="item__desc">Malbec $25.000 · Malbec 3/8 $15.000</small></span><span class="item__price">$33.000</span></div>
@@ -392,23 +435,23 @@
   <div class="wrap">
     <div class="salon__head">
       <span class="kicker reveal">El salón</span>
-      <h2 class="reveal" data-d="1">Casona vieja, mesas <em>llenas</em></h2>
+      <h2 class="reveal" data-d="1">Casona vieja, mesas llenas</h2>
       <p class="lead reveal" data-d="2">Techos altos, ladrillo a la vista, paredes color tierra y el murmullo de las mesas. Vení temprano: a la noche se llena volando.</p>
     </div>
-    <div class="gallery reveal" data-d="1">
-      <figure class="gphoto g-big">
+    <div class="gallery">
+      <figure class="gphoto g-big reveal">
         <img src="assets/salon-gente.webp" alt="Salón principal de Doña Salta con mesas llenas, paredes color terracota y lámparas colgantes" loading="lazy" />
         <figcaption>El salón a la noche</figcaption>
       </figure>
-      <figure class="gphoto g-tall">
+      <figure class="gphoto g-tall reveal" data-d="1">
         <img src="assets/salon-paredes.webp" alt="Detalle de las paredes de adobe color tierra con lámparas de mimbre y cañas de bambú" loading="lazy" />
         <figcaption>Adobe y mimbre</figcaption>
       </figure>
-      <figure class="gphoto">
+      <figure class="gphoto reveal" data-d="2">
         <img src="assets/salon-mesa-pan.webp" alt="Mesa servida con canasta de pan casero y el salón de fondo" loading="lazy" />
         <figcaption>La mesa puesta</figcaption>
       </figure>
-      <figure class="gphoto g-wide">
+      <figure class="gphoto g-wide reveal" data-d="3">
         <img src="assets/locro-mesa.webp" alt="Locro en olla de barro con pan y copa de vino tinto sobre la mesa" loading="lazy" />
         <figcaption>Pan, locro y un tinto</figcaption>
       </figure>
@@ -416,59 +459,51 @@
   </div>
 </section>
 
-<!-- ============ UBICACIÓN ============ -->
-<section class="ubic section-pad" id="ubicacion">
-  <div class="wrap">
-    <div class="ubic__grid">
-      <figure class="ubic__photo reveal">
-        <img src="assets/fachada.webp" alt="Fachada iluminada de la casona de Doña Salta de noche en el casco histórico de Salta" loading="lazy" />
-        <div class="vignette"></div>
-        <figcaption>Frente a la Basílica de San Francisco</figcaption>
-      </figure>
-      <div class="ubic__info">
-        <span class="kicker reveal">Ubicación</span>
-        <h2 class="reveal" data-d="1">En pleno <em>casco histórico</em></h2>
+<!-- ============ VISITANOS ============ -->
+<section class="visita" id="visita">
+  <div class="visita__feature">
+    <div class="visita__bg" role="img" aria-label="Fachada de la casona de Doña Salta de día, en el casco histórico de Salta"></div>
+    <div class="visita__veil" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="visita__featxt">
+        <span class="kicker reveal">Visitanos</span>
+        <h2 class="reveal" data-d="1">En pleno casco histórico</h2>
         <p class="lead reveal" data-d="2">Estás justo frente a la Basílica y Convento de San Francisco — el corazón colonial de Salta. Imposible no encontrarnos.</p>
-        <div class="reveal" data-d="3" style="margin-top:22px">
-          <p class="ubic__addr"><b>Córdoba 46</b><small>A4400 · Salta capital, Argentina</small></p>
-          <div class="cta-row" style="margin-top:18px">
-            <a class="btn btn-oro" href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              Cómo llegar
-            </a>
-            <a class="btn btn-ghost" href="tel:+543874321921">Llamar para take-out</a>
-          </div>
-        </div>
-        <div class="map reveal" data-d="4">
-          <iframe title="Mapa de Doña Salta — Córdoba 46, Salta" src="https://www.google.com/maps?q=C%C3%B3rdoba%2046%2C%20Salta%2C%20Argentina&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ============ CÓMO VISITARNOS ============ -->
-<section class="visit section-pad">
-  <div class="wrap">
-    <span class="kicker reveal">Cómo visitarnos</span>
-    <h2 class="reveal" data-d="1">Abierto de <em>lunes a lunes</em></h2>
-    <div class="visit__grid">
-      <div class="reveal" data-d="2">
-        <div class="horarios">
-          <div class="horario"><span>Almuerzo<small>Todos los días</small></span><time>11:00 — 15:00</time></div>
-          <div class="horario"><span>Cena<small>Todos los días</small></span><time>20:00 — 00:00</time></div>
-        </div>
+  <div class="visita__grid wrap section-pad">
+    <div class="visita__info">
+      <p class="visita__addr reveal"><b>Córdoba 46</b><small>A4400 · Salta capital, Argentina</small></p>
+
+      <div class="horarios reveal" data-d="1">
+        <div class="horario"><span>Almuerzo<small>Todos los días</small></span><time>11:00 — 15:00</time></div>
+        <div class="horario"><span>Cena<small>Todos los días</small></span><time>20:00 — 00:00</time></div>
       </div>
-      <div class="reveal" data-d="3">
-        <div class="aviso">
+
+      <div class="avisos">
+        <div class="aviso reveal" data-d="2">
           <h3>No tomamos reserva</h3>
           <p>Es por orden de llegada. Vení temprano que se llena volando — sobre todo a la noche y los fines de semana.</p>
         </div>
-        <div class="aviso">
+        <div class="aviso reveal" data-d="3">
           <h3>Take-out en la vereda</h3>
           <p>Llevás tus empanadas y platos para casa. No tenemos delivery propio: llamá y te lo dejamos listo para retirar.</p>
         </div>
       </div>
+
+      <div class="cta-row reveal" data-d="4">
+        <a class="btn btn--solid" href="https://www.google.com/maps/dir/?api=1&amp;destination=Do%C3%B1a+Salta+C%C3%B3rdoba+46+Salta+Argentina" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Cómo llegar
+        </a>
+        <a class="btn btn--line" href="tel:+543874321921">Llamar para take-out</a>
+      </div>
+    </div>
+
+    <div class="visita__map reveal" data-d="1">
+      <iframe title="Mapa de Doña Salta — Córdoba 46, Salta" src="https://www.google.com/maps?q=C%C3%B3rdoba%2046%2C%20Salta%2C%20Argentina&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </section>
@@ -478,13 +513,13 @@
   <div class="footer__glow" aria-hidden="true"></div>
   <div class="wrap">
     <div class="footer__top">
-      <div class="footer__logo">
+      <div class="footer__brand">
         <img src="assets/logo.webp" alt="Doña Salta" />
         <p>Empanadas al horno de barro y comida regional salteña. Frente a San Francisco, desde hace generaciones.</p>
       </div>
       <div class="footer__col">
         <h4>Contacto</h4>
-        <a class="big" href="tel:+543874321921">0387 432-1921</a>
+        <a class="footer__big" href="tel:+543874321921">0387 432-1921</a>
         <p><small>Tocá para llamar y pedir take-out</small></p>
         <a href="https://instagram.com/donasaltarestaurante" target="_blank" rel="noopener">Instagram @donasaltarestaurante</a>
         <a href="https://facebook.com" target="_blank" rel="noopener">Facebook · Doña Salta</a>
@@ -504,6 +539,6 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js?v=30"></script>
 </body>
 </html>
