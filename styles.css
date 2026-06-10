@@ -266,7 +266,7 @@ section[id] { scroll-margin-top: 88px; }
 .hero__kicker {
   font-size: clamp(11px, 1.4vw, 13px);
   font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--oro);
+  color: #fff;
   margin-bottom: clamp(18px, 3vw, 26px);
   display: flex; align-items: center; gap: 0.9em;
 }
