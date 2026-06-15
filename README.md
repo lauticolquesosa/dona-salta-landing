@@ -9,10 +9,32 @@ Sitio **estático** (HTML + CSS + JS puro). Sin framework ni build: el navegador
 index.html                  ← página única
 styles.css                  ← estilos
 script.js                   ← interacciones (nav, tabs, reveals, parallax)
+manifest.webmanifest        ← metadatos PWA (instalable, ícono, colores)
+robots.txt                  ← permite indexar + apunta al sitemap
+sitemap.xml                 ← mapa del sitio para buscadores
 assets/                     ← imágenes (fotos del local y los platos, en WebP)
 scripts/optimize-images.mjs ← optimizador de imágenes (uso local con sharp)
-vercel.json                 ← deploy estático en Vercel + headers de caché
+vercel.json                 ← deploy estático + headers de seguridad y caché
 ```
+
+## Seguridad
+Sitio estático sin formularios, sin backend y sin claves de API: no hay datos de
+usuario que validar ni secretos que exponer. La protección se aplica en los
+**headers** (`vercel.json`):
+- **Content-Security-Policy** estricta: `script-src 'self'` y `style-src 'self'`
+  (sin `unsafe-inline`). Aunque alguien lograra inyectar HTML, el navegador no
+  ejecuta scripts ni estilos ajenos al propio sitio → XSS bloqueado.
+- `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`,
+  `Referrer-Policy`, `Strict-Transport-Security` (HTTPS forzado) y
+  `Permissions-Policy` (cámara, micrófono, geolocalización, etc. deshabilitados).
+
+## Caché
+- **HTML** (`/`): `max-age=0, must-revalidate` → siempre se ve la última versión.
+- **CSS/JS**: caché de 1 año `immutable` (se versionan con `?v=NN`; subí el número
+  al editarlos para que el cambio llegue a todos).
+- **Imágenes** (`assets/`): caché de 7 días con `stale-while-revalidate`. Si
+  reemplazás una foto con el mismo nombre, puede tardar hasta una semana en
+  actualizarse para visitantes que ya entraron (o un *hard refresh*).
 
 ## Ver en local
 No necesita instalar nada para correr el sitio:

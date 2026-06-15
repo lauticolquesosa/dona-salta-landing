@@ -1,0 +1,14 @@
+{
+  "name": "Doña Salta — Empanadas al horno de barro",
+  "short_name": "Doña Salta",
+  "description": "Bodegón salteño frente a San Francisco. Empanadas al horno de barro y comida regional. Córdoba 46, Salta capital.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#14110D",
+  "theme_color": "#14110D",
+  "lang": "es-AR",
+  "icons": [
+    { "src": "assets/logo.webp", "sizes": "any", "type": "image/webp", "purpose": "any" }
+  ]
+}

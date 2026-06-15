@@ -254,6 +254,9 @@ section[id] { scroll-margin-top: 88px; }
   will-change: opacity, transform;
 }
 .hero__frame.is-active { opacity: 1; transform: scale(1.14); }
+.hero__frame[data-frame="0"] { background-image: url("assets/hero-dia.webp"); }
+.hero__frame[data-frame="1"] { background-image: url("assets/empanadas.webp"); }
+.hero__frame[data-frame="2"] { background-image: url("assets/salon-gente.webp"); }
 
 .hero__scrim {
   position: absolute; inset: 0; z-index: 1;
