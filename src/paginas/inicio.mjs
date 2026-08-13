@@ -15,18 +15,20 @@ const destacados = [
   { que: "Locro en olla de barro", cuanto: 25000 },
 ];
 
+/* Portada a pantalla completa: la fachada de Córdoba 46 de fondo, el título
+   grande abajo a la izquierda y una sola acción principal. */
 const portada = `<section class="portada">
-  <div class="contenedor par">
-    <div>
-      <h1 class="titulo-1">Empanadas al horno de barro, frente a San Francisco</h1>
-      <p class="parrafo bajada">Somos un bodegón salteño en Córdoba 46. Cocina regional de todos los días, hecha en el mismo horno de leña desde hace generaciones.</p>
-      <div class="acciones">
-        ${boton({ texto: "Cómo llegar", url: contacto.mapa, ico: "pin", externo: true, etiqueta: "Cómo llegar a Doña Salta, abre Google Maps" })}
-        ${boton({ texto: "Ver la carta", url: "/carta", nivel: "contorno" })}
-      </div>
-      <ul class="datos">${datosPortada.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>
+  ${foto(fotos.fachada, { clase: "portada__foto", prioridad: true, sizes: "100vw" })}
+  <div class="portada__velo" aria-hidden="true"></div>
+  <div class="contenedor portada__contenido">
+    <p class="portada__kicker">Salta capital · desde hace generaciones</p>
+    <h1 class="portada__titulo">Empanadas al<br />horno de barro.</h1>
+    <p class="portada__bajada">Bodegón salteño en Córdoba 46, frente a la Basílica de San Francisco. Cocina regional todos los días.</p>
+    <div class="acciones">
+      ${boton({ texto: "Llamar", url: `tel:${contacto.telefonoE164}`, ico: "telefono", etiqueta: `Llamar a Doña Salta al ${contacto.telefono}` })}
+      ${boton({ texto: "Cómo llegar", url: contacto.mapa, nivel: "contorno", ico: "pin", externo: true, etiqueta: "Cómo llegar a Doña Salta, abre Google Maps" })}
     </div>
-    ${foto(fotos.empanadas, { clase: "par__foto", prioridad: true, sizes: "(max-width: 960px) 100vw, 45vw" })}
+    <ul class="datos">${datosPortada.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>
   </div>
 </section>`;
 
@@ -100,6 +102,8 @@ export default {
   descripcion:
     "Bodegón salteño en Córdoba 46, frente a la Basílica de San Francisco. Empanadas al horno de barro, locro y cocina regional. Abierto todos los días, sin reserva.",
   imagen: rutaFoto(fotos.empanadas, 1440),
+  // La foto de la portada es el LCP: se precarga en vez de diferirse.
+  precarga: { foto: fotos.fachada, sizes: "100vw" },
   jsonLd: [fichaNegocio()],
   cuerpo: [
     portada,

@@ -1,5 +1,5 @@
 import { sitio, contacto, horarios, redes, navegacion, legales } from "../data/sitio.mjs";
-import { fotos, rutaFoto } from "../data/fotos.mjs";
+import { fotos, medidas, rutaFoto } from "../data/fotos.mjs";
 import { esc, juntar, icono, boton } from "./html.mjs";
 
 const DIAS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -172,6 +172,15 @@ export function documento(pagina, assets) {
     .map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`)
     .join("\n");
 
+  // La foto que abre la página no se difiere: se pide junto con la hoja de estilos.
+  const precarga = pagina.precarga
+    ? `<link rel="preload" as="image" href="${rutaFoto(pagina.precarga.foto, medidas(pagina.precarga.foto).at(-1))}" imagesrcset="${medidas(
+        pagina.precarga.foto
+      )
+        .map((a) => `${rutaFoto(pagina.precarga.foto, a)} ${a}w`)
+        .join(", ")}" imagesizes="${esc(pagina.precarga.sizes)}" fetchpriority="high" />`
+    : "";
+
   return `<!doctype html>
 <html lang="es-AR">
 <head>
@@ -198,8 +207,9 @@ export function documento(pagina, assets) {
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Hanken+Grotesk:wght@400;600&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..600,0..100,0..1&family=Hanken+Grotesk:wght@400;600&display=swap" />
 <link rel="stylesheet" href="${assets.css}" />
+${precarga}
 ${bloques}
 </head>
 <body>

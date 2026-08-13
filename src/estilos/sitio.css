@@ -18,11 +18,27 @@
   --acento-oscuro: #7a5f00;
   --sombra-foto: #0d0a07;
 
+  /* Sobre foto: el texto y los bordes se apoyan en blanco, no en la paleta. */
+  --linea-clara: rgba(255, 255, 255, 0.55);
+  --linea-clara-2: rgba(255, 255, 255, 0.28);
+  --velo-portada: linear-gradient(
+      180deg,
+      rgba(13, 10, 7, 0.56) 0%,
+      rgba(13, 10, 7, 0.2) 22%,
+      rgba(13, 10, 7, 0.6) 58%,
+      rgba(13, 10, 7, 0.95) 100%
+    ),
+    radial-gradient(120% 90% at 14% 88%, rgba(13, 10, 7, 0.68) 0%, transparent 60%);
+
   /* Tipografía */
   --titular: "Fraunces", Georgia, "Times New Roman", serif;
   --cuerpo: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  /* Corte display de Fraunces: más contraste entre trazos, terminaciones
+     suaves y las formas wonk. Solo para los títulos que se leen grandes. */
+  --display: "opsz" 144, "SOFT" 32, "WONK" 1;
 
   /* Escala fluida, razón 1.25 */
+  --t-portada: clamp(2.5rem, 0.9rem + 7.4vw, 8rem);
   --t1: clamp(2.6rem, 1.6rem + 4.4vw, 5.2rem);
   --t2: clamp(1.9rem, 1.4rem + 2.3vw, 3.2rem);
   --t3: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
@@ -142,6 +158,7 @@ a {
   font-size: var(--t1);
   line-height: 1.02;
   letter-spacing: -0.03em;
+  font-variation-settings: var(--display);
   max-width: 16ch;
 }
 
@@ -401,10 +418,94 @@ a {
 
 /* ---------- Portada ---------- */
 
-/* La sección que sigue aporta su propio aire arriba: acá va solo el mínimo. */
+/* Pantalla completa con la fachada de fondo. El texto se apoya abajo a la
+   izquierda, sobre la parte más oscura del velo: es donde mejor se lee. */
 .portada {
-  padding-top: calc(var(--alto-cabecera) + clamp(40px, 8vw, 96px));
-  padding-bottom: var(--e8);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100svh;
+  padding-top: calc(var(--alto-cabecera) + var(--e8));
+  padding-bottom: clamp(24px, 4vh, 44px);
+  overflow: hidden;
+  background: var(--sombra-foto);
+}
+
+/* Gana en especificidad a las reglas generales de .foto, que vienen después. */
+.portada .portada__foto {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 0;
+}
+
+.portada .portada__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+}
+
+.portada__velo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--velo-portada);
+}
+
+.portada__contenido {
+  position: relative;
+  z-index: 2;
+}
+
+.portada__kicker {
+  font-size: clamp(0.6875rem, 0.63rem + 0.22vw, 0.8125rem);
+  font-weight: 600;
+  letter-spacing: clamp(0.16em, 0.1em + 0.2vw, 0.26em);
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.portada__titulo {
+  margin-top: var(--e5);
+  font-family: var(--titular);
+  font-weight: 400;
+  font-size: var(--t-portada);
+  font-variation-settings: var(--display);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+.portada__bajada {
+  max-width: 44ch;
+  margin-top: var(--e5);
+  font-size: clamp(1.06rem, 1rem + 0.5vw, 1.25rem);
+  color: var(--texto);
+}
+
+/* Sobre la foto el contorno se dibuja en blanco: el borde de la paleta
+   no llega a contrastar contra una imagen clara. */
+.portada .boton--contorno {
+  border-color: var(--linea-clara);
+  color: #fff;
+  background: rgba(23, 18, 14, 0.32);
+}
+
+.portada .boton--contorno:hover {
+  border-color: #fff;
+  background: rgba(23, 18, 14, 0.55);
+}
+
+.portada .datos {
+  margin-top: clamp(32px, 5vh, 56px);
+  border-top-color: var(--linea-clara-2);
+  color: var(--texto);
+}
+
+.portada .datos li + li {
+  border-left-color: var(--linea-clara-2);
 }
 
 /* Texto a la izquierda y foto vertical a la derecha. Abre el inicio y la
@@ -1157,6 +1258,17 @@ html:not(.js) .animar {
   .datos li + li {
     padding-left: 0;
     border-left: 0;
+  }
+
+  /* En el celular la portada tiene que entrar en la pantalla: mismo orden,
+     menos aire entre las piezas. */
+  .portada {
+    padding-top: calc(var(--alto-cabecera) + var(--e5));
+  }
+
+  .portada .acciones,
+  .portada .datos {
+    margin-top: var(--e6);
   }
 
   .acciones .boton,
