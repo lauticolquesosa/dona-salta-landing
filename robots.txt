@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://dona-salta-landing.vercel.app/sitemap.xml

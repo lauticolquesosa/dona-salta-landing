@@ -1,33 +1,16 @@
-# build output
+# resultado de la compilación
 dist/
-.output/
 
-# dependencies
+# dependencias
 node_modules/
 
-# astro
-.astro/
-
-# environment
+# entorno
 .env
 .env.production
+.vercel
 
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# os / editor
+# sistema y editor
 .DS_Store
 Thumbs.db
 .vscode/
-
-# claude code (config local)
 .claude/
-
-.vercel
-
-# temporales de pruebas
-*.tmp.json
-assets/Imagen hero.png
-assets/Hero dia.png

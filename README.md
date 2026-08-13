@@ -1,59 +1,75 @@
-# Doña Salta — Landing
+# Doña Salta
 
-Sitio web de **Doña Salta** — restaurante de cocina regional salteña, empanadas al horno de barro. Córdoba 46, Salta capital.
+Sitio de **Doña Salta**, bodegón de cocina regional salteña en Córdoba 46, Salta capital.
 
-Sitio **estático** (HTML + CSS + JS puro). Sin framework ni build: el navegador sirve los archivos tal cual. La única dependencia (`sharp`) es una herramienta **local** para optimizar imágenes, no se usa en producción.
+Son cinco páginas de HTML estático. No hay framework ni cliente pesado: un script de
+Node arma los archivos y el navegador recibe HTML terminado. La única dependencia es
+`sharp`, y se usa para generar las fotos en varias medidas.
+
+## Cómo trabajar
+
+```
+npm install     # la primera vez
+npm run dev     # levanta http://localhost:4321 y rehace el sitio al guardar
+npm run build   # deja el sitio publicable en dist/
+```
+
+`dist/` es resultado, no fuente: se puede borrar entero y se vuelve a generar.
 
 ## Estructura
+
 ```
-index.html                  ← página única
-styles.css                  ← estilos
-script.js                   ← interacciones (nav, tabs, reveals, parallax)
-manifest.webmanifest        ← metadatos PWA (instalable, ícono, colores)
-robots.txt                  ← permite indexar + apunta al sitemap
-sitemap.xml                 ← mapa del sitio para buscadores
-assets/                     ← imágenes (fotos del local y los platos, en WebP)
-scripts/optimize-images.mjs ← optimizador de imágenes (uso local con sharp)
-vercel.json                 ← deploy estático + headers de seguridad y caché
-```
-
-## Seguridad
-Sitio estático sin formularios, sin backend y sin claves de API: no hay datos de
-usuario que validar ni secretos que exponer. La protección se aplica en los
-**headers** (`vercel.json`):
-- **Content-Security-Policy** estricta: `script-src 'self'` y `style-src 'self'`
-  (sin `unsafe-inline`). Aunque alguien lograra inyectar HTML, el navegador no
-  ejecuta scripts ni estilos ajenos al propio sitio → XSS bloqueado.
-- `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`,
-  `Referrer-Policy`, `Strict-Transport-Security` (HTTPS forzado) y
-  `Permissions-Policy` (cámara, micrófono, geolocalización, etc. deshabilitados).
-
-## Caché
-- **HTML** (`/`): `max-age=0, must-revalidate` → siempre se ve la última versión.
-- **CSS/JS**: caché de 1 año `immutable` (se versionan con `?v=NN`; subí el número
-  al editarlos para que el cambio llegue a todos).
-- **Imágenes** (`assets/`): caché de 7 días con `stale-while-revalidate`. Si
-  reemplazás una foto con el mismo nombre, puede tardar hasta una semana en
-  actualizarse para visitantes que ya entraron (o un *hard refresh*).
-
-## Ver en local
-No necesita instalar nada para correr el sitio:
-- Abrir `index.html` directo en el navegador, o
-- Servirlo: `npx serve .` y entrar a la URL que indique.
-
-## Optimizar imágenes (opcional)
-Antes de subir fotos nuevas, optimizalas a WebP para que el sitio cargue rápido:
-```
-npm install          # instala sharp (solo la primera vez)
-npm run optimize     # convierte/comprime las imágenes de assets/
+src/data/        contenido del sitio: negocio, carta, fotos, preguntas frecuentes
+src/lib/         render de HTML y armado de cada página
+src/paginas/     una por página publicada
+src/estilos/     la hoja de estilos, con todas las variables
+src/guiones/     el JavaScript del sitio, en un solo archivo
+medios/          fotos originales del local, sin tocar
+scripts/         compilación y servidor de desarrollo
 ```
 
-## Deploy
-Conectado a **Vercel** con deploy automático: cada `git push` a `main` publica la web.
+## Dónde se cambia cada cosa
 
-- Producción: **https://dona-salta-landing.vercel.app**
-- Las URLs con hash (`...-xxxxx-lauti-s-projects.vercel.app`) son previews congeladas de un commit puntual: no usar para ver "lo último".
+| Qué | Dónde |
+| --- | --- |
+| Dirección, teléfono, horarios, redes | `src/data/sitio.mjs` |
+| Precios y platos de la carta | `src/data/carta.mjs` |
+| Preguntas frecuentes y rellenos de empanada | `src/data/contenido.mjs` |
+| Fotos y sus textos alternativos | `src/data/fotos.mjs` más el archivo en `medios/` |
+| Textos de una página | el archivo de esa página en `src/paginas/` |
+| Colores, tipografía, espaciado | las variables al principio de `src/estilos/sitio.css` |
 
-## Editar contenido
-Todo el contenido (textos, secciones, precios de la carta) está en `index.html`.
-Para cambiar una foto, reemplazá el archivo dentro de `assets/` manteniendo el nombre.
+El teléfono, la dirección y los horarios se escriben una sola vez y de ahí salen el
+encabezado, el pie, la ficha del negocio para Google y las páginas legales. Tienen que
+coincidir letra por letra con la ficha de Google Business y con las redes.
+
+## Páginas
+
+`/` inicio · `/empanadas` · `/carta` · `/el-bodegon` · `/visitanos` ·
+`/privacidad` · `/terminos`
+
+Cada una tiene su título, su descripción y sus datos estructurados. El sitemap y el
+robots se generan solos con la lista de páginas.
+
+## Imágenes
+
+Las fotos originales viven en `medios/`. La compilación genera de cada una las medidas
+que declara `ANCHOS` en `src/data/fotos.mjs` y el HTML sale con `srcset`, así el celular
+baja la chica y la pantalla grande la grande. Una foto solo se genera de nuevo si el
+original cambió.
+
+Para sumar una foto: dejá el archivo en `medios/`, agregala a `src/data/fotos.mjs` con
+sus medidas reales y su texto alternativo, y usala desde la página.
+
+## Publicación
+
+Vercel toma cada push a `main`, corre `node scripts/construir.mjs` y publica `dist/`.
+
+- `vercel.json` define las direcciones limpias, la caché y los headers de seguridad.
+- Los archivos de `/a/` llevan el hash del contenido en el nombre, así que se cachean
+  para siempre y un cambio de estilos llega al instante.
+- La política de seguridad de contenido no admite scripts ni estilos en línea. Si algún
+  día hace falta uno, se agrega al archivo correspondiente, nunca al HTML.
+
+Al conectar el dominio propio hay que cambiar `origen` en `src/data/sitio.mjs`: de ahí
+salen las canónicas, el sitemap y las metas para compartir.

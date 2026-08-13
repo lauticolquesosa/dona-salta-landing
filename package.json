@@ -1,11 +1,13 @@
 {
-  "name": "dona-salta-landing",
+  "name": "dona-salta",
   "private": true,
-  "description": "Sitio estático de Doña Salta. sharp solo se usa localmente para optimizar imágenes.",
+  "type": "module",
+  "description": "Sitio de Doña Salta. HTML estático generado desde src/ hacia dist/.",
   "scripts": {
-    "optimize": "node scripts/optimize-images.mjs"
+    "build": "node scripts/construir.mjs",
+    "dev": "node scripts/servir.mjs"
   },
-  "devDependencies": {
+  "dependencies": {
     "sharp": "^0.34.5"
   }
 }
