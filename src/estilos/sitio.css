@@ -20,15 +20,32 @@
 
   /* Sobre foto: el texto y los bordes se apoyan en blanco, no en la paleta. */
   --linea-clara: rgba(255, 255, 255, 0.55);
-  --linea-clara-2: rgba(255, 255, 255, 0.28);
+  /* Dos velos de negro transparente sobre la foto. El vertical sostiene la
+     cabecera arriba y los botones abajo. El horizontal oscurece la columna
+     izquierda, que es donde se apoya el texto, y deja respirar la fachada
+     a la derecha. Medido contra la zona más clara de la foto, no el promedio. */
   --velo-portada: linear-gradient(
-      180deg,
-      rgba(13, 10, 7, 0.56) 0%,
-      rgba(13, 10, 7, 0.2) 22%,
-      rgba(13, 10, 7, 0.6) 58%,
-      rgba(13, 10, 7, 0.95) 100%
+      90deg,
+      rgba(13, 10, 7, 0.72) 0%,
+      rgba(13, 10, 7, 0.6) 34%,
+      rgba(13, 10, 7, 0) 78%
     ),
-    radial-gradient(120% 90% at 14% 88%, rgba(13, 10, 7, 0.68) 0%, transparent 60%);
+    linear-gradient(
+      180deg,
+      rgba(13, 10, 7, 0.7) 0%,
+      rgba(13, 10, 7, 0.34) 16%,
+      rgba(13, 10, 7, 0.44) 52%,
+      rgba(13, 10, 7, 0.92) 100%
+    );
+  /* En pantallas angostas el texto ocupa todo el ancho: el velo se vuelve
+     parejo de lado a lado y carga el peso abajo. */
+  --velo-portada-angosto: linear-gradient(
+    180deg,
+    rgba(13, 10, 7, 0.72) 0%,
+    rgba(13, 10, 7, 0.5) 18%,
+    rgba(13, 10, 7, 0.66) 46%,
+    rgba(13, 10, 7, 0.93) 100%
+  );
 
   /* Tipografía */
   --titular: "Fraunces", Georgia, "Times New Roman", serif;
@@ -460,16 +477,7 @@ a {
   z-index: 2;
 }
 
-.portada__kicker {
-  font-size: clamp(0.6875rem, 0.63rem + 0.22vw, 0.8125rem);
-  font-weight: 600;
-  letter-spacing: clamp(0.16em, 0.1em + 0.2vw, 0.26em);
-  text-transform: uppercase;
-  color: #fff;
-}
-
 .portada__titulo {
-  margin-top: var(--e5);
   font-family: var(--titular);
   font-weight: 400;
   font-size: var(--t-portada);
@@ -477,6 +485,13 @@ a {
   line-height: 0.94;
   letter-spacing: -0.025em;
   color: #fff;
+  text-wrap: balance;
+}
+
+/* El corte de las líneas del titular está decidido a mano, como en un
+   titular de tapa. En pantallas angostas se suelta y el texto se acomoda. */
+.portada__titulo span {
+  display: block;
 }
 
 .portada__bajada {
@@ -1227,6 +1242,14 @@ html:not(.js) .animar {
      menos aire entre las piezas. */
   .portada {
     padding-top: calc(var(--alto-cabecera) + var(--e5));
+  }
+
+  .portada__titulo span {
+    display: inline;
+  }
+
+  .portada__velo {
+    background: var(--velo-portada-angosto);
   }
 
   .portada .acciones {

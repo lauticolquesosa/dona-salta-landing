@@ -6,7 +6,7 @@ import { cierre, migas } from "../lib/layout.mjs";
 const encabezado = `<section class="encabezado">
   <div class="contenedor">
     <h1 class="titulo-1">El bodegón: una casona vieja del casco histórico</h1>
-    <p class="parrafo bajada">Doña Salta funciona en una casona antigua de Córdoba 46, a media cuadra de la plaza 9 de Julio. Techos altos, paredes color tierra, ladrillo a la vista y mesas de madera que se llenan todos los días.</p>
+    <p class="parrafo bajada">Doña Salta funciona en una casona antigua de Córdoba 46, a dos cuadras de la plaza 9 de Julio. Techos altos, paredes color tierra, ladrillo a la vista y mesas de madera que se llenan todos los días.</p>
   </div>
   ${foto(fotos.salon, { clase: "foto--ancha foto--recorte", prioridad: true, sizes: "100vw" })}
 </section>`;

@@ -15,9 +15,12 @@ const portada = `<section class="portada">
   ${foto(fotos.fachada, { clase: "portada__foto", prioridad: true, sizes: "100vw" })}
   <div class="portada__velo" aria-hidden="true"></div>
   <div class="contenedor portada__contenido">
-    <p class="portada__kicker">Salta capital · desde hace generaciones</p>
-    <h1 class="portada__titulo">Empanadas al<br />horno de barro.</h1>
-    <p class="portada__bajada">Bodegón salteño en Córdoba 46, frente a la Basílica de San Francisco. Cocina regional todos los días.</p>
+    <h1 class="portada__titulo">
+      <span>Empanadas al</span>
+      <span>horno de barro,</span>
+      <span>en Salta capital</span>
+    </h1>
+    <p class="portada__bajada">El bodegón de Córdoba 46, frente a la Basílica de San Francisco. Cocina del norte, todos los días al mediodía y a la noche.</p>
     <div class="acciones">
       ${boton({ texto: "Llamar", url: `tel:${contacto.telefonoE164}`, ico: "telefono", etiqueta: `Llamar a Doña Salta al ${contacto.telefono}` })}
       ${boton({ texto: "Cómo llegar", url: contacto.mapa, nivel: "contorno", ico: "pin", externo: true, etiqueta: "Cómo llegar a Doña Salta, abre Google Maps" })}

@@ -7,7 +7,7 @@ import { migas } from "../lib/layout.mjs";
 const encabezado = `<section class="encabezado">
   <div class="contenedor">
     <h1 class="titulo-1">Córdoba 46, frente a la Basílica de San Francisco</h1>
-    <p class="parrafo bajada">Estamos en pleno casco histórico de Salta capital, a tres cuadras de la plaza 9 de Julio. Abrimos todos los días al mediodía y a la noche. No tomamos reserva: se entra por orden de llegada.</p>
+    <p class="parrafo bajada">Estamos en pleno casco histórico de Salta capital, a dos cuadras de la plaza 9 de Julio. Abrimos todos los días al mediodía y a la noche. No tomamos reserva: se entra por orden de llegada.</p>
     <div class="acciones">
       ${boton({ texto: "Cómo llegar", url: contacto.mapa, ico: "pin", externo: true, etiqueta: "Cómo llegar a Doña Salta, abre Google Maps" })}
       <a class="enlace" href="tel:${contacto.telefonoE164}">Llamar al ${esc(contacto.telefono)}${icono("flecha")}</a>
@@ -20,7 +20,7 @@ const datos = `<section class="seccion">
   <div class="contenedor visita">
     <div class="visita__col">
       <h2 class="titulo-2 animar">Si ves la torre de San Francisco, ya llegaste</h2>
-      <p class="parrafo animar">La casona es amarilla y tiene tres arcos sobre la vereda, justo enfrente de la Basílica y Convento de San Francisco. Desde la plaza 9 de Julio son tres cuadras caminando por calle Córdoba.</p>
+      <p class="parrafo animar">La casona es amarilla y tiene tres arcos sobre la vereda, sobre la misma cuadra de la Basílica y Convento de San Francisco. Desde la plaza 9 de Julio son dos cuadras caminando por calle Córdoba.</p>
       <p class="ficha animar"><b>${esc(contacto.calle)}</b><span>${esc(contacto.codigoPostal)}, ${esc(contacto.localidad)} capital, ${esc(contacto.paisNombre)}</span></p>
       <ul class="horas horas--grande animar">
         ${horarios

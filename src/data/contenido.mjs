@@ -36,7 +36,7 @@ export const faq = [
   {
     pregunta: "¿Dónde queda y cómo llego?",
     respuesta:
-      "Estamos en Córdoba 46, Salta capital, justo frente a la Basílica y Convento de San Francisco. Desde la plaza 9 de Julio son tres cuadras caminando. La casona es amarilla, con tres arcos sobre la vereda.",
+      "Estamos en Córdoba 46, Salta capital, sobre la misma cuadra de la Basílica y Convento de San Francisco. Desde la plaza 9 de Julio son dos cuadras caminando. La casona es amarilla, con tres arcos sobre la vereda.",
   },
   {
     pregunta: "¿Qué días y en qué horario abren?",
