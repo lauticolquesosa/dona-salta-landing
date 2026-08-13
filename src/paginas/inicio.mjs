@@ -3,12 +3,6 @@ import { fotos, rutaFoto } from "../data/fotos.mjs";
 import { boton, enlace, foto, precio, esc } from "../lib/html.mjs";
 import { cierre, fichaNegocio } from "../lib/layout.mjs";
 
-const datosPortada = [
-  "Frente a la Basílica de San Francisco",
-  "Abierto todos los días",
-  "4,5 en Google con 25.000 reseñas",
-];
-
 const destacados = [
   { que: "Empanada al horno de barro", cuanto: 2000 },
   { que: "Docena de empanadas", cuanto: 24000 },
@@ -28,7 +22,6 @@ const portada = `<section class="portada">
       ${boton({ texto: "Llamar", url: `tel:${contacto.telefonoE164}`, ico: "telefono", etiqueta: `Llamar a Doña Salta al ${contacto.telefono}` })}
       ${boton({ texto: "Cómo llegar", url: contacto.mapa, nivel: "contorno", ico: "pin", externo: true, etiqueta: "Cómo llegar a Doña Salta, abre Google Maps" })}
     </div>
-    <ul class="datos">${datosPortada.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>
   </div>
 </section>`;
 

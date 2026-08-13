@@ -427,7 +427,8 @@ a {
   justify-content: flex-end;
   min-height: 100svh;
   padding-top: calc(var(--alto-cabecera) + var(--e8));
-  padding-bottom: clamp(24px, 4vh, 44px);
+  /* El aire de abajo levanta el bloque hasta el último tercio de la pantalla. */
+  padding-bottom: clamp(56px, 13vh, 148px);
   overflow: hidden;
   background: var(--sombra-foto);
 }
@@ -498,16 +499,6 @@ a {
   background: rgba(23, 18, 14, 0.55);
 }
 
-.portada .datos {
-  margin-top: clamp(32px, 5vh, 56px);
-  border-top-color: var(--linea-clara-2);
-  color: var(--texto);
-}
-
-.portada .datos li + li {
-  border-left-color: var(--linea-clara-2);
-}
-
 /* Texto a la izquierda y foto vertical a la derecha. Abre el inicio y la
    página de empanadas: son las dos fotos verticales del catálogo. */
 .par {
@@ -521,24 +512,6 @@ a {
   width: 100%;
   height: clamp(360px, 52vw, 620px);
   object-fit: cover;
-}
-
-.datos {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--e5);
-  margin-top: var(--e7);
-  padding-top: var(--e5);
-  border-top: 1px solid var(--linea);
-  list-style: none;
-  font-size: var(--t-chico);
-  line-height: 1.45;
-  color: var(--texto-2);
-}
-
-.datos li + li {
-  padding-left: var(--e5);
-  border-left: 1px solid var(--linea);
 }
 
 /* ---------- Encabezado de página interna ---------- */
@@ -1250,24 +1223,13 @@ html:not(.js) .animar {
     grid-template-columns: 1fr;
   }
 
-  .datos {
-    grid-template-columns: 1fr;
-    gap: var(--e2);
-  }
-
-  .datos li + li {
-    padding-left: 0;
-    border-left: 0;
-  }
-
   /* En el celular la portada tiene que entrar en la pantalla: mismo orden,
      menos aire entre las piezas. */
   .portada {
     padding-top: calc(var(--alto-cabecera) + var(--e5));
   }
 
-  .portada .acciones,
-  .portada .datos {
+  .portada .acciones {
     margin-top: var(--e6);
   }
 
