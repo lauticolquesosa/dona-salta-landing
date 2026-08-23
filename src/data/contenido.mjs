@@ -1,4 +1,34 @@
-/** Contenido que se repite entre páginas: variedades de empanada y preguntas frecuentes. */
+/** Contenido que se repite entre páginas: platos, empanadas y preguntas frecuentes. */
+
+import { fotos } from "./fotos.mjs";
+
+/** Los tres platos que más salen. La foto es la del catálogo, no una foto de banco. */
+export const destacados = [
+  {
+    nombre: "Docena de empanadas",
+    texto: "Doce empanadas al horno de barro, surtidas entre los cuatro rellenos si querés.",
+    precio: 24000,
+    foto: fotos.empanadas,
+    url: "/empanadas",
+    seccion: "empanadas",
+  },
+  {
+    nombre: "Locro",
+    texto: "En olla de barro, con maíz, porotos, chorizo y verdeo por arriba. Sale todo el año.",
+    precio: 25000,
+    foto: fotos.locro,
+    url: "/carta#regionales",
+    seccion: "regionales",
+  },
+  {
+    nombre: "Cazuela de cabrito",
+    texto: "El plato grande de la casa. Cabrito del valle cocinado lento, para comer con pan.",
+    precio: 38000,
+    foto: fotos.locroMesa,
+    url: "/carta#casa",
+    seccion: "casa",
+  },
+];
 
 export const variedades = [
   {

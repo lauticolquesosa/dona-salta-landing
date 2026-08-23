@@ -10,6 +10,8 @@ export const sitio = {
   descripcionCorta:
     "Bodegón salteño frente a la Basílica de San Francisco. Empanadas al horno de barro y cocina regional, todos los días.",
   estudio: "LCS Desing",
+  // Se usa en la etiqueta de tema, el manifiesto y el fondo del ícono.
+  colorTema: "#1E1512",
 };
 
 export const contacto = {
@@ -47,6 +49,9 @@ export const redes = [
     icono: "facebook",
   },
 ];
+
+/** Puntaje público en Google. Se escribe una vez: lo usan la portada y la ficha del negocio. */
+export const reputacion = { puntaje: 4.5, puntajeTexto: "4,5", reseñas: 25000, reseñasTexto: "25.000" };
 
 /** Prueba de confianza. Todos los datos están verificados, no se agregan otros. */
 export const reconocimientos = [

@@ -1,58 +1,34 @@
 import { carta, cubierto } from "../data/carta.mjs";
 import { fotos, rutaFoto } from "../data/fotos.mjs";
-import { esc, precio, foto, enlace } from "../lib/html.mjs";
-import { cierre, migas, absoluta } from "../lib/layout.mjs";
+import { boton, esc, precio } from "../lib/html.mjs";
+import { absoluta, migas } from "../lib/layout.mjs";
+import { atajos, centrada, invitacion, portada, relato } from "../lib/piezas.mjs";
 
-const encabezado = `<section class="encabezado">
+/** Cada sección de la carta: una grilla de filetes con el plato, el detalle y el precio. */
+const seccion = (s) => `<section class="seccion seccion--oscura carta-seccion" id="${s.id}">
   <div class="contenedor">
-    <h1 class="titulo-1">La carta de Doña Salta, con todos los precios</h1>
-    <p class="parrafo bajada">Esta es la carta completa del salón, la misma que está sobre la mesa. Cocina regional salteña, pastas, minutas y una carta de vinos casi toda de la provincia. Los precios están en pesos y se actualizan cuando cambian en el local.</p>
-  </div>
-</section>`;
-
-const indice = `<nav class="indice" aria-label="Secciones de la carta">
-  <div class="contenedor">
-    <ul>${carta.map((s) => `<li><a href="#${s.id}">${esc(s.titulo)}</a></li>`).join("")}</ul>
-  </div>
-</nav>`;
-
-const seccion = (s, i) => `<section class="seccion carta-seccion${i % 2 ? " seccion--superficie" : ""}" id="${s.id}">
-  <div class="contenedor">
-    <div class="bloque">
+    <div class="bloque bloque--centro">
       <h2 class="titulo-2 animar">${esc(s.titulo)}</h2>
       <p class="parrafo animar">${esc(s.entrada)}</p>
     </div>
-    <div class="grupos">
-      ${s.grupos
-        .map(
-          (g) => `<div class="grupo animar">
-        <h3 class="titulo-3">${esc(g.titulo)}</h3>
-        <ul class="items">
-          ${g.items
-            .map(
-              (it) => `<li class="item">
-            <span class="item__nombre">${esc(it.nombre)}${it.detalle ? `<small>${esc(it.detalle)}</small>` : ""}</span>
-            <span class="item__precio">${precio(it.precio)}</span>
-          </li>`
-            )
-            .join("")}
-        </ul>
-      </div>`
-        )
-        .join("")}
-    </div>
-  </div>
-</section>`;
-
-const notas = `<section class="seccion">
-  <div class="contenedor banda banda--invertida">
-    ${foto(fotos.locroMesa, { clase: "banda__foto animar", sizes: "(max-width: 900px) 100vw, 45vw" })}
-    <div class="banda__texto">
-      <h2 class="titulo-2 animar">Antes de sentarte, tres cosas</h2>
-      <p class="parrafo animar">El servicio de cubiertos y pan se cobra ${precio(cubierto)} por persona y va aparte de lo que pidas. Los precios están en pesos argentinos y pueden cambiar sin aviso, así que la carta del salón es la que manda.</p>
-      <p class="parrafo animar">Sin carne hay poco, y preferimos decirlo antes: empanadas de queso, humitas, tamales, pastas con salsa, pizza a la piedra, ensaladas y guarniciones de verdura.</p>
-      <p class="animar">${enlace({ texto: "Cómo se hacen las empanadas", url: "/empanadas" })}</p>
-    </div>
+    ${s.grupos
+      .map(
+        (g) => `<div class="grupo">
+      <h3 class="grupo__titulo animar">${esc(g.titulo)}</h3>
+      <ul class="items escalona">
+        ${g.items
+          .map(
+            (it) => `<li class="item animar">
+          <h4 class="titulo-3">${esc(it.nombre)}</h4>
+          ${it.detalle ? `<p class="item__detalle">${esc(it.detalle)}</p>` : ""}
+          <p class="item__precio">${precio(it.precio)}</p>
+        </li>`
+          )
+          .join("")}
+      </ul>
+    </div>`
+      )
+      .join("")}
   </div>
 </section>`;
 
@@ -86,16 +62,43 @@ export default {
   descripcion:
     "Carta completa de Doña Salta con precios: empanadas al horno de barro, locro, humitas, cazuela de cabrito, pastas, minutas y vinos salteños. Córdoba 46, Salta capital.",
   imagen: rutaFoto(fotos.locro, 1440),
+  precarga: fotos.locro,
   jsonLd: [migas("La carta", "/carta"), fichaCarta],
   cuerpo: [
-    encabezado,
-    indice,
+    portada({
+      imagen: fotos.locro,
+      titulo: ["La carta,", "con todos los precios"],
+      bajada:
+        "Esta es la carta del salón, la misma que está sobre la mesa. Cocina regional salteña, pastas, minutas y vinos de la provincia.",
+    }),
+
+    centrada({
+      titulo: ["Ocho secciones", "y una cocina sola"],
+      textos: [
+        "Todo se cocina en Córdoba 46: las empanadas en el horno de barro, los platos de olla a fuego lento y las cazuelas por encargo del día. Los precios están en pesos y se actualizan cuando cambian en el local.",
+      ],
+      accion: atajos(carta.map((s) => ({ titulo: s.titulo, url: `#${s.id}` }))),
+    }),
+
     carta.map(seccion).join("\n"),
-    notas,
-    cierre({
-      titulo: "La carta se disfruta en la mesa",
+
+    relato({
+      imagen: fotos.locroMesa,
+      invertida: true,
+      titulo: ["Antes de sentarte,", "tres cosas"],
+      textos: [
+        `El servicio de cubiertos y pan se cobra ${precio(cubierto)} por persona y va aparte de lo que pidas.`,
+        "Los precios pueden cambiar sin aviso, así que la carta del salón es la que manda al momento de pedir. La disponibilidad de los platos regionales depende del día y algunos se agotan durante el servicio.",
+        "Sin carne hay poco, y preferimos decirlo antes: empanadas de queso, humitas, tamales, pastas con salsa, pizza a la piedra, ensaladas y guarniciones de verdura.",
+      ],
+      accion: boton({ texto: "Cómo se hacen las empanadas", url: "/empanadas", nivel: "contorno" }),
+    }),
+
+    invitacion({
+      imagen: fotos.mesa,
+      titulo: ["La carta se disfruta", "en la mesa"],
       texto:
-        "Todo lo que ves se cocina acá, en Córdoba 46. Venite a almorzar o a cenar, o llamá y te lo preparamos para llevar.",
+        "Todo lo que ves se cocina acá. Venite a almorzar o a cenar, o llamá y te lo preparamos para llevar.",
     }),
   ].join("\n"),
 };

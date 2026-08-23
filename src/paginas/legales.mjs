@@ -6,17 +6,19 @@ import { migas } from "../lib/layout.mjs";
 const documentoLegal = (titulo, bajada, bloques) => `<section class="encabezado">
   <div class="contenedor">
     <h1 class="titulo-1">${esc(titulo)}</h1>
-    <p class="parrafo bajada">${esc(bajada)}</p>
+    <p class="bajada">${esc(bajada)}</p>
   </div>
 </section>
 <section class="seccion">
-  <div class="contenedor texto-legal">
+  <div class="contenedor">
+    <div class="legal">
     ${bloques
       .map(
-        (b) => `<h2 class="titulo-3">${esc(b.titulo)}</h2>
-      ${b.parrafos.map((p) => `<p class="parrafo">${esc(p)}</p>`).join("")}`
+        (b) => `<h2 class="titulo-3 animar">${esc(b.titulo)}</h2>
+      ${b.parrafos.map((p) => `<p class="parrafo animar">${esc(p)}</p>`).join("")}`
       )
       .join("")}
+    </div>
   </div>
 </section>`;
 
@@ -24,6 +26,7 @@ const privacidad = {
   ruta: "/privacidad",
   archivo: "privacidad.html",
   activa: "privacidad",
+  sinPortada: true,
   titulo: "Política de privacidad · Doña Salta",
   descripcion:
     "Qué datos maneja el sitio de Doña Salta. No hay formularios, no se piden datos personales y no se usan cookies propias de seguimiento.",
@@ -43,7 +46,7 @@ const privacidad = {
         titulo: "Cookies",
         parrafos: [
           "No usamos cookies propias de seguimiento ni herramientas de publicidad. Tampoco medimos tu navegación con perfiles individuales.",
-          "El sitio carga tipografías desde Google Fonts y muestra un mapa embebido de Google Maps en la página Visitanos. Al cargarse esos recursos, Google puede recibir tu dirección IP y datos técnicos del navegador, según sus propias políticas. Si preferís evitarlo, podés bloquear ese contenido desde la configuración de tu navegador.",
+          "El sitio carga tipografías desde Google Fonts. En la página Visitanos hay un mapa de Google Maps que no se carga solo: aparece únicamente si tocás el botón para verlo. Cuando esos recursos se cargan, Google puede recibir tu dirección IP y datos técnicos del navegador, según sus propias políticas. Si preferís evitarlo, podés bloquear ese contenido desde la configuración de tu navegador.",
         ],
       },
       {
@@ -67,6 +70,7 @@ const terminos = {
   ruta: "/terminos",
   archivo: "terminos.html",
   activa: "terminos",
+  sinPortada: true,
   titulo: "Términos de uso · Doña Salta",
   descripcion:
     "Condiciones de uso del sitio de Doña Salta: alcance de la información publicada, precios de la carta y propiedad del contenido.",

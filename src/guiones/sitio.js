@@ -1,18 +1,16 @@
 /**
  * Doña Salta — interacciones del sitio.
- * Cuatro cosas: menú de celular, estado de la cabecera al scrollear,
- * apariciones al entrar en pantalla e índice activo de la carta.
+ * Cinco cosas: menú de celular, estado de la cabecera al scrollear,
+ * apariciones al entrar en pantalla, mapa a pedido y atajo activo de la carta.
  */
 (function () {
   "use strict";
 
-  var raiz = document.documentElement;
-  raiz.classList.add("js");
+  document.documentElement.classList.add("js");
 
   var sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---- Menú de celular ---- */
-  var cabecera = document.getElementById("cabecera");
   var boton = document.querySelector(".hamburguesa");
 
   function cerrarMenu() {
@@ -24,8 +22,7 @@
   }
 
   if (boton) {
-    boton.addEventListener("click", function (evento) {
-      evento.stopPropagation();
+    boton.addEventListener("click", function () {
       var abierto = document.body.classList.toggle("menu-abierto");
       document.body.style.overflow = abierto ? "hidden" : "";
       boton.setAttribute("aria-expanded", abierto ? "true" : "false");
@@ -36,15 +33,15 @@
       if (evento.key === "Escape") cerrarMenu();
     });
 
-    document.addEventListener("click", function (evento) {
-      if (!document.body.classList.contains("menu-abierto")) return;
-      if (!evento.target.closest(".menu")) cerrarMenu();
+    document.querySelectorAll(".menu a").forEach(function (enlace) {
+      enlace.addEventListener("click", cerrarMenu);
     });
 
     window.addEventListener("resize", cerrarMenu);
   }
 
   /* ---- Cabecera: se vuelve sólida al bajar ---- */
+  var cabecera = document.getElementById("cabecera");
   var pendiente = false;
 
   function pintarCabecera() {
@@ -81,32 +78,46 @@
           observador.unobserve(entrada.target);
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
     );
     animables.forEach(function (el) {
       observador.observe(el);
     });
   }
 
-  /* ---- Índice de la carta: marca la sección que se está leyendo ---- */
-  var enlacesIndice = document.querySelectorAll(".indice a");
+  /* ---- Mapa a pedido: el embebido de Google pesa dos megas ---- */
+  var abrirMapa = document.querySelector(".mapa__abrir");
 
-  if (enlacesIndice.length && "IntersectionObserver" in window) {
+  if (abrirMapa) {
+    abrirMapa.addEventListener("click", function () {
+      var marco = document.createElement("iframe");
+      marco.title = "Mapa con la ubicación de Doña Salta en Córdoba 46, Salta";
+      marco.src = abrirMapa.dataset.mapa;
+      marco.loading = "lazy";
+      marco.referrerPolicy = "no-referrer-when-downgrade";
+      abrirMapa.parentNode.appendChild(marco);
+      abrirMapa.remove();
+    });
+  }
+
+  /* ---- Atajos de la carta: marcan la sección que se está leyendo ---- */
+  var atajos = document.querySelectorAll(".atajos a");
+  var secciones = document.querySelectorAll(".carta-seccion");
+
+  if (atajos.length && secciones.length && "IntersectionObserver" in window) {
     var porId = {};
-    enlacesIndice.forEach(function (enlace) {
+    atajos.forEach(function (enlace) {
       porId[enlace.getAttribute("href").slice(1)] = enlace;
     });
 
-    var secciones = document.querySelectorAll(".carta-seccion");
     var vigia = new IntersectionObserver(
       function (entradas) {
         entradas.forEach(function (entrada) {
           if (!entrada.isIntersecting) return;
-          enlacesIndice.forEach(function (enlace) {
+          atajos.forEach(function (enlace) {
             enlace.classList.remove("es-activo");
           });
-          var activo = porId[entrada.target.id];
-          if (activo) activo.classList.add("es-activo");
+          if (porId[entrada.target.id]) porId[entrada.target.id].classList.add("es-activo");
         });
       },
       { rootMargin: "-30% 0px -60% 0px" }

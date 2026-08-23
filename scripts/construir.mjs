@@ -78,14 +78,14 @@ async function generarMarca() {
     .toFile(join(salida, "assets", "logo.webp"));
 
   // Ícono cuadrado: el logo centrado sobre el fondo del sitio.
-  for (const lado of [180, 512]) {
+  for (const lado of [32, 180, 512]) {
     const margen = Math.round(lado * 0.14);
     const logo = await sharp(origen)
       .resize({ width: lado - margen * 2, fit: "inside" })
       .toBuffer();
 
     await sharp({
-      create: { width: lado, height: lado, channels: 4, background: "#17120e" },
+      create: { width: lado, height: lado, channels: 4, background: sitio.colorTema },
     })
       .composite([{ input: logo, gravity: "center" }])
       .png()
@@ -119,8 +119,8 @@ const manifiesto = () =>
       scope: "/",
       display: "standalone",
       lang: sitio.idioma,
-      background_color: "#17120e",
-      theme_color: "#17120e",
+      background_color: sitio.colorTema,
+      theme_color: sitio.colorTema,
       icons: [
         { src: "/assets/icono-180.png", sizes: "180x180", type: "image/png" },
         { src: "/assets/icono-512.png", sizes: "512x512", type: "image/png", purpose: "any" },

@@ -1,6 +1,7 @@
-import { sitio, contacto, horarios, redes, navegacion, legales } from "../data/sitio.mjs";
+import { sitio, contacto, horarios, redes, navegacion, legales, reputacion } from "../data/sitio.mjs";
+import { carta } from "../data/carta.mjs";
 import { fotos, medidas, rutaFoto } from "../data/fotos.mjs";
-import { esc, juntar, icono, boton } from "./html.mjs";
+import { esc, icono, boton } from "./html.mjs";
 
 const DIAS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
@@ -38,8 +39,8 @@ export function fichaNegocio() {
     })),
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.5",
-      reviewCount: "25000",
+      ratingValue: String(reputacion.puntaje),
+      reviewCount: String(reputacion.reseñas),
       bestRating: "5",
       worstRating: "1",
     },
@@ -56,6 +57,15 @@ export const migas = (titulo, ruta) => ({
     { "@type": "ListItem", position: 2, name: titulo, item: absoluta(ruta) },
   ],
 });
+
+const accionPrincipal = () =>
+  boton({
+    texto: "Cómo llegar",
+    url: contacto.mapa,
+    ico: "pin",
+    externo: true,
+    etiqueta: "Cómo llegar a Doña Salta, abre Google Maps",
+  });
 
 function cabecera(activa) {
   const items = navegacion
@@ -75,7 +85,7 @@ function cabecera(activa) {
       <nav class="nav" aria-label="Principal"><ul>${items}</ul></nav>
       <div class="menu__acciones">
         <a class="menu__tel" href="tel:${contacto.telefonoE164}">${icono("telefono")}<span>${esc(contacto.telefono)}</span></a>
-        ${boton({ texto: "Cómo llegar", url: contacto.mapa, ico: "pin", externo: true, etiqueta: "Cómo llegar a Doña Salta, abre Google Maps" })}
+        ${accionPrincipal()}
       </div>
     </div>
 
@@ -86,32 +96,20 @@ function cabecera(activa) {
 </header>`;
 }
 
-/** Banda de cierre. Repite la única acción del sitio al final de cada página. */
-export function cierre({ titulo, texto }) {
-  const filas = horarios
-    .map((h) => `<li><span>${esc(h.servicio)}</span><time>${esc(h.abre)} a ${esc(h.cierra)}</time></li>`)
+function pie() {
+  const columna = (titulo, cuerpo) =>
+    `<div class="pie__col"><h2>${esc(titulo)}</h2>${cuerpo}</div>`;
+
+  const enlacesSitio = navegacion.map((n) => `<li><a href="${n.url}">${esc(n.titulo)}</a></li>`).join("");
+
+  const secciones = carta
+    .slice(0, 4)
+    .map((s) => `<li><a href="/carta#${s.id}">${esc(s.titulo)}</a></li>`)
     .join("");
 
-  return `<section class="cierre">
-  <div class="contenedor cierre__grilla">
-    <div class="cierre__texto">
-      <h2 class="titulo-2 animar">${esc(titulo)}</h2>
-      <p class="parrafo animar">${esc(texto)}</p>
-      <div class="cierre__accion animar">
-        ${boton({ texto: "Cómo llegar", url: contacto.mapa, ico: "pin", externo: true, etiqueta: "Cómo llegar a Doña Salta, abre Google Maps" })}
-        <a class="enlace" href="tel:${contacto.telefonoE164}">Llamar al ${esc(contacto.telefono)}${icono("flecha")}</a>
-      </div>
-    </div>
-    <div class="cierre__datos animar">
-      <p class="cierre__dir"><b>${esc(contacto.calle)}</b><span>${esc(contacto.codigoPostal)}, ${esc(contacto.localidad)} capital</span></p>
-      <ul class="horas">${filas}</ul>
-    </div>
-  </div>
-</section>`;
-}
-
-function pie() {
-  const enlacesSitio = navegacion.map((n) => `<li><a href="${n.url}">${esc(n.titulo)}</a></li>`).join("");
+  const filasHorario = horarios
+    .map((h) => `<li><span>${esc(h.servicio)}</span><time>${esc(h.abre)} a ${esc(h.cierra)}</time></li>`)
+    .join("");
 
   const tarjetasRedes = redes
     .map(
@@ -120,50 +118,41 @@ function pie() {
     )
     .join("");
 
-  const filasHorario = horarios
-    .map((h) => `<li><span>${esc(h.servicio)}</span><time>${esc(h.abre)} a ${esc(h.cierra)}</time></li>`)
-    .join("");
-
   const enlacesLegales = legales.map((l) => `<a href="${l.url}">${esc(l.titulo)}</a>`).join("");
 
   return `<footer class="pie">
-  <div class="contenedor pie__grilla">
+  <div class="contenedor">
     <div class="pie__marca">
       <img src="/assets/logo.webp" width="480" height="320" alt="${esc(sitio.nombre)}" loading="lazy" />
       <p>${esc(sitio.descripcionCorta)}</p>
     </div>
 
-    <nav class="pie__col" aria-label="Secciones del sitio">
-      <h2>El sitio</h2>
-      <ul>${enlacesSitio}</ul>
-    </nav>
-
-    <div class="pie__col">
-      <h2>Dónde y cuándo</h2>
-      <ul>
+    <div class="pie__grilla">
+      ${columna("El sitio", `<nav aria-label="Secciones del sitio"><ul>${enlacesSitio}</ul></nav>`)}
+      ${columna("La carta", `<nav aria-label="Secciones de la carta"><ul>${secciones}</ul></nav>`)}
+      ${columna(
+        "Dónde y cuándo",
+        `<ul>
         <li><a href="${esc(contacto.mapa)}" target="_blank" rel="noopener">${esc(contacto.calle)}, ${esc(contacto.localidad)} capital</a></li>
         <li><a href="tel:${contacto.telefonoE164}">${esc(contacto.telefono)}</a></li>
       </ul>
-      <ul class="horas">${filasHorario}</ul>
+      <ul class="horas">${filasHorario}</ul>`
+      )}
+      ${columna("Redes", `<div class="redes">${tarjetasRedes}</div>`)}
     </div>
 
-    <div class="pie__col">
-      <h2>Redes</h2>
-      <div class="redes">${tarjetasRedes}</div>
+    <div class="pie__linea">
+      <span>&copy; ${new Date().getFullYear()} ${esc(sitio.nombre)}, ${esc(contacto.localidad)} capital, ${esc(contacto.paisNombre)}</span>
+      <nav class="pie__legales" aria-label="Legales">${enlacesLegales}</nav>
+      <span>Sitio hecho por ${esc(sitio.estudio)}</span>
     </div>
-  </div>
-
-  <div class="contenedor pie__linea">
-    <span>&copy; ${new Date().getFullYear()} ${esc(sitio.nombre)}, ${esc(contacto.localidad)} capital, ${esc(contacto.paisNombre)}</span>
-    <nav class="pie__legales" aria-label="Legales">${enlacesLegales}</nav>
-    <span>Sitio hecho por ${esc(sitio.estudio)}</span>
   </div>
 </footer>`;
 }
 
 /**
  * Arma el documento completo de una página.
- * pagina: { ruta, titulo, descripcion, activa, imagen, jsonLd, cuerpo }
+ * pagina: { ruta, titulo, descripcion, activa, imagen, jsonLd, precarga, cuerpo }
  */
 export function documento(pagina, assets) {
   const url = absoluta(pagina.ruta);
@@ -172,17 +161,17 @@ export function documento(pagina, assets) {
     .map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`)
     .join("\n");
 
-  // La foto que abre la página no se difiere: se pide junto con la hoja de estilos.
+  // La foto que abre la página es el LCP: se pide junto con la hoja de estilos.
   const precarga = pagina.precarga
-    ? `<link rel="preload" as="image" href="${rutaFoto(pagina.precarga.foto, medidas(pagina.precarga.foto).at(-1))}" imagesrcset="${medidas(
-        pagina.precarga.foto
+    ? `<link rel="preload" as="image" href="${rutaFoto(pagina.precarga, medidas(pagina.precarga).at(-1))}" imagesrcset="${medidas(
+        pagina.precarga
       )
-        .map((a) => `${rutaFoto(pagina.precarga.foto, a)} ${a}w`)
-        .join(", ")}" imagesizes="${esc(pagina.precarga.sizes)}" fetchpriority="high" />`
+        .map((a) => `${rutaFoto(pagina.precarga, a)} ${a}w`)
+        .join(", ")}" imagesizes="100vw" fetchpriority="high" />`
     : "";
 
   return `<!doctype html>
-<html lang="es-AR">
+<html lang="${esc(sitio.idioma)}">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -190,7 +179,7 @@ export function documento(pagina, assets) {
 <meta name="description" content="${esc(pagina.descripcion)}" />
 <link rel="canonical" href="${esc(url)}" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
-<meta name="theme-color" content="#17120E" />
+<meta name="theme-color" content="${sitio.colorTema}" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="${esc(sitio.nombre)}" />
@@ -201,18 +190,18 @@ export function documento(pagina, assets) {
 <meta property="og:image" content="${esc(imagen)}" />
 <meta name="twitter:card" content="summary_large_image" />
 
-<link rel="icon" href="/assets/icono-512.png" type="image/png" sizes="512x512" />
+<link rel="icon" href="/assets/icono-32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/assets/icono-180.png" />
 <link rel="manifest" href="/manifest.webmanifest" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..600,0..100,0..1&family=Hanken+Grotesk:wght@400;600&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inclusive+Sans:wght@400;700&display=swap" />
 <link rel="stylesheet" href="${assets.css}" />
 ${precarga}
 ${bloques}
 </head>
-<body>
+<body${pagina.sinPortada ? ' class="sin-portada"' : ""}>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 ${cabecera(pagina.activa)}
 <main id="contenido">
@@ -223,5 +212,3 @@ ${pie()}
 </body>
 </html>`;
 }
-
-export { juntar };
