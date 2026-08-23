@@ -151,6 +151,16 @@ function pie() {
 }
 
 /**
+ * Clases del cuerpo. sin-portada = la página arranca con texto y la cabecera va
+ * sólida; portada-clara = la apertura es de fondo claro y la cabecera se pinta
+ * en tinta hasta que aparece el fondo al scrollear.
+ */
+function claseCuerpo(pagina) {
+  const clases = [pagina.sinPortada && "sin-portada", pagina.portadaClara && "portada-clara"].filter(Boolean);
+  return clases.length ? ` class="${clases.join(" ")}"` : "";
+}
+
+/**
  * Arma el documento completo de una página.
  * pagina: { ruta, titulo, descripcion, activa, imagen, jsonLd, precarga, cuerpo }
  */
@@ -201,7 +211,7 @@ export function documento(pagina, assets) {
 ${precarga}
 ${bloques}
 </head>
-<body${pagina.sinPortada ? ' class="sin-portada"' : ""}>
+<body${claseCuerpo(pagina)}>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 ${cabecera(pagina.activa)}
 <main id="contenido">

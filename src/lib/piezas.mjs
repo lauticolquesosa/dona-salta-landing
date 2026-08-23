@@ -30,6 +30,34 @@ export function portada({ imagen, titulo, bajada, acciones = "", fichas = "", al
 </section>`;
 }
 
+/**
+ * Portada partida: el texto a la izquierda sobre el mismo fondo claro que la
+ * sección siguiente y la foto del local a la derecha, con la tarjeta de la
+ * carta apoyada sobre el borde inferior izquierdo de la foto.
+ */
+export function portadaPartida({ imagen, titulo, bajada, acciones = "", ficha = "" }) {
+  return `<section class="apertura">
+  <div class="contenedor apertura__grilla">
+    <div class="apertura__texto">
+      <h1 class="titulo-1 apertura__titulo">${lineas(titulo)}</h1>
+      <p class="apertura__bajada">${esc(bajada)}</p>
+      ${acciones ? `<div class="acciones apertura__acciones">${acciones}</div>` : ""}
+      ${puntajeSuelto()}
+    </div>
+    <div class="apertura__marco">
+      ${foto(imagen, { clase: "apertura__foto", prioridad: true, sizes: "(max-width: 62rem) 100vw, 52vw" })}
+      ${ficha ? `<div class="apertura__ficha">${ficha}</div>` : ""}
+    </div>
+  </div>
+</section>`;
+}
+
+/** Puntaje de Google en una línea, sin tarjeta: va sobre el fondo claro. */
+export const puntajeSuelto = () => `<a class="puntaje" href="${esc(contacto.reseñas)}" target="_blank" rel="noopener">
+  ${estrellas(reputacion.puntaje)}
+  <span class="puntaje__texto"><b>${esc(reputacion.puntajeTexto)} en Google</b><small>${esc(reputacion.reseñasTexto)} reseñas de comensales</small></span>
+</a>`;
+
 /** Tarjeta blanca con el puntaje de Google. Va colgada del borde inferior de la portada. */
 export const fichaPuntaje = () => `<a class="ficha ficha--puntaje" href="${esc(contacto.reseñas)}" target="_blank" rel="noopener">
   ${estrellas(reputacion.puntaje)}

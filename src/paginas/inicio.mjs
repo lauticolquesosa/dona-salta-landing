@@ -8,11 +8,10 @@ import {
   centrada,
   comanda,
   fichaEnlace,
-  fichaPuntaje,
   franja,
   invitacion,
   mosaico,
-  portada,
+  portadaPartida,
   relato,
 } from "../lib/piezas.mjs";
 
@@ -26,9 +25,9 @@ export default {
   imagen: rutaFoto(fotos.empanadas, 1440),
   precarga: fotos.fachada,
   jsonLd: [fichaNegocio()],
+  portadaClara: true,
   cuerpo: [
-    portada({
-      alta: true,
+    portadaPartida({
       imagen: fotos.fachada,
       titulo: ["Empanadas al horno", "de barro, en Salta"],
       bajada:
@@ -40,10 +39,7 @@ export default {
         externo: true,
         etiqueta: "Cómo llegar a Doña Salta, abre Google Maps",
       }),
-      fichas: [
-        fichaPuntaje(),
-        fichaEnlace({ imagen: fotos.locro, texto: "Ver la carta con precios", url: "/carta" }),
-      ].join(""),
+      ficha: fichaEnlace({ imagen: fotos.locro, texto: "Ver la carta con precios", url: "/carta" }),
     }),
 
     centrada({

@@ -426,6 +426,17 @@ iframe {
   background: var(--profundo);
 }
 
+/* Sobre la apertura clara la cabecera va en tinta; al scrollear vuelve al fondo
+   oscuro y recupera el color claro. */
+.portada-clara .cabecera {
+  color: var(--tinta);
+}
+
+.portada-clara .cabecera.es-solida,
+.menu-abierto .cabecera {
+  color: var(--oscuro-texto);
+}
+
 .marca img {
   width: auto;
   height: 2.5rem;
@@ -524,6 +535,91 @@ iframe {
 
 .menu-abierto .hamburguesa span::after {
   transform: translateY(-0.3125rem) rotate(-45deg);
+}
+
+/* ---------------------------------------------------------- apertura --- */
+
+/* Apertura del inicio: texto a la izquierda sobre el mismo fondo que la sección
+   siguiente, foto a la derecha y la tarjeta de la carta apoyada sobre la foto. */
+.apertura {
+  background: var(--fondo);
+  padding-block: calc(var(--alto-cabecera) + var(--e5)) var(--e6);
+}
+
+.apertura__grilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(var(--e4), 5vw, var(--e7));
+}
+
+.apertura__texto {
+  max-width: 34rem;
+}
+
+.apertura__titulo {
+  color: var(--tinta);
+  text-wrap: balance;
+}
+
+.apertura__bajada {
+  max-width: 42ch;
+  margin-top: var(--e3);
+}
+
+.apertura__acciones {
+  margin-top: var(--e4);
+}
+
+.puntaje {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e2);
+  margin-top: var(--e4);
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.puntaje__texto b {
+  display: block;
+  font-size: var(--t-chico);
+}
+
+.puntaje__texto small {
+  display: block;
+  font-size: var(--t-micro);
+  color: var(--suave);
+}
+
+.puntaje:hover b {
+  color: var(--acento);
+}
+
+.apertura__marco {
+  position: relative;
+  align-self: stretch;
+  min-height: clamp(24rem, 62svh, 40rem);
+}
+
+.apertura__foto,
+.apertura__foto img {
+  height: 100%;
+}
+
+.apertura__foto img {
+  object-fit: cover;
+}
+
+/* La tarjeta se apoya sobre el borde inferior izquierdo de la foto. */
+.apertura__ficha {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: min(22rem, 88%);
+}
+
+.apertura__ficha .ficha {
+  box-shadow: 0 1rem 2.5rem rgba(30, 21, 18, 0.18);
 }
 
 /* ----------------------------------------------------------- portada --- */
@@ -1469,6 +1565,19 @@ iframe {
 
   .portada__fichas {
     flex-direction: column;
+  }
+
+  .apertura__grilla {
+    grid-template-columns: 1fr;
+    gap: var(--e5);
+  }
+
+  .apertura__texto {
+    max-width: none;
+  }
+
+  .apertura__marco {
+    min-height: 20rem;
   }
 
   .items {
