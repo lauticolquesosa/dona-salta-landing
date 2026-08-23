@@ -144,7 +144,7 @@ function pie() {
     <div class="pie__linea">
       <span>&copy; ${new Date().getFullYear()} ${esc(sitio.nombre)}, ${esc(contacto.localidad)} capital, ${esc(contacto.paisNombre)}</span>
       <nav class="pie__legales" aria-label="Legales">${enlacesLegales}</nav>
-      <span>Sitio hecho por ${esc(sitio.estudio)}</span>
+      <span>Sitio hecho por <a href="${esc(sitio.estudioUrl)}" target="_blank" rel="noopener noreferrer">${esc(sitio.estudio)}</a></span>
     </div>
   </div>
 </footer>`;
