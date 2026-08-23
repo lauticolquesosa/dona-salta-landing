@@ -485,6 +485,22 @@ iframe {
   font-variant-numeric: tabular-nums;
 }
 
+/* Entre el menú de hamburguesa y el escritorio holgado la barra no entra
+   entera: se juntan los espacios y el teléfono se queda con el ícono. */
+@media (max-width: 64rem) and (min-width: 52.0625rem) {
+  .menu {
+    gap: var(--e3);
+  }
+
+  .nav ul {
+    gap: var(--e3);
+  }
+
+  .menu__tel span {
+    display: none;
+  }
+}
+
 .hamburguesa {
   display: none;
   width: 2.75rem;
@@ -572,13 +588,25 @@ iframe {
   margin-top: var(--e4);
 }
 
+/* Mismo cajón blanco que la tarjeta de la carta, con menos giro: los dos
+   papeles de la apertura son de la misma familia. */
 .puntaje {
   display: inline-flex;
   align-items: center;
   gap: var(--e2);
   margin-top: var(--e4);
+  padding: var(--e2);
+  background: var(--superficie);
+  border-radius: var(--radio);
+  box-shadow: 0 0.75rem 2rem rgba(30, 21, 18, 0.12);
   color: var(--tinta);
   text-decoration: none;
+  transform: rotate(-1.4deg);
+  transition: transform var(--t-fast) var(--ease-out-quart);
+}
+
+.puntaje:hover {
+  transform: rotate(-1.4deg) translateY(-2px);
 }
 
 .puntaje__texto b {
@@ -617,26 +645,35 @@ iframe {
   position: absolute;
   left: 0;
   bottom: var(--e4);
-  width: min(25rem, 92%);
+  width: min(20rem, 92%);
   transform: translateX(-50%) rotate(-2.6deg);
 }
 
 .apertura__ficha .ficha {
-  padding: var(--e2) var(--e3) var(--e2) var(--e2);
-  font-size: var(--t-cuerpo);
+  padding: var(--e1) var(--e2) var(--e1) var(--e1);
+  font-size: var(--t-chico);
   box-shadow: 0 1rem 2.5rem rgba(30, 21, 18, 0.18);
 }
 
 .apertura__ficha .mini {
-  width: 4rem;
-  height: 4rem;
+  width: 3.25rem;
+  height: 3.25rem;
 }
 
-/* Entre celular y escritorio la columna de texto queda cerca: la tarjeta sale
-   menos de la foto para no pisarla. */
+/* En pantallas medianas la tarjeta sale menos de la foto: la columna de texto
+   queda cerca y no hay lugar para que cruce entera. */
 @media (max-width: 76rem) and (min-width: 52.0625rem) {
   .apertura__ficha {
-    width: min(22rem, 92%);
+    width: min(19rem, 92%);
+    transform: translateX(-35%) rotate(-2.6deg);
+  }
+}
+
+/* Y en la banda más angosta, además, sube: si no, queda pegada al cajón del
+   puntaje, que está a la misma altura. */
+@media (max-width: 64rem) and (min-width: 52.0625rem) {
+  .apertura__ficha {
+    bottom: 26%;
     transform: translateX(-22%) rotate(-2.6deg);
   }
 }
@@ -1636,6 +1673,7 @@ iframe {
 
   .puntaje {
     order: 5;
+    justify-self: start;
     margin-top: var(--e3);
   }
 
@@ -1659,8 +1697,8 @@ iframe {
   }
 
   .apertura__ficha .mini {
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 3rem;
+    height: 3rem;
   }
 
   /* El titular ya no se corta por lineas: en pantalla angosta fluye solo. */

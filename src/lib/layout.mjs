@@ -84,7 +84,7 @@ function cabecera(activa) {
     <div class="menu" id="menu">
       <nav class="nav" aria-label="Principal"><ul>${items}</ul></nav>
       <div class="menu__acciones">
-        <a class="menu__tel" href="tel:${contacto.telefonoE164}">${icono("telefono")}<span>${esc(contacto.telefono)}</span></a>
+        <a class="menu__tel" href="tel:${contacto.telefonoE164}" aria-label="Llamar al ${esc(contacto.telefono)}">${icono("telefono")}<span>${esc(contacto.telefono)}</span></a>
         ${accionPrincipal()}
       </div>
     </div>
