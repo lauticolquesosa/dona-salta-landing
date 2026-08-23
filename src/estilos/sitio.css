@@ -558,6 +558,7 @@ iframe {
 }
 
 .apertura__titulo {
+  font-size: clamp(2.1rem, 4.6vw, 3.75rem);
   color: var(--tinta);
   text-wrap: balance;
 }
@@ -1567,17 +1568,85 @@ iframe {
     flex-direction: column;
   }
 
+  /* En celular la apertura se arma en una sola columna y se reordena: título,
+     bajada, foto con la tarjeta y recién después el botón y el puntaje. El
+     texto se vuelve transparente para que sus hijos entren en la grilla. */
+  .apertura {
+    padding-block: calc(var(--alto-cabecera) + var(--e3)) var(--e5);
+  }
+
   .apertura__grilla {
     grid-template-columns: 1fr;
-    gap: var(--e5);
+    gap: 0;
   }
 
   .apertura__texto {
+    display: contents;
+  }
+
+  .apertura__titulo {
+    order: 1;
+  }
+
+  .apertura__bajada {
+    order: 2;
     max-width: none;
+    margin-top: var(--e2);
+  }
+
+  /* La segunda mitad de la bajada y el detalle de reseñas no entran: se caen. */
+  .apertura__extra {
+    display: none;
   }
 
   .apertura__marco {
-    min-height: 20rem;
+    order: 3;
+    margin-top: var(--e4);
+    min-height: clamp(14rem, 37svh, 20rem);
+  }
+
+  .apertura__acciones {
+    order: 4;
+    margin-top: var(--e4);
+  }
+
+  .apertura__acciones .boton {
+    width: 100%;
+    max-width: 24rem;
+    justify-content: center;
+  }
+
+  .puntaje {
+    order: 5;
+    margin-top: var(--e3);
+  }
+
+  .puntaje__texto small {
+    display: none;
+  }
+
+  .apertura__ficha {
+    max-width: none;
+    width: 100%;
+  }
+
+  .apertura__ficha .ficha {
+    padding: var(--e1);
+    gap: var(--e1);
+  }
+
+  .apertura__ficha .mini {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  /* El titular ya no se corta por lineas: en pantalla angosta fluye solo. */
+  .apertura__titulo span {
+    display: inline;
+  }
+
+  .apertura__titulo span + span::before {
+    content: " ";
   }
 
   .items {

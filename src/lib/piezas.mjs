@@ -34,13 +34,17 @@ export function portada({ imagen, titulo, bajada, acciones = "", fichas = "", al
  * Portada partida: el texto a la izquierda sobre el mismo fondo claro que la
  * sección siguiente y la foto del local a la derecha, con la tarjeta de la
  * carta apoyada sobre el borde inferior izquierdo de la foto.
+ * bajadaExtra es la parte de la bajada que se cae en celular, donde la apertura
+ * se reordena para que la foto entre en la primera pantalla.
  */
-export function portadaPartida({ imagen, titulo, bajada, acciones = "", ficha = "" }) {
+export function portadaPartida({ imagen, titulo, bajada, bajadaExtra = "", acciones = "", ficha = "" }) {
   return `<section class="apertura">
   <div class="contenedor apertura__grilla">
     <div class="apertura__texto">
       <h1 class="titulo-1 apertura__titulo">${lineas(titulo)}</h1>
-      <p class="apertura__bajada">${esc(bajada)}</p>
+      <p class="apertura__bajada">${esc(bajada)}${
+        bajadaExtra ? ` <span class="apertura__extra">${esc(bajadaExtra)}</span>` : ""
+      }</p>
       ${acciones ? `<div class="acciones apertura__acciones">${acciones}</div>` : ""}
       ${puntajeSuelto()}
     </div>

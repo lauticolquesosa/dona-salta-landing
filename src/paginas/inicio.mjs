@@ -30,8 +30,8 @@ export default {
     portadaPartida({
       imagen: fotos.fachada,
       titulo: ["Empanadas al horno", "de barro, en Salta"],
-      bajada:
-        "El bodegón de Córdoba 46, frente a la Basílica de San Francisco. Cocina del norte, todos los días al mediodía y a la noche.",
+      bajada: "El bodegón de Córdoba 46. Cocina del norte al mediodía y a la noche, todos los días.",
+      bajadaExtra: "Frente a la Basílica de San Francisco, en el casco histórico salteño.",
       acciones: boton({
         texto: "Cómo llegar",
         url: contacto.mapa,
