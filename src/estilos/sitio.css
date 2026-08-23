@@ -611,16 +611,34 @@ iframe {
   object-fit: cover;
 }
 
-/* La tarjeta se apoya sobre el borde inferior izquierdo de la foto. */
+/* La tarjeta cruza el borde inferior izquierdo de la foto: mitad sobre la
+   foto, mitad sobre el fondo, y apenas girada como la comanda. */
 .apertura__ficha {
   position: absolute;
   left: 0;
-  bottom: 0;
-  max-width: min(22rem, 88%);
+  bottom: var(--e4);
+  width: min(25rem, 92%);
+  transform: translateX(-50%) rotate(-2.6deg);
 }
 
 .apertura__ficha .ficha {
+  padding: var(--e2) var(--e3) var(--e2) var(--e2);
+  font-size: var(--t-cuerpo);
   box-shadow: 0 1rem 2.5rem rgba(30, 21, 18, 0.18);
+}
+
+.apertura__ficha .mini {
+  width: 4rem;
+  height: 4rem;
+}
+
+/* Entre celular y escritorio la columna de texto queda cerca: la tarjeta sale
+   menos de la foto para no pisarla. */
+@media (max-width: 76rem) and (min-width: 52.0625rem) {
+  .apertura__ficha {
+    width: min(22rem, 92%);
+    transform: translateX(-22%) rotate(-2.6deg);
+  }
 }
 
 /* ----------------------------------------------------------- portada --- */
@@ -1625,14 +1643,19 @@ iframe {
     display: none;
   }
 
+  /* En celular no hay margen para que salga de la foto: queda apoyada adentro,
+     con la misma inclinación. */
   .apertura__ficha {
-    max-width: none;
-    width: 100%;
+    left: 0;
+    bottom: var(--e2);
+    width: 90%;
+    transform: rotate(-1.6deg);
   }
 
   .apertura__ficha .ficha {
     padding: var(--e1);
     gap: var(--e1);
+    font-size: var(--t-chico);
   }
 
   .apertura__ficha .mini {
