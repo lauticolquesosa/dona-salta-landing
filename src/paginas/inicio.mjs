@@ -1,4 +1,4 @@
-import { contacto, reconocimientos } from "../data/sitio.mjs";
+import { reconocimientos } from "../data/sitio.mjs";
 import { destacados } from "../data/contenido.mjs";
 import { fotos, rutaFoto } from "../data/fotos.mjs";
 import { boton } from "../lib/html.mjs";
@@ -32,13 +32,6 @@ export default {
       titulo: ["Empanadas al horno", "de barro, en Salta"],
       bajada: "El bodegón de Córdoba 46. Cocina del norte al mediodía y a la noche, todos los días.",
       bajadaExtra: "Frente a la Basílica de San Francisco, en el casco histórico salteño.",
-      acciones: boton({
-        texto: "Cómo llegar",
-        url: contacto.mapa,
-        ico: "pin",
-        externo: true,
-        etiqueta: "Cómo llegar a Doña Salta, abre Google Maps",
-      }),
       ficha: fichaEnlace({ imagen: fotos.locro, texto: "Ver la carta con precios", url: "/carta" }),
     }),
 

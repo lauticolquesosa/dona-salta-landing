@@ -564,7 +564,13 @@ iframe {
   --tarjeta-apertura: min(19rem, 100%);
   --asomo-apertura: calc(max(var(--margen), (100vw - var(--ancho)) / 2 + var(--margen)) - var(--e3));
   background: var(--fondo);
-  padding-block: calc(var(--alto-cabecera) + var(--e5)) var(--e6);
+  padding-block: calc(var(--alto-cabecera) + var(--e5)) var(--e4);
+}
+
+/* La apertura y la sección que sigue comparten el fondo: con el aire entero
+   parecían dos bloques sueltos. */
+.apertura + .seccion {
+  padding-top: var(--e7);
 }
 
 .apertura__grilla {
@@ -589,12 +595,8 @@ iframe {
   margin-top: var(--e3);
 }
 
-.apertura__acciones {
-  margin-top: var(--e4);
-}
-
-/* Los dos papeles de la apertura miden lo mismo: el puntaje a la izquierda,
-   bajo el botón, y la tarjeta de la carta cruzando el borde de la foto. */
+/* Los dos papeles de la apertura miden lo mismo: el puntaje bajo la bajada y
+   la tarjeta de la carta cruzando el borde derecho de la foto. */
 .puntaje,
 .apertura__ficha {
   width: var(--tarjeta-apertura);
@@ -609,7 +611,7 @@ iframe {
   display: inline-flex;
   align-items: center;
   gap: var(--e2);
-  margin-top: var(--e4);
+  margin-top: var(--e5);
   padding: var(--e2);
   background: var(--superficie);
   border-radius: var(--radio);
@@ -1620,15 +1622,21 @@ iframe {
     flex-direction: column;
   }
 
-  /* En celular la apertura se arma en una sola columna y se reordena: título,
-     bajada, foto con la tarjeta y recién después el botón y el puntaje. El
-     texto se vuelve transparente para que sus hijos entren en la grilla. */
+  /* En celular la apertura se arma en una sola columna: título, bajada y una
+     foto más alta con las dos tarjetas apoyadas encima, una sobre la otra. El
+     texto se vuelve transparente para que sus hijos entren en la grilla y el
+     puntaje pueda compartir celda con la foto. */
   .apertura {
-    padding-block: calc(var(--alto-cabecera) + var(--e3)) var(--e5);
+    padding-block: calc(var(--alto-cabecera) + var(--e3)) var(--e2);
+  }
+
+  .apertura + .seccion {
+    padding-top: var(--e5);
   }
 
   .apertura__grilla {
     grid-template-columns: 1fr;
+    grid-template-areas: "titulo" "bajada" "foto";
     gap: 0;
   }
 
@@ -1637,11 +1645,11 @@ iframe {
   }
 
   .apertura__titulo {
-    order: 1;
+    grid-area: titulo;
   }
 
   .apertura__bajada {
-    order: 2;
+    grid-area: bajada;
     max-width: none;
     margin-top: var(--e2);
   }
@@ -1652,34 +1660,32 @@ iframe {
   }
 
   .apertura__marco {
-    order: 3;
+    grid-area: foto;
     margin-top: var(--e4);
-    min-height: clamp(14rem, 37svh, 20rem);
+    min-height: clamp(20rem, 52svh, 28rem);
   }
 
-  .apertura__acciones {
-    order: 4;
-    margin-top: var(--e4);
-  }
-
-  .apertura__acciones .boton {
-    width: 100%;
-    max-width: 24rem;
-    justify-content: center;
+  /* Las dos tarjetas se apilan sobre el pie de la foto, separadas por un hilo
+     de aire: la de la carta apoyada abajo y el puntaje corrido hacia arriba su
+     propio alto más ese hilo. Comparten inclinación para quedar paralelas. */
+  .apertura__ficha {
+    right: var(--e2);
+    bottom: var(--e2);
+    transform: rotate(-1.6deg);
   }
 
   .puntaje {
-    order: 5;
-    justify-self: start;
-    margin-top: var(--e3);
+    position: relative;
+    z-index: 2;
+    grid-area: foto;
+    align-self: end;
+    justify-self: end;
+    margin: 0 var(--e2) calc(5.5rem + var(--e2)) 0;
+    transform: rotate(-1.6deg);
   }
 
-  /* En celular no hay aire para que salga de la foto: queda apoyada adentro,
-     contra el borde derecho, con la misma inclinación. */
-  .apertura__ficha {
-    right: 0;
-    bottom: var(--e2);
-    transform: rotate(-1.6deg);
+  .puntaje:hover {
+    transform: rotate(-1.6deg) translateY(-2px);
   }
 
   .apertura__ficha .ficha {
