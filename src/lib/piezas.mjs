@@ -59,7 +59,7 @@ export function portadaPartida({ imagen, titulo, bajada, bajadaExtra = "", accio
 /** Puntaje de Google en una línea, sin tarjeta: va sobre el fondo claro. */
 export const puntajeSuelto = () => `<a class="puntaje" href="${esc(contacto.reseñas)}" target="_blank" rel="noopener">
   ${estrellas(reputacion.puntaje)}
-  <span class="puntaje__texto"><b>${esc(reputacion.puntajeTexto)} en Google</b><small>${esc(reputacion.reseñasTexto)} reseñas de comensales</small></span>
+  <span class="puntaje__texto"><b>${esc(reputacion.puntajeTexto)} en Google</b><small>${esc(reputacion.reseñasTexto)} reseñas</small></span>
 </a>`;
 
 /** Tarjeta blanca con el puntaje de Google. Va colgada del borde inferior de la portada. */

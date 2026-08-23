@@ -558,6 +558,11 @@ iframe {
 /* Apertura del inicio: texto a la izquierda sobre el mismo fondo que la sección
    siguiente, foto a la derecha y la tarjeta de la carta apoyada sobre la foto. */
 .apertura {
+  /* Medida única de los dos cajones blancos y cuánto puede asomarse la tarjeta
+     de la carta fuera de la foto: el margen de página más lo que sobra cuando
+     la pantalla es más ancha que el contenedor, menos un respiro. */
+  --tarjeta-apertura: min(19rem, 100%);
+  --asomo-apertura: calc(max(var(--margen), (100vw - var(--ancho)) / 2 + var(--margen)) - var(--e3));
   background: var(--fondo);
   padding-block: calc(var(--alto-cabecera) + var(--e5)) var(--e6);
 }
@@ -588,8 +593,18 @@ iframe {
   margin-top: var(--e4);
 }
 
-/* Mismo cajón blanco que la tarjeta de la carta, con menos giro: los dos
-   papeles de la apertura son de la misma familia. */
+/* Los dos papeles de la apertura miden lo mismo: el puntaje a la izquierda,
+   bajo el botón, y la tarjeta de la carta cruzando el borde de la foto. */
+.puntaje,
+.apertura__ficha {
+  width: var(--tarjeta-apertura);
+}
+
+.puntaje,
+.apertura__ficha .ficha {
+  height: 5.5rem;
+}
+
 .puntaje {
   display: inline-flex;
   align-items: center;
@@ -639,14 +654,14 @@ iframe {
   object-fit: cover;
 }
 
-/* La tarjeta cruza el borde inferior izquierdo de la foto: mitad sobre la
-   foto, mitad sobre el fondo, y apenas girada como la comanda. */
+/* La tarjeta cruza el borde inferior derecho de la foto. Lo que sale se limita
+   al aire que queda entre la foto y el borde de la pantalla, así nunca se
+   corta ni empuja la página de costado. */
 .apertura__ficha {
   position: absolute;
-  left: 0;
+  right: 0;
   bottom: var(--e4);
-  width: min(20rem, 92%);
-  transform: translateX(-50%) rotate(-2.6deg);
+  transform: translateX(min(50%, var(--asomo-apertura))) rotate(-2.6deg);
 }
 
 .apertura__ficha .ficha {
@@ -658,24 +673,6 @@ iframe {
 .apertura__ficha .mini {
   width: 3.25rem;
   height: 3.25rem;
-}
-
-/* En pantallas medianas la tarjeta sale menos de la foto: la columna de texto
-   queda cerca y no hay lugar para que cruce entera. */
-@media (max-width: 76rem) and (min-width: 52.0625rem) {
-  .apertura__ficha {
-    width: min(19rem, 92%);
-    transform: translateX(-35%) rotate(-2.6deg);
-  }
-}
-
-/* Y en la banda más angosta, además, sube: si no, queda pegada al cajón del
-   puntaje, que está a la misma altura. */
-@media (max-width: 64rem) and (min-width: 52.0625rem) {
-  .apertura__ficha {
-    bottom: 26%;
-    transform: translateX(-22%) rotate(-2.6deg);
-  }
 }
 
 /* ----------------------------------------------------------- portada --- */
@@ -1649,7 +1646,7 @@ iframe {
     margin-top: var(--e2);
   }
 
-  /* La segunda mitad de la bajada y el detalle de reseñas no entran: se caen. */
+  /* La segunda mitad de la bajada no entra: se cae. */
   .apertura__extra {
     display: none;
   }
@@ -1677,29 +1674,19 @@ iframe {
     margin-top: var(--e3);
   }
 
-  .puntaje__texto small {
-    display: none;
-  }
-
-  /* En celular no hay margen para que salga de la foto: queda apoyada adentro,
-     con la misma inclinación. */
+  /* En celular no hay aire para que salga de la foto: queda apoyada adentro,
+     contra el borde derecho, con la misma inclinación. */
   .apertura__ficha {
-    left: 0;
+    right: 0;
     bottom: var(--e2);
-    width: 90%;
     transform: rotate(-1.6deg);
   }
 
   .apertura__ficha .ficha {
-    padding: var(--e1);
     gap: var(--e1);
-    font-size: var(--t-chico);
   }
 
-  .apertura__ficha .mini {
-    width: 3rem;
-    height: 3rem;
-  }
+
 
   /* El titular ya no se corta por lineas: en pantalla angosta fluye solo. */
   .apertura__titulo span {
