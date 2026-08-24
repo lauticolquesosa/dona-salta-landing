@@ -32,11 +32,11 @@ export function portada({ imagen, titulo, bajada, acciones = "", fichas = "", al
 
 /**
  * Portada partida: el texto a la izquierda sobre el mismo fondo claro que la
- * sección siguiente y la foto del local a la derecha, con la tarjeta de la
- * carta cruzando su borde derecho. No lleva botón: la acción del sitio ya está
- * en la cabecera, arriba de todo.
- * bajadaExtra es la parte de la bajada que se cae en celular, donde la apertura
- * se reordena y las dos tarjetas se apoyan sobre la foto.
+ * sección siguiente y la foto del local a la derecha. Debajo de la bajada va la
+ * tarjeta de la carta y sobre el borde derecho de la foto, el puntaje. No lleva
+ * botón: la acción del sitio ya está en la cabecera, arriba de todo.
+ * bajadaExtra es la parte de la bajada que se cae en celular, donde la tarjeta
+ * de la carta se apoya sobre la foto y el puntaje baja al cierre de la página.
  */
 export function portadaPartida({ imagen, titulo, bajada, bajadaExtra = "", ficha = "" }) {
   return `<section class="apertura">
@@ -46,11 +46,11 @@ export function portadaPartida({ imagen, titulo, bajada, bajadaExtra = "", ficha
       <p class="apertura__bajada">${esc(bajada)}${
         bajadaExtra ? ` <span class="apertura__extra">${esc(bajadaExtra)}</span>` : ""
       }</p>
-      ${puntajeSuelto()}
+      ${ficha ? `<div class="apertura__tarjeta">${ficha}</div>` : ""}
     </div>
     <div class="apertura__marco">
       ${foto(imagen, { clase: "apertura__foto", prioridad: true, sizes: "(max-width: 62rem) 100vw, 52vw" })}
-      ${ficha ? `<div class="apertura__ficha">${ficha}</div>` : ""}
+      <div class="apertura__ficha">${puntajeSuelto()}</div>
     </div>
   </div>
 </section>`;
@@ -61,6 +61,19 @@ export const puntajeSuelto = () => `<a class="puntaje" href="${esc(contacto.rese
   ${estrellas(reputacion.puntaje)}
   <span class="puntaje__texto"><b>${esc(reputacion.puntajeTexto)} en Google</b><small>${esc(reputacion.reseñasTexto)} reseñas</small></span>
 </a>`;
+
+/**
+ * Cierre con el puntaje de Google, justo antes del pie. Es la versión de
+ * celular del cajón de la apertura: ahí la foto se queda con una sola tarjeta
+ * y el puntaje baja al final, ya sin caja, como firma de la página.
+ */
+export const cierrePuntaje = () => `<section class="cierre-puntaje">
+  <a class="cierre-puntaje__enlace contenedor" href="${esc(contacto.reseñas)}" target="_blank" rel="noopener">
+    ${estrellas(reputacion.puntaje)}
+    <span class="titulo-3">${esc(reputacion.puntajeTexto)} en Google</span>
+    <small>${esc(reputacion.reseñasTexto)} reseñas de comensales</small>
+  </a>
+</section>`;
 
 /** Tarjeta blanca con el puntaje de Google. Va colgada del borde inferior de la portada. */
 export const fichaPuntaje = () => `<a class="ficha ficha--puntaje" href="${esc(contacto.reseñas)}" target="_blank" rel="noopener">

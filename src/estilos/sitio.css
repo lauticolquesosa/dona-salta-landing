@@ -558,10 +558,11 @@ iframe {
 /* Apertura del inicio: texto a la izquierda sobre el mismo fondo que la sección
    siguiente, foto a la derecha y la tarjeta de la carta apoyada sobre la foto. */
 .apertura {
-  /* Medida única de los dos cajones blancos y cuánto puede asomarse la tarjeta
-     de la carta fuera de la foto: el margen de página más lo que sobra cuando
-     la pantalla es más ancha que el contenedor, menos un respiro. */
+  /* Medidas de los dos cajones blancos y cuánto puede asomarse el de la foto:
+     el margen de página más lo que sobra cuando la pantalla es más ancha que
+     el contenedor, menos un respiro. */
   --tarjeta-apertura: min(19rem, 100%);
+  --tarjeta-puntaje: min(17.5rem, 100%);
   --asomo-apertura: calc(max(var(--margen), (100vw - var(--ancho)) / 2 + var(--margen)) - var(--e3));
   background: var(--fondo);
   padding-block: calc(var(--alto-cabecera) + var(--e5)) var(--e4);
@@ -595,35 +596,41 @@ iframe {
   margin-top: var(--e3);
 }
 
-/* Los dos papeles de la apertura miden lo mismo: el puntaje bajo la bajada y
-   la tarjeta de la carta cruzando el borde derecho de la foto. */
-.puntaje,
-.apertura__ficha {
+/* Los dos papeles de la apertura: la tarjeta de la carta bajo la bajada y el
+   puntaje cruzando el borde derecho de la foto, un punto más chico. */
+.apertura__tarjeta {
   width: var(--tarjeta-apertura);
+  margin-top: var(--e5);
+  transform: rotate(-1.4deg);
 }
 
-.puntaje,
-.apertura__ficha .ficha {
+.apertura__tarjeta .ficha {
   height: 5.5rem;
+  padding: var(--e1) var(--e2) var(--e1) var(--e1);
+  font-size: var(--t-chico);
+  box-shadow: 0 0.75rem 2rem rgba(30, 21, 18, 0.12);
+}
+
+.apertura__tarjeta .mini {
+  width: 3.25rem;
+  height: 3.25rem;
 }
 
 .puntaje {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: var(--e2);
-  margin-top: var(--e5);
+  height: 5rem;
   padding: var(--e2);
   background: var(--superficie);
   border-radius: var(--radio);
-  box-shadow: 0 0.75rem 2rem rgba(30, 21, 18, 0.12);
   color: var(--tinta);
   text-decoration: none;
-  transform: rotate(-1.4deg);
   transition: transform var(--t-fast) var(--ease-out-quart);
 }
 
 .puntaje:hover {
-  transform: rotate(-1.4deg) translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .puntaje__texto b {
@@ -656,25 +663,55 @@ iframe {
   object-fit: cover;
 }
 
-/* La tarjeta cruza el borde inferior derecho de la foto. Lo que sale se limita
+/* El puntaje cruza el borde inferior derecho de la foto. Lo que sale se limita
    al aire que queda entre la foto y el borde de la pantalla, así nunca se
    corta ni empuja la página de costado. */
 .apertura__ficha {
   position: absolute;
   right: 0;
   bottom: var(--e4);
+  width: var(--tarjeta-puntaje);
   transform: translateX(min(50%, var(--asomo-apertura))) rotate(-2.6deg);
 }
 
-.apertura__ficha .ficha {
-  padding: var(--e1) var(--e2) var(--e1) var(--e1);
-  font-size: var(--t-chico);
+.apertura__ficha .puntaje {
   box-shadow: 0 1rem 2.5rem rgba(30, 21, 18, 0.18);
 }
 
-.apertura__ficha .mini {
-  width: 3.25rem;
-  height: 3.25rem;
+/* Cierre con el puntaje de Google: solo en celular, donde la apertura deja de
+   mostrarlo. Va sin caja, centrado entre el mosaico y el pie. */
+.cierre-puntaje {
+  display: none;
+}
+
+@media (max-width: 52rem) {
+  .cierre-puntaje {
+    display: block;
+    padding-block: var(--e6);
+  }
+
+  .cierre-puntaje__enlace {
+    display: grid;
+    justify-items: center;
+    gap: var(--e1);
+    color: var(--tinta);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .cierre-puntaje__enlace .titulo-3 {
+    border-bottom: 1px solid var(--linea);
+    transition: border-color var(--t-micro-dur) var(--ease-out-std);
+  }
+
+  .cierre-puntaje__enlace:hover .titulo-3 {
+    border-color: currentColor;
+  }
+
+  .cierre-puntaje__enlace small {
+    font-size: var(--t-micro);
+    color: var(--suave);
+  }
 }
 
 /* ----------------------------------------------------------- portada --- */
@@ -1665,30 +1702,23 @@ iframe {
     min-height: clamp(20rem, 52svh, 28rem);
   }
 
-  /* Las dos tarjetas se apilan sobre el pie de la foto, separadas por un hilo
-     de aire: la de la carta apoyada abajo y el puntaje corrido hacia arriba su
-     propio alto más ese hilo. Comparten inclinación para quedar paralelas. */
-  .apertura__ficha {
-    right: var(--e2);
-    bottom: var(--e2);
-    transform: rotate(-1.6deg);
-  }
-
-  .puntaje {
+  /* La foto se queda con una sola tarjeta, la de la carta, apoyada sobre su
+     pie derecho; el puntaje baja al cierre de la página, arriba del pie. */
+  .apertura__tarjeta {
     position: relative;
     z-index: 2;
     grid-area: foto;
     align-self: end;
     justify-self: end;
-    margin: 0 var(--e2) calc(5.5rem + var(--e2)) 0;
+    margin: 0 var(--e2) var(--e2) 0;
     transform: rotate(-1.6deg);
   }
 
-  .puntaje:hover {
-    transform: rotate(-1.6deg) translateY(-2px);
+  .apertura__ficha {
+    display: none;
   }
 
-  .apertura__ficha .ficha {
+  .apertura__tarjeta .ficha {
     gap: var(--e1);
   }
 

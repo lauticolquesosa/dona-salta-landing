@@ -6,6 +6,7 @@ import { fichaNegocio } from "../lib/layout.mjs";
 import {
   banda,
   centrada,
+  cierrePuntaje,
   comanda,
   fichaEnlace,
   franja,
@@ -81,5 +82,7 @@ export default {
     }),
 
     mosaico([fotos.fachada, fotos.horno, fotos.locro, fotos.salon]),
+
+    cierrePuntaje(),
   ].join("\n"),
 };
