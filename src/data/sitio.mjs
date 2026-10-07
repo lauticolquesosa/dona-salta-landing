@@ -10,7 +10,7 @@ export const sitio = {
   descripcionCorta:
     "Bodegón salteño frente a la Basílica de San Francisco. Empanadas al horno de barro y cocina regional, todos los días.",
   estudio: "LCS DESIGN",
-  estudioUrl: "https://lcsdesign.vercel.app",
+  estudioUrl: "https://lcsdesignstudio.com.ar",
   // Se usa en la etiqueta de tema, el manifiesto y el fondo del ícono.
   colorTema: "#1E1512",
 };
